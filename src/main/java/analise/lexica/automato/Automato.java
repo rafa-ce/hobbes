@@ -1,5 +1,6 @@
 package analise.lexica.automato;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Automato {
@@ -9,7 +10,11 @@ public class Automato {
 	private List<Estado> estadosFinais;
 	private List<Transicao> transicoes;
 	
-	public Automato() { }
+	public Automato() { 
+		this.estados = new ArrayList<Estado>();
+		this.transicoes = new ArrayList<Transicao>();
+		this.estadosFinais = new ArrayList<Estado>();
+	}
 
 	public Estado getEstadoInicial() {
 		return estadoInicial;
@@ -17,26 +22,34 @@ public class Automato {
 
 	public void setEstadoInicial(Estado estadoInicial) {
 		this.estadoInicial = estadoInicial;
+		this.estados.add(estadoInicial);
 	}
 
 	public List<Estado> getEstados() {
 		return estados;
 	}
 
-	public void setEstados(List<Estado> estados) {
-		this.estados = estados;
+	public void addEstado(Estado estado) {
+		this.estados.add(estado);
 	}
 
 	public List<Estado> getEstadosFinais() {
 		return estadosFinais;
 	}
 
-	public void setEstadosFinais(List<Estado> estadosFinais) {
-		this.estadosFinais = estadosFinais;
+	public void addEstadoFinal(Estado estadoFinal) {
+		this.estadosFinais.add(estadoFinal);
+		
+		if (!estados.contains(estadoFinal))
+			this.estados.add(estadoFinal);
 	}
 
 	public List<Transicao> getTransicoes() {
 		return transicoes;
+	}
+	
+	public void addTransicao(Transicao transicao) {
+		this.transicoes.add(transicao);
 	}
 	
 	public Estado getProximoEstado(Estado estadoAtual, String codigo) throws Throwable {
@@ -47,13 +60,4 @@ public class Automato {
 		
 		throw new Exception("Caractere inválido!");
 	}
-
-	public void setTransicoes(List<Transicao> transicoes) {
-		this.transicoes = transicoes;
-	}
-	
-	
-	
-	
-
 }
