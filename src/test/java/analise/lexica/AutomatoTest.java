@@ -24,7 +24,8 @@ public class AutomatoTest {
 		assertEquals("Estado Inicial", 0, automato.getEstadoInicial().getId().intValue());
 		assertEquals("Quantidade de estados finais", 1, automato.getEstadosFinais().size());
 		assertEquals("Estado final", 1, automato.getEstadosFinais().get(0).getId().intValue());
-		assertEquals(2, automato.getEstados().size());
+		assertEquals("Estados", 2, automato.getEstados().size());
+		assertEquals("Transição", 1, automato.getTransicoes().size());
 		
 	}
 	
@@ -36,13 +37,11 @@ public class AutomatoTest {
 		
 		Estado estadoAtual = automato.getEstadoInicial();
 		
-		for (Character cada : entrada.toCharArray()) {
-			estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
-		}
+		estadoAtual = percorreAutomato(entrada, automato, estadoAtual);
 		
-		assertEquals("Estado final", automato.getEstadosFinais().get(0).getNome().toString(), estadoAtual.getNome().toString());
+		assertEquals("Estado final", automato.getEstadosFinais().get(0).getId().intValue(), estadoAtual.getId().intValue());
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void leCaractereInvalido() throws Throwable {
 		String entrada = "c";
@@ -51,9 +50,7 @@ public class AutomatoTest {
 		
 		Estado estadoAtual = automato.getEstadoInicial();
 		
-		for (Character cada : entrada.toCharArray()) {
-			estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
-		}
+		estadoAtual = percorreAutomato(entrada, automato, estadoAtual);
 	}
 	
 	@Test
@@ -90,7 +87,7 @@ public class AutomatoTest {
 	
 	@Test
 	public void criaAutomatoQueIdentificaPalavraOuUnderline() throws Throwable {
-		String entrada = "p_";
+		String entrada = "p_a_l_a_v_r_a";
 		String result = "";
 		
 		Automato automato = criaAutomatoPalavraUnderline();
@@ -104,6 +101,14 @@ public class AutomatoTest {
 		assertEquals(entrada, result);
 	}
 	
+	private Estado percorreAutomato(String entrada, Automato automato, Estado estadoAtual) throws Throwable {
+		for (Character cada : entrada.toCharArray()) {
+			estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
+		}
+		
+		return estadoAtual;
+	}
+
 	private Automato criaAutomatoPalavraUnderline() {
 		Automato automato = new Automato();
 		
