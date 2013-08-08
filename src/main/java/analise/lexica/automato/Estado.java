@@ -4,7 +4,7 @@ public class Estado {
 	
 	private Integer id;
 	
-	public Estado(Integer id, String nome) {
+	public Estado(Integer id) {
 		this.id = id;
 	}
 	

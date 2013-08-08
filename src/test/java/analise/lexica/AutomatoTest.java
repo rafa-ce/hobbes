@@ -112,8 +112,8 @@ public class AutomatoTest {
 	private Automato criaAutomatoPalavraUnderline() {
 		Automato automato = new Automato();
 		
-		Estado estadoInicial = new Estado(0, "inicial");
-		Estado estadoFinal = new Estado(1, "final");
+		Estado estadoInicial = new Estado(0);
+		Estado estadoFinal = new Estado(1);
 		
 		automato.setEstadoInicial(estadoInicial);
 		automato.addEstadoFinal(estadoFinal);
@@ -128,7 +128,7 @@ public class AutomatoTest {
 		
 		Automato automato = new Automato();
 		
-		Estado estadoInicialEFinal = new Estado(0, "inicial");
+		Estado estadoInicialEFinal = new Estado(0);
 		
 		automato.setEstadoInicial(estadoInicialEFinal);
 		automato.addEstadoFinal(estadoInicialEFinal);
@@ -141,8 +141,8 @@ public class AutomatoTest {
 	private Automato criaAutomatoComDoisEstados() {
 		Automato automato = new Automato();
 		
-		Estado estadoInicial = new Estado(0, "inicial");
-		Estado estadoFinal = new Estado(1, "final");
+		Estado estadoInicial = new Estado(0);
+		Estado estadoFinal = new Estado(1);
 		
 		automato.setEstadoInicial(estadoInicial);
 		automato.addEstadoFinal(estadoFinal);
