@@ -1,9 +1,8 @@
 package analise.lexica;
 
+import static analise.lexica.Suporte.percorreAutomato;
 import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
+import static utils.ExpressaoRegular.*;
 
 import org.junit.Test;
 
@@ -12,10 +11,6 @@ import analise.lexica.automato.Estado;
 import analise.lexica.automato.Transicao;
 
 public class AutomatoTest {
-
-	private static final String LETRA = "[a-zA-Z]";
-	private static final String LETRA_E_UNDERLINE = "[a-zA-Z_]";
-	private static final String ESPACO_EM_BRANCO = "\\s";
 
 	@Test
 	public void criaAtutomatoHappyDay() {
@@ -42,7 +37,7 @@ public class AutomatoTest {
 		assertEquals("Estado final", automato.getEstadosFinais().get(0).getId().intValue(), estadoAtual.getId().intValue());
 	}
 
-	@Test(expected = Exception.class)
+	@Test(expected = LexicoException.class)
 	public void leCaractereInvalido() throws Throwable {
 		String entrada = "c";
 		
@@ -50,7 +45,7 @@ public class AutomatoTest {
 		
 		Estado estadoAtual = automato.getEstadoInicial();
 		
-		estadoAtual = percorreAutomato(entrada, automato, estadoAtual);
+		automato.getProximoEstado(estadoAtual, entrada);
 	}
 	
 	@Test
@@ -71,7 +66,7 @@ public class AutomatoTest {
 		assertEquals(entrada, result);	
 	}
 	
-	@Test(expected = Exception.class)
+	@Test(expected = LexicoException.class)
 	public void criaAutomatoQueIdentificaPalavraErro() throws Throwable {
 		
 		String entrada = "pala vra";
@@ -101,14 +96,6 @@ public class AutomatoTest {
 		assertEquals(entrada, result);
 	}
 	
-	private Estado percorreAutomato(String entrada, Automato automato, Estado estadoAtual) throws Throwable {
-		for (Character cada : entrada.toCharArray()) {
-			estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
-		}
-		
-		return estadoAtual;
-	}
-
 	private Automato criaAutomatoPalavraUnderline() {
 		Automato automato = new Automato();
 		
@@ -119,7 +106,7 @@ public class AutomatoTest {
 		automato.addEstadoFinal(estadoFinal);
 		
 		automato.addTransicao(new Transicao(estadoInicial, estadoFinal, LETRA));
-		automato.addTransicao(new Transicao(estadoFinal, estadoFinal, LETRA_E_UNDERLINE));
+		automato.addTransicao(new Transicao(estadoFinal, estadoFinal, LETRA_NUMERO_UNDERLINE));
 		
 		return automato;
 	}

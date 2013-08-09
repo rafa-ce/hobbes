@@ -3,6 +3,8 @@ package analise.lexica.automato;
 import java.util.ArrayList;
 import java.util.List;
 
+import analise.lexica.LexicoException;
+
 public class Automato {
 	
 	private Estado estadoInicial;
@@ -58,6 +60,6 @@ public class Automato {
 				return transicao.getDestino();
 		}
 		
-		throw new Exception("Caractere inválido!");
+		throw new LexicoException("Caractere inválido!");
 	}
 }
