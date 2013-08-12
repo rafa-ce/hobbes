@@ -6,4 +6,7 @@ public class Lexico {
 	
 	private Automato automato;
 
+	public Lexico() {
+		this.automato = AutomatoTiger.implementa();
+	}
 }
