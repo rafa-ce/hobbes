@@ -1,7 +1,5 @@
 package analise.lexica;
 
-import static utils.ExpressaoRegular.ESPACO_EM_BRANCO;
-import utils.ExpressaoRegular;
 import utils.Token;
 import analise.lexica.automato.Automato;
 import analise.lexica.automato.Estado;
@@ -49,7 +47,9 @@ public class Lexico {
 	}
 	
 	private Token montaToken(String valor, Estado estado) {
-		String tipo = tipoToken.getTipo(estado.getId());
+		
+		Integer estadoID = estado.getId();
+		String tipo = tipoToken.getTipo(estadoID,  valor);
 		
 		return new Token(valor, coluna, tipo);
 	}
