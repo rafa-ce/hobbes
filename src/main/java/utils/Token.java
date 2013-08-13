@@ -3,12 +3,12 @@ package utils;
 public class Token {
 	
 	private String valor;
-	private Integer posicao;
+	private Integer posicaoColuna;
 	private String tipo;
 
-	public Token(String valor, Integer posicao, String tipo) {
+	public Token(String valor, Integer posicaoColuna, String tipo) {
 		this.setValor(valor);
-		this.setPosicao(posicao);
+		this.setPosicaoColuna(posicaoColuna);
 		this.setTipo(tipo);
 	}
 
@@ -20,12 +20,12 @@ public class Token {
 		this.valor = valor;
 	}
 
-	public Integer getPosicao() {
-		return posicao;
+	public Integer getPosicaoColuna() {
+		return posicaoColuna;
 	}
 
-	public void setPosicao(Integer posicao) {
-		this.posicao = posicao;
+	public void setPosicaoColuna(Integer posicao) {
+		this.posicaoColuna = posicao;
 	}
 
 	public String getTipo() {

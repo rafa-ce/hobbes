@@ -8,6 +8,7 @@ public class Lexico {
 	
 	private Automato automato;
 	private Integer coluna;
+	private Integer posicaoToken;
 	private TipoToken tipoToken;
 
 	public Lexico() {
@@ -17,11 +18,12 @@ public class Lexico {
 	}
 
 	public Token getNextToken(String entrada) throws Throwable {
-		
+
 		String valorDoToken = "";
-		
 		Estado estadoAtual = automato.getEstadoInicial();
 
+		posicaoToken = coluna;
+		
 		while (coluna < entrada.length()) {
 			
 			Character cada = entrada.charAt(coluna);
@@ -43,15 +45,15 @@ public class Lexico {
 			coluna = 0;
 		}
 		
-		return montaToken(valorDoToken, estadoAtual);
+		return montaToken(valorDoToken, posicaoToken, estadoAtual);
 	}
 	
-	private Token montaToken(String valor, Estado estado) {
+	private Token montaToken(String valor, Integer posicaoToken, Estado estado) {
 		
 		Integer estadoID = estado.getId();
 		String tipo = tipoToken.getTipo(estadoID,  valor);
 		
-		return new Token(valor, coluna, tipo);
+		return new Token(valor, posicaoToken, tipo);
 	}
 
 	private String montaValorDoToken(Estado estado, String caracter) {
