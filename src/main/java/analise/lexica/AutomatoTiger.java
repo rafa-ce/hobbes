@@ -54,6 +54,8 @@ public class AutomatoTiger {
 		automato.addEstado(q17);
 		automato.addEstado(q18);
 		
+		automato.addTransicao(new Transicao(q0, q0, ESPACO_EM_BRANCO));
+		
 		automato.addTransicao(new Transicao(q0, q1, LETRA));
 		automato.addTransicao(new Transicao(q1, q1, LETRA_NUMERO_UNDERLINE));
 		automato.addTransicao(new Transicao(q1, q2, ESPACO_EM_BRANCO));

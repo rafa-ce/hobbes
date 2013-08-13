@@ -62,4 +62,12 @@ public class Automato {
 		
 		throw new LexicoException("Caractere inválido!");
 	}
+
+	public Boolean isEstadoFinal(Estado estado) {
+		return getEstadosFinais().contains(estado);
+	}
+	
+	public Boolean isEstadoInicial(Estado estado) {
+		return getEstadoInicial().equals(estado);
+	}
 }
