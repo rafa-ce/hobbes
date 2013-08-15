@@ -26,6 +26,9 @@ public class TipoToken {
 		this.palavrasChave = new ArrayList<String>();
 		palavrasChave.add("while");
 		palavrasChave.add("do");
+		palavrasChave.add("if");
+		palavrasChave.add("then");
+		palavrasChave.add("else");
 		//TODO: todas as palavras chave
 		
 	}     

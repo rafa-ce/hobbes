@@ -11,22 +11,22 @@ import analise.lexica.automato.Estado;
 public class Lexico {
 	
 	private Automato automato;
-	private Integer coluna;
-	private Integer linha;
-	private Integer posicaoToken;
+	private Integer iterador;
+	private Integer tokenLinha;
+	private Integer tokenColuna;
 	private TipoToken tipoToken;
 	private BufferedReader codigoFonte;
 	private String linhaAtual;
 	
 	public Lexico(String entrada) {
 		this.automato = AutomatoTiger.implementa();
-		this.coluna = 0;
-		this.linha = 0;
+		this.iterador = 0;
+		this.tokenLinha = 0;
 		this.tipoToken = new TipoToken();
 		inicializa(entrada);
 		
 		try {
-			linhaAtual = lerArquivo();
+			linhaAtual = getLinha();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
@@ -41,10 +41,11 @@ public class Lexico {
 
 	}
 
-	private String lerArquivo() throws Throwable {	
-		if (codigoFonte.ready())
-			 return codigoFonte.readLine() + " ";
-			
+	private String getLinha() throws Throwable {	
+		if (codigoFonte.ready()) {
+			tokenLinha++;
+			return codigoFonte.readLine() + " ";
+		}
 		codigoFonte.close();
 		
 		return "";
@@ -52,43 +53,50 @@ public class Lexico {
 
 	public Token getNextToken() throws Throwable {
 
+		lerProximaLinha();
+		
 		String valorDoToken = "";
 		Estado estadoAtual = automato.getEstadoInicial();
 		
-		posicaoToken = coluna;
+		tokenColuna = iterador;
 		
-		while (coluna < linhaAtual.length() + 1) {
+		while (iterador < linhaAtual.length() + 1) {
 			
-			Character cada = linhaAtual.charAt(coluna);
+			Character cada = linhaAtual.charAt(iterador);
 			
 			try {
 				estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
 				valorDoToken += montaValorDoToken(estadoAtual, cada.toString());
-				coluna++;
+				iterador++;
 			} catch (LexicoException e) {
 				e.getMessage();
-			} finally {
-				if (automato.isEstadoFinal(estadoAtual))
-					break;
+				break;
 			}
+			
+			if (automato.isEstadoFinal(estadoAtual))
+				break;
+		}
+		
+		if (automato.isEstadoFinal(estadoAtual))
+			return montaToken(valorDoToken, estadoAtual);
+		
+		throw new LexicoException("Caractere inválido!");
+	}
 
+	private void lerProximaLinha() throws Throwable {
+		if (iterador.equals(linhaAtual.length())) {
+			iterador = 0;
+			linhaAtual = getLinha();
 		}
-		
-		if (coluna.equals(linhaAtual.length())) {
-			coluna = 0;
-			linhaAtual = lerArquivo();
-		}
-		
-		return montaToken(valorDoToken, posicaoToken, estadoAtual);
 	}
 	
 	
-	private Token montaToken(String valor, Integer posicaoToken, Estado estado) {
+	private Token montaToken(String valor, Estado estado) {
 		
 		Integer estadoID = estado.getId();
 		String tipo = tipoToken.getTipo(estadoID,  valor);
 		
-		return new Token(valor, posicaoToken, tipo);
+		return new Token(valor, tokenLinha, tokenColuna, tipo);
 	}
 
 	private String montaValorDoToken(Estado estado, String caracter) {

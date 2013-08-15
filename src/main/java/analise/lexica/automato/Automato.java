@@ -60,7 +60,7 @@ public class Automato {
 				return transicao.getDestino();
 		}
 		
-		throw new LexicoException("Caractere inv√°lido!");
+		throw new LexicoException("Caractere inv·lido!");
 	}
 
 	public Boolean isEstadoFinal(Estado estado) {
