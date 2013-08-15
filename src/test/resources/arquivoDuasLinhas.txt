@@ -1,2 +1,2 @@
-while i < 100 do
+while i and 100 do
 	i = j + i

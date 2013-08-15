@@ -32,9 +32,9 @@ public class LexicoTest {
 		
 		assertToken("while", "1 - 0", "palavraChave", lexico.getNextToken());
 		assertToken("i", "1 - 6", "identificador", lexico.getNextToken());
-		assertToken("<", "1 - 8", "simbolo", lexico.getNextToken());
-		assertToken("100", "1 - 10", "numero", lexico.getNextToken());
-		assertToken("do", "1 - 14", "palavraChave", lexico.getNextToken());
+		assertToken("and", "1 - 8", "simbolo", lexico.getNextToken());
+		assertToken("100", "1 - 12", "numero", lexico.getNextToken());
+		assertToken("do", "1 - 16", "palavraChave", lexico.getNextToken());
 		assertToken("i", "2 - 0", "identificador", lexico.getNextToken());
 		assertToken("=", "2 - 3", "simbolo", lexico.getNextToken());
 		assertToken("j", "2 - 5", "identificador", lexico.getNextToken());
