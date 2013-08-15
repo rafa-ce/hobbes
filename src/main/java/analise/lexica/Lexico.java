@@ -1,5 +1,7 @@
 package analise.lexica;
 
+import static java.lang.Boolean.*;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,16 +16,20 @@ public class Lexico {
 	private Integer iterador;
 	private Integer tokenLinha;
 	private Integer tokenColuna;
-	private TipoToken tipoToken;
 	private BufferedReader codigoFonte;
 	private String linhaAtual;
+	private Boolean fimDeArquivo;
 	
 	public Lexico(String entrada) {
 		this.automato = AutomatoTiger.implementa();
 		this.iterador = 0;
 		this.tokenLinha = 0;
-		this.tipoToken = new TipoToken();
+		fimDeArquivo = FALSE;
 		inicializa(entrada);
+	}
+	
+	private void inicializa(String entrada) {
+		abreArquivo(entrada);
 		
 		try {
 			linhaAtual = getLinha();
@@ -31,14 +37,13 @@ public class Lexico {
 			e.printStackTrace();
 		}
 	}
-	
-	private void inicializa(String entrada) {
+
+	private void abreArquivo(String entrada) {
 		try {
 			codigoFonte = new BufferedReader(new FileReader(entrada));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private String getLinha() throws Throwable {	
@@ -46,7 +51,9 @@ public class Lexico {
 			tokenLinha++;
 			return codigoFonte.readLine() + " ";
 		}
+		
 		codigoFonte.close();
+		fimDeArquivo = TRUE;
 		
 		return "";
 	}
@@ -60,7 +67,7 @@ public class Lexico {
 		
 		tokenColuna = iterador;
 		
-		while (iterador < linhaAtual.length() + 1) {
+		while (!automato.isEstadoFinal(estadoAtual)) {
 			
 			Character cada = linhaAtual.charAt(iterador);
 			
@@ -72,9 +79,6 @@ public class Lexico {
 				e.getMessage();
 				break;
 			}
-			
-			if (automato.isEstadoFinal(estadoAtual))
-				break;
 		}
 		
 		if (automato.isEstadoFinal(estadoAtual))
@@ -92,6 +96,7 @@ public class Lexico {
 	
 	
 	private Token montaToken(String valor, Estado estado) {
+		TipoToken tipoToken = new TipoToken();
 		
 		Integer estadoID = estado.getId();
 		String tipo = tipoToken.getTipo(estadoID,  valor);
@@ -104,5 +109,9 @@ public class Lexico {
 			return "";
 		
 		return caracter;
+	}
+
+	public Boolean hasToken() {
+		return !fimDeArquivo;
 	}
 }
