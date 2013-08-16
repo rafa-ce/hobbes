@@ -24,8 +24,7 @@ public class Sintatico {
 		while (lexico.hasToken()) {
 			token = lexico.getNextToken();
 			
-			if (lexico.hasToken())
-				tokens.add(token);			
+			tokens.add(token);			
 		}
 		
 		return tokens;

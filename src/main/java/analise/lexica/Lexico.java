@@ -59,32 +59,32 @@ public class Lexico {
 	}
 
 	public Token getNextToken() throws Throwable {
-
+		Token token = getToken();
+		
 		lerProximaLinha();
 		
+		return token;
+	}
+	
+	public Token getToken() throws LexicoException {
 		String valorDoToken = "";
-		Estado estadoAtual = automato.getEstadoInicial();
-		
-		tokenColuna = iterador;
-		
-		while (!automato.isEstadoFinal(estadoAtual)) {
-			
-			Character cada = linhaAtual.charAt(iterador);
-			
-			try {
-				estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
-				valorDoToken += montaValorDoToken(estadoAtual, cada.toString());
-				iterador++;
-			} catch (LexicoException e) {
-				e.getMessage();
-				break;
-			}
-		}
-		
-		if (automato.isEstadoFinal(estadoAtual))
-			return montaToken(valorDoToken, estadoAtual);
-		
-		throw new LexicoException("Caractere inválido!");
+        Estado estadoAtual = automato.getEstadoInicial();
+        tokenColuna = iterador;
+        
+        while (!automato.isEstadoFinal(estadoAtual)) {
+            
+            Character cada = linhaAtual.charAt(iterador);
+            
+            try {
+                    estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
+                    valorDoToken += montaValorDoToken(estadoAtual, cada.toString());
+                    iterador++;
+            } catch (LexicoException e) {
+                    throw e;
+            }
+        }
+        	
+        return montaToken(valorDoToken, estadoAtual);
 	}
 
 	private void lerProximaLinha() throws Throwable {

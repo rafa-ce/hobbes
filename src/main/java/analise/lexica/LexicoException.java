@@ -7,5 +7,10 @@ public class LexicoException extends Exception {
 	public LexicoException(String mensagem) {
 		super(mensagem);
 	}
+	
+	@Override
+	public String getMessage() {
+		return super.getMessage();
+	}
 
 }

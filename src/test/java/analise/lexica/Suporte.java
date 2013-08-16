@@ -5,7 +5,7 @@ import analise.lexica.automato.Estado;
 
 public class Suporte {
 	
-	public static Estado percorreAutomato(String entrada, Automato automato, Estado estadoAtual) throws Throwable {
+	public static Estado percorreAutomato(String entrada, Automato automato, Estado estadoAtual) {
 		for (Character cada : entrada.toCharArray()) {
 			try {
 				estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
