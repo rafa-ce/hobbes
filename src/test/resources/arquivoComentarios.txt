@@ -1,0 +1,5 @@
+while( i and /* inicio */ 100 ) do
+	i = j + i	
+printf('string')
+
+/* fim */	

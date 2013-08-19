@@ -8,7 +8,7 @@ public class ExpressaoRegular {
 	
 	public static final String SIMBOLOS_SIMPLES = "\\+|-|\\*|=|\\(|\\)|\\[|\\]";
 	
-	public static final String LETRA_NUMERO_ESPACO_EM_BRANCO = "[a-zA-Z0-9\\s]";
+	public static final String LETRA_NUMERO_ESPACO_EM_BRANCO = "[a-zA-Z0-9\\s(]";
 	
 	public static final String MENOR = "<";
 	public static final String MAIOR = ">";
@@ -18,8 +18,12 @@ public class ExpressaoRegular {
 	
 	public static final String ESPACO_EM_BRANCO = "\\s";
 	
-	public static final String ASTERISCO = "*";
+	public static final String ASTERISCO = "\\*";
 	
 	public static final String ASPA = "\"";
+	
+	public static final String TUDO_MENOS_ASTERISCO = "[^//*]"; // [.&&[^\\*]]
+	public static final String TUDO_MENOS_BARRA = "[^/]";
+	
 
 }

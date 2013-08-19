@@ -1,6 +1,19 @@
 package analise.lexica;
 
-import static utils.ExpressaoRegular.*;
+import static utils.ExpressaoRegular.ASPA;
+import static utils.ExpressaoRegular.ASTERISCO;
+import static utils.ExpressaoRegular.BARRA;
+import static utils.ExpressaoRegular.ESPACO_EM_BRANCO;
+import static utils.ExpressaoRegular.IGUAL;
+import static utils.ExpressaoRegular.LETRA;
+import static utils.ExpressaoRegular.LETRA_NUMERO_ESPACO_EM_BRANCO;
+import static utils.ExpressaoRegular.LETRA_NUMERO_UNDERLINE;
+import static utils.ExpressaoRegular.MAIOR;
+import static utils.ExpressaoRegular.MENOR;
+import static utils.ExpressaoRegular.NUMERO;
+import static utils.ExpressaoRegular.SIMBOLOS_SIMPLES;
+import static utils.ExpressaoRegular.TUDO_MENOS_ASTERISCO;
+import static utils.ExpressaoRegular.TUDO_MENOS_BARRA;
 import analise.lexica.automato.Automato;
 import analise.lexica.automato.Estado;
 import analise.lexica.automato.Transicao;
@@ -59,6 +72,7 @@ public class AutomatoTiger {
 		automato.addTransicao(new Transicao(q0, q1, LETRA));
 		automato.addTransicao(new Transicao(q1, q1, LETRA_NUMERO_UNDERLINE));
 		automato.addTransicao(new Transicao(q1, q2, ESPACO_EM_BRANCO));
+		automato.addTransicao(new Transicao(q1, q2, SIMBOLOS_SIMPLES));
 		
 		automato.addTransicao(new Transicao(q0, q3, NUMERO));
 		automato.addTransicao(new Transicao(q3, q3, NUMERO));
@@ -77,11 +91,12 @@ public class AutomatoTiger {
 		automato.addTransicao(new Transicao(q11, q13, LETRA_NUMERO_ESPACO_EM_BRANCO));
 		
 		automato.addTransicao(new Transicao(q0, q14, BARRA));
-		automato.addTransicao(new Transicao(q14, q0, BARRA));
 		automato.addTransicao(new Transicao(q14, q15, LETRA_NUMERO_ESPACO_EM_BRANCO));
 		automato.addTransicao(new Transicao(q14, q16, ASTERISCO));
+		
+		automato.addTransicao(new Transicao(q16, q16, TUDO_MENOS_ASTERISCO));
 		automato.addTransicao(new Transicao(q16, q17, ASTERISCO));
-		automato.addTransicao(new Transicao(q17, q16, LETRA));
+		automato.addTransicao(new Transicao(q17, q16, TUDO_MENOS_BARRA));
 		automato.addTransicao(new Transicao(q17, q0, BARRA));
 		
 		automato.addTransicao(new Transicao(q0, q18, ASPA));
