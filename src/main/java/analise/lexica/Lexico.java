@@ -5,6 +5,7 @@ import static java.lang.Boolean.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 import utils.Token;
 import analise.lexica.automato.Automato;
@@ -28,6 +29,58 @@ public class Lexico {
 		inicializa(entrada);
 	}
 	
+	public Token getNextToken() throws Throwable {
+		Token token = getToken();
+		
+		lerProximaLinha();
+		
+		return token;
+	}
+
+	private Token getToken() throws LexicoException {
+		String valorDoToken = "";
+	    Estado estadoAtual = automato.getEstadoInicial();
+	    tokenColuna = iterador;
+	    
+	    while (!automato.isEstadoFinal(estadoAtual)) {
+	        
+	        Character cada = linhaAtual.charAt(iterador);
+	        
+	        try {
+	                estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
+	                valorDoToken += montaValorDoToken(estadoAtual, cada.toString());
+	                iterador++;
+	        } catch (LexicoException e) {
+	                throw e;
+	        }
+	    }
+	    	
+	    return montaToken(valorDoToken, estadoAtual);
+	}
+
+	private Token montaToken(String valor, Estado estado) {
+		TipoToken tipoToken = new TipoToken();
+		
+		Integer estadoID = estado.getId();
+		String tipo = tipoToken.getTipo(estadoID,  valor);
+		
+		return new Token(valor, tokenLinha, tokenColuna, tipo);
+	}
+
+	private void lerProximaLinha() throws Throwable {
+		if (iterador.equals(linhaAtual.length())) {
+			iterador = 0;
+			linhaAtual = getLinha();
+		}
+	}
+
+	private String montaValorDoToken(Estado estado, String caracter) {
+		if (automato.isEstadoFinal(estado) || automato.isEstadoInicial(estado))
+			return "";
+		
+		return caracter;
+	}
+
 	private void inicializa(String entrada) {
 		abreArquivo(entrada);
 		
@@ -52,63 +105,14 @@ public class Lexico {
 			return codigoFonte.readLine() + " ";
 		}
 		
-		codigoFonte.close();
-		fimDeArquivo = TRUE;
+		finaliza();
 		
 		return "";
 	}
 
-	public Token getNextToken() throws Throwable {
-		Token token = getToken();
-		
-		lerProximaLinha();
-		
-		return token;
-	}
-	
-	public Token getToken() throws LexicoException {
-		String valorDoToken = "";
-        Estado estadoAtual = automato.getEstadoInicial();
-        tokenColuna = iterador;
-        
-        while (!automato.isEstadoFinal(estadoAtual)) {
-            
-            Character cada = linhaAtual.charAt(iterador);
-            
-            try {
-                    estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
-                    valorDoToken += montaValorDoToken(estadoAtual, cada.toString());
-                    iterador++;
-            } catch (LexicoException e) {
-                    throw e;
-            }
-        }
-        	
-        return montaToken(valorDoToken, estadoAtual);
-	}
-
-	private void lerProximaLinha() throws Throwable {
-		if (iterador.equals(linhaAtual.length())) {
-			iterador = 0;
-			linhaAtual = getLinha();
-		}
-	}
-	
-	
-	private Token montaToken(String valor, Estado estado) {
-		TipoToken tipoToken = new TipoToken();
-		
-		Integer estadoID = estado.getId();
-		String tipo = tipoToken.getTipo(estadoID,  valor);
-		
-		return new Token(valor, tokenLinha, tokenColuna, tipo);
-	}
-
-	private String montaValorDoToken(Estado estado, String caracter) {
-		if (automato.isEstadoFinal(estado) || automato.isEstadoInicial(estado))
-			return "";
-		
-		return caracter;
+	private void finaliza() throws IOException {
+		codigoFonte.close();
+		fimDeArquivo = TRUE;
 	}
 
 	public Boolean hasToken() {
