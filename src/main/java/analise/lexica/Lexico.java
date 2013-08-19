@@ -61,39 +61,43 @@ public class Lexico {
 	public Token getNextToken() throws Throwable {
 		Token token = getToken();
 		
-		lerProximaLinha();
+		posicionaIterador();
 		
 		return token;
 	}
+
+	private void posicionaIterador() throws Throwable {
+		if (chegouFimDaLinha()) {
+			iterador = 0;
+			linhaAtual = getLinha();
+		}
+	}
 	
+	private boolean chegouFimDaLinha() {
+		return iterador.equals(linhaAtual.length());
+	}
+
 	public Token getToken() throws LexicoException {
 		String valorDoToken = "";
         Estado estadoAtual = automato.getEstadoInicial();
         tokenColuna = iterador;
         
         while (!automato.isEstadoFinal(estadoAtual)) {
-            
+        	
             Character cada = linhaAtual.charAt(iterador);
             
             try {
                     estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
-                    valorDoToken += montaValorDoToken(estadoAtual, cada.toString());
+                    valorDoToken = montaValorDoToken(valorDoToken, estadoAtual, cada.toString());
                     iterador++;
             } catch (LexicoException e) {
                     throw e;
             }
+            
         }
-        	
+        
         return montaToken(valorDoToken, estadoAtual);
-	}
-
-	private void lerProximaLinha() throws Throwable {
-		if (iterador.equals(linhaAtual.length())) {
-			iterador = 0;
-			linhaAtual = getLinha();
-		}
-	}
-	
+	}	
 	
 	private Token montaToken(String valor, Estado estado) {
 		TipoToken tipoToken = new TipoToken();
@@ -104,11 +108,11 @@ public class Lexico {
 		return new Token(valor, tokenLinha, tokenColuna, tipo);
 	}
 
-	private String montaValorDoToken(Estado estado, String caracter) {
-		if (automato.isEstadoFinal(estado) || automato.isEstadoInicial(estado))
-			return "";
+	private String montaValorDoToken(String valorDoToken, Estado estado, String caracter) {
+		if (automato.isEstadoFinal(estado) ) return valorDoToken;
+		if (automato.isEstadoInicial(estado) ) return "";
 		
-		return caracter;
+		return valorDoToken + caracter;
 	}
 
 	public Boolean hasToken() {

@@ -45,7 +45,7 @@ public class TipoToken {
 		tiposToken.put(12, "simbolo");
 		tiposToken.put(13, "simbolo");
 		tiposToken.put(15, "simbolo");
-		tiposToken.put(19, "simbolo");
+		tiposToken.put(19, "string");
 	}     
 
 	private void iniciaPalavrasChave() {
