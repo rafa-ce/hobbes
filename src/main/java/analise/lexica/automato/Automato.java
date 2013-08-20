@@ -54,13 +54,13 @@ public class Automato {
 		this.transicoes.add(transicao);
 	}
 	
-	public Estado getProximoEstado(Estado estadoAtual, String codigo) throws LexicoException {
+	public Estado getProximoEstado(Estado estadoAtual, String codigo) throws AutomatoException {
 		for (Transicao transicao : getTransicoes()) {
 			if (transicao.getOrigem().equals(estadoAtual) && codigo.matches(transicao.getCodigo()))
 				return transicao.getDestino();
 		}
 		
-		throw new LexicoException("Caractere inv�lido!");
+		throw new AutomatoException();
 	}
 
 	public Boolean isEstadoFinal(Estado estado) {

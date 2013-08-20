@@ -1,0 +1,10 @@
+while i and 100 do
+/* comentario 
+de 
+varias
+linhas
+*/ 
+	i =j+i  
+	
+	
+i = 10

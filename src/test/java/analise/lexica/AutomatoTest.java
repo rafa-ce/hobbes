@@ -7,6 +7,7 @@ import static utils.ExpressaoRegular.*;
 import org.junit.Test;
 
 import analise.lexica.automato.Automato;
+import analise.lexica.automato.AutomatoException;
 import analise.lexica.automato.Estado;
 import analise.lexica.automato.Transicao;
 
@@ -25,20 +26,24 @@ public class AutomatoTest {
 	}
 	
 	@Test
-	public void fazTransicaoDeUmEstadoParaOutro() throws Throwable {
+	public void fazTransicaoDeUmEstadoParaOutro() {
 		String entrada = " ";
 		
 		Automato automato = criaAutomatoComDoisEstados();
 		
 		Estado estadoAtual = automato.getEstadoInicial();
 		
-		estadoAtual = percorreAutomato(entrada, automato, estadoAtual);
+		try {
+			estadoAtual = percorreAutomato(entrada, automato, estadoAtual);
+		} catch (AutomatoException e) {
+			e.printStackTrace();
+		}
 		
 		assertEquals("Estado final", automato.getEstadosFinais().get(0).getId().intValue(), estadoAtual.getId().intValue());
 	}
 
-	@Test(expected = LexicoException.class)
-	public void leCaractereInvalido() throws Throwable {
+	@Test(expected = AutomatoException.class)
+	public void leCaractereInvalido() throws AutomatoException {
 		String entrada = "c";
 		
 		Automato automato = criaAutomatoComDoisEstados();
@@ -49,7 +54,7 @@ public class AutomatoTest {
 	}
 	
 	@Test
-	public void criaAutomatoQueIdentificaPalavra() throws Throwable {
+	public void criaAutomatoQueIdentificaPalavra() {
 		
 		String result = "";
 		String entrada = "palavra";
@@ -59,15 +64,20 @@ public class AutomatoTest {
 		Estado estadoAtual = automato.getEstadoInicial();
 		
 		for (Character cada : entrada.toCharArray()) {
-			automato.getProximoEstado(estadoAtual, cada.toString());
+			try {
+				automato.getProximoEstado(estadoAtual, cada.toString());
+			} catch (AutomatoException e) {
+				e.printStackTrace();
+			}
+			
 			result += cada;
 		}
 		
 		assertEquals(entrada, result);	
 	}
 	
-	@Test(expected = LexicoException.class)
-	public void criaAutomatoQueIdentificaPalavraErro() throws Throwable {
+	@Test(expected = AutomatoException.class)
+	public void criaAutomatoQueIdentificaPalavraErro() throws AutomatoException {
 		
 		String entrada = "pala vra";
 		
@@ -75,13 +85,13 @@ public class AutomatoTest {
 		
 		Estado estadoAtual = automato.getEstadoInicial();
 		
-		for (Character cada : entrada.toCharArray()) {
+		for (Character cada : entrada.toCharArray())
 			automato.getProximoEstado(estadoAtual, cada.toString());
-		}
+
 	}
 	
 	@Test
-	public void criaAutomatoQueIdentificaPalavraOuUnderline() throws Throwable {
+	public void criaAutomatoQueIdentificaPalavraOuUnderline() {
 		String entrada = "p_a_l_a_v_r_a";
 		String result = "";
 		
@@ -89,7 +99,11 @@ public class AutomatoTest {
 		Estado estadoAtual = automato.getEstadoInicial();
 		
 		for (Character cada : entrada.toCharArray()) {
-			estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
+			try {
+				estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
+			} catch (AutomatoException e) {
+				e.printStackTrace();
+			}
 			result += cada.toString();
 		}
 		

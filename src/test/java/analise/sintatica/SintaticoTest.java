@@ -15,6 +15,22 @@ public class SintaticoTest {
 		
 		assertEquals(10, sintatico.montaASA().size());
 	}
+	
+	@Test
+	public void testaFluxoTokensDuasLinhas() throws Throwable {
+		
+		Sintatico sintatico = new Sintatico("src/test/resources/arquivoDuasLinhas.txt");
+		
+		assertEquals(10, sintatico.montaASA().size());
+	}
+	
+	@Test
+	public void testaFluxoTokensComComentario() throws Throwable {
+		
+		Sintatico sintatico = new Sintatico("src/test/resources/arquivoComentario.txt");
+		
+		assertEquals(13, sintatico.montaASA().size());
+	}
 
 	@Test(expected = LexicoException.class)
 	public void testaLexicoException() throws Throwable {

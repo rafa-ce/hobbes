@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import analise.lexica.automato.Automato;
+import analise.lexica.automato.AutomatoException;
 import analise.lexica.automato.Estado;
 
 public class AutomatoTigerTest {
@@ -33,7 +34,7 @@ public class AutomatoTigerTest {
 	}
 	
 	@Test
-	public void identificaSimbolos() {
+	public void identificaSimbolos() throws AutomatoException {
 		Automato automato = AutomatoTiger.implementa();
 		
 		String entrada = "+-*";
@@ -48,29 +49,29 @@ public class AutomatoTigerTest {
 	}
 	
 	@Test
-	public void reconheceDiferente() {
+	public void reconheceDiferente() throws AutomatoException {
 		Automato automato = AutomatoTiger.implementa();
 		
 		Estado estadoAtual = automato.getEstadoInicial();
 		
-		estadoAtual = percorreAutomato("<> ", automato, estadoAtual);
+		estadoAtual = percorreAutomato("<>", automato, estadoAtual);
 		
 		assertEquals("Estado final deveria ser 8", 8, estadoAtual.getId().intValue());
 	}
 	
 	@Test
-	public void reconheceMenorIgual() {
+	public void reconheceMenorIgual() throws AutomatoException {
 		Automato automato = AutomatoTiger.implementa();
 		
 		Estado estadoAtual = automato.getEstadoInicial();
 		
-		estadoAtual = percorreAutomato("<= ", automato, estadoAtual);
+		estadoAtual = percorreAutomato("<=", automato, estadoAtual);
 		
 		assertEquals("Estado final deveria ser 9", 9, estadoAtual.getId().intValue());
 	}
 	
 	@Test
-	public void reconheceMenor() {
+	public void reconheceMenor() throws AutomatoException {
 		Automato automato = AutomatoTiger.implementa();
 		
 		Estado estadoAtual = automato.getEstadoInicial();
@@ -81,18 +82,18 @@ public class AutomatoTigerTest {
 	}
 	
 	@Test
-	public void reconheceMaiorIgual() {
+	public void reconheceMaiorIgual() throws Exception {
 		Automato automato = AutomatoTiger.implementa();
 		
 		Estado estadoAtual = automato.getEstadoInicial();
 		
-		estadoAtual = percorreAutomato(">= ", automato, estadoAtual);
+		estadoAtual = percorreAutomato(">=", automato, estadoAtual);
 		
 		assertEquals("Estado final deveria ser 12", 12, estadoAtual.getId().intValue());
 	}
 	
 	@Test
-	public void reconheceMaior() {
+	public void reconheceMaior() throws AutomatoException {
 		Automato automato = AutomatoTiger.implementa();
 		
 		Estado estadoAtual = automato.getEstadoInicial();

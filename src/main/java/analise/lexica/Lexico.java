@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import utils.Token;
 import analise.lexica.automato.Automato;
+import analise.lexica.automato.AutomatoException;
 import analise.lexica.automato.Estado;
 
 public class Lexico {
@@ -65,7 +66,7 @@ public class Lexico {
 
     public Token getNextToken() throws Throwable {
         Token token = getToken();
-        
+		        
         posicionaIterador();
         
         return token;
@@ -79,13 +80,14 @@ public class Lexico {
     }
     
     private Boolean isFimDaLinha() {
-           return iterador.equals(linhaAtual.length());
+    	Integer x = iterador+1;
+    	
+    	 return x.equals(linhaAtual.length());
     }
 
-    private Token getToken() throws LexicoException {
+    private Token getToken() throws Throwable {
     	String valorDoToken = "";
     	Estado estadoAtual = automato.getEstadoInicial();
-    	tokenColuna = iterador;
     
 	    while (!automato.isEstadoFinal(estadoAtual)) {
 	            
@@ -94,9 +96,12 @@ public class Lexico {
 	        try {
                 estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
                 valorDoToken = montaValorDoToken(valorDoToken, estadoAtual, cada.toString());
-                iterador++;
-	        } catch (LexicoException e) {
-                throw e;
+
+                if (valorDoToken.length() == 1)
+                	tokenColuna = iterador;
+
+	        } catch (AutomatoException e) {
+                throw new LexicoException();
 	        }
 	        
 	    }
@@ -113,10 +118,28 @@ public class Lexico {
         return new Token(valor, tokenLinha, tokenColuna, tipo);
     }
 
-    private String montaValorDoToken(String valorDoToken, Estado estado, String caracter) {
-        if (automato.isEstadoFinal(estado) ) return valorDoToken;
-        if (automato.isEstadoInicial(estado) ) return "";
+    private String montaValorDoToken(String valorDoToken, Estado estado, String caracter) throws Throwable {
+        if (automato.isEstadoFinal(estado))
+        	return valorDoToken;
+        
+        if (estado.getId().equals(99)) {
+        	linhaAtual = getLinha();
+    		iterador = 0;
+        }
+        
+        if (automato.isEstadoInicial(estado) || estado.getId().equals(16)) { 
+        	if (!isFimDaLinha()) {
+        		iterador++;
+        	}
+        	else {
+        		linhaAtual = getLinha();
+        		iterador = 0;
+        	}
+        	return "";
+        }
             
+        iterador++;
+        
         return valorDoToken + caracter;
     }
 

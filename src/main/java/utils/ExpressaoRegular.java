@@ -22,8 +22,8 @@ public class ExpressaoRegular {
 	
 	public static final String ASPA = "\"";
 	
-	public static final String TUDO_MENOS_ASTERISCO = "[^//*]"; // [.&&[^\\*]]
+	public static final String TUDO_MENOS_ASTERISCO = "[^//*]";
 	public static final String TUDO_MENOS_BARRA = "[^/]";
 	
-
+	public static final String TUDO_MENOS_ASPA = "[^\"]";
 }

@@ -1,0 +1,16 @@
+// nome
+
+while( i < /* inicio */ 100 )do              
+	i = j + i
+printf("jose")
+
+
+
+
+/* sdasdf ssd a  
+ sdf sdf 
+ */
+
+/* fim */	
+
+

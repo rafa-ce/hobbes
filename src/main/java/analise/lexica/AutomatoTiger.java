@@ -1,19 +1,6 @@
 package analise.lexica;
 
-import static utils.ExpressaoRegular.ASPA;
-import static utils.ExpressaoRegular.ASTERISCO;
-import static utils.ExpressaoRegular.BARRA;
-import static utils.ExpressaoRegular.ESPACO_EM_BRANCO;
-import static utils.ExpressaoRegular.IGUAL;
-import static utils.ExpressaoRegular.LETRA;
-import static utils.ExpressaoRegular.LETRA_NUMERO_ESPACO_EM_BRANCO;
-import static utils.ExpressaoRegular.LETRA_NUMERO_UNDERLINE;
-import static utils.ExpressaoRegular.MAIOR;
-import static utils.ExpressaoRegular.MENOR;
-import static utils.ExpressaoRegular.NUMERO;
-import static utils.ExpressaoRegular.SIMBOLOS_SIMPLES;
-import static utils.ExpressaoRegular.TUDO_MENOS_ASTERISCO;
-import static utils.ExpressaoRegular.TUDO_MENOS_BARRA;
+import static utils.ExpressaoRegular.*;
 import analise.lexica.automato.Automato;
 import analise.lexica.automato.Estado;
 import analise.lexica.automato.Transicao;
@@ -77,6 +64,7 @@ public class AutomatoTiger {
 		automato.addTransicao(new Transicao(q0, q3, NUMERO));
 		automato.addTransicao(new Transicao(q3, q3, NUMERO));
 		automato.addTransicao(new Transicao(q3, q4, ESPACO_EM_BRANCO));
+		automato.addTransicao(new Transicao(q3, q4, SIMBOLOS_SIMPLES));
 		
 		automato.addTransicao(new Transicao(q0, q5, SIMBOLOS_SIMPLES));
 		automato.addTransicao(new Transicao(q5, q6, LETRA_NUMERO_ESPACO_EM_BRANCO));
@@ -100,7 +88,7 @@ public class AutomatoTiger {
 		automato.addTransicao(new Transicao(q17, q0, BARRA));
 		
 		automato.addTransicao(new Transicao(q0, q18, ASPA));
-		automato.addTransicao(new Transicao(q18, q18, LETRA));
+		automato.addTransicao(new Transicao(q18, q18, TUDO_MENOS_ASPA));
 		automato.addTransicao(new Transicao(q18, q19, ASPA));
 		
 		return automato;
