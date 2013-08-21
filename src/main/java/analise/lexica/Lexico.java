@@ -29,63 +29,46 @@ public class Lexico {
         fimDeArquivo = FALSE;
         inicializa(entrada);
     }
-    
-    private void inicializa(String entrada) {
-        abreArquivo(entrada);
-        
-        try {
-            linhaAtual = getLinha();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-    }
 
-    private void abreArquivo(String entrada) {
-        try {
-        	codigoFonte = new BufferedReader(new FileReader(entrada));
-        } catch (FileNotFoundException e) {
-             e.printStackTrace();
-        }
-    }
-
-    private String getLinha() throws Throwable {    
-        if (codigoFonte.ready()) {
-            tokenLinha++;
-            return codigoFonte.readLine() + " ";
-        }
-        
-        finaliza();
-        
-        return "";
-    }
-
-	private void finaliza() throws IOException {
-		codigoFonte.close();
-        fimDeArquivo = TRUE;
+	private void inicializa(String entrada) {
+		abrirArquivo(entrada);
+		getProximaLinha();		
 	}
 
-    public Token getNextToken() throws Throwable {
-        Token token = getToken();
-		        
-        posicionaIterador();
-        
-        return token;
-    }
-
-    private void posicionaIterador() throws Throwable {
-        if (isFimDaLinha()) {
-            iterador = 0;
-            linhaAtual = getLinha();
+	private void abrirArquivo(String entrada) {
+		try {
+			codigoFonte = new BufferedReader(new FileReader(entrada));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-    }
+	}
     
-    private Boolean isFimDaLinha() {
-    	Integer x = iterador+1;
-    	
-    	 return x.equals(linhaAtual.length());
-    }
+	private void getProximaLinha() {
+		try {
+			getLinha();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    private Token getToken() throws Throwable {
+	private void getLinha() throws IOException {
+		if (codigoFonte.ready()) {
+		    tokenLinha++;
+		    linhaAtual = codigoFonte.readLine() + "$";
+		} else {
+			linhaAtual = "FIM";
+		}
+	}
+
+	public Token getNextToken() throws Throwable {
+		Token token = getToken();
+		
+		posicionaIterador();
+		
+		return token;
+	}
+
+	private Token getToken() throws Throwable {
     	String valorDoToken = "";
     	Estado estadoAtual = automato.getEstadoInicial();
     
@@ -107,23 +90,14 @@ public class Lexico {
 	    }
 	    
 	    return montaToken(valorDoToken, estadoAtual);
-    }       
-    
-    private Token montaToken(String valor, Estado estado) {
-        TipoToken tipoToken = new TipoToken();
-        
-        Integer estadoID = estado.getId();
-        String tipo = tipoToken.getTipo(estadoID,  valor);
-            
-        return new Token(valor, tokenLinha, tokenColuna, tipo);
-    }
-
+	}
+	
     private String montaValorDoToken(String valorDoToken, Estado estado, String caracter) throws Throwable {
         if (automato.isEstadoFinal(estado))
         	return valorDoToken;
         
         if (estado.getId().equals(99)) {
-        	linhaAtual = getLinha();
+        	getProximaLinha();
     		iterador = 0;
         }
         
@@ -132,7 +106,7 @@ public class Lexico {
         		iterador++;
         	}
         	else {
-        		linhaAtual = getLinha();
+        		getProximaLinha();
         		iterador = 0;
         	}
         	return "";
@@ -142,8 +116,38 @@ public class Lexico {
         
         return valorDoToken + caracter;
     }
+    
+    private Token montaToken(String valor, Estado estado) {
+        TipoToken tipoToken = new TipoToken();
+        
+        Integer estadoID = estado.getId();
+        String tipo = tipoToken.getTipo(estadoID,  valor);
+            
+        return new Token(valor, tokenLinha, tokenColuna, tipo);
+    }
+	
+	private void posicionaIterador() {
+		 if (isFimDaLinha()) {
+			 iterador = 0;
+	         getProximaLinha();
+	     }
+		 
+		 if (linhaAtual.equals("FIM")) {
+			 fimDeArquivo = TRUE;
+			 try {
+				codigoFonte.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		 }
+	}
 
-    public Boolean hasToken() {
+	private boolean isFimDaLinha() {
+		return linhaAtual.charAt(iterador) == '$';
+	}
+	
+	public Boolean hasToken() {
         return !fimDeArquivo;
     }
+	
 }
