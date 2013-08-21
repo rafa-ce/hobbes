@@ -55,6 +55,7 @@ public class AutomatoTiger {
 		automato.addEstado(q18);
 		
 		automato.addTransicao(new Transicao(q0, q0, ESPACO_EM_BRANCO));
+		automato.addTransicao(new Transicao(q0, q0, "\\$"));
 		
 		automato.addTransicao(new Transicao(q0, q1, LETRA));
 		automato.addTransicao(new Transicao(q1, q1, LETRA_NUMERO_UNDERLINE));
@@ -66,7 +67,7 @@ public class AutomatoTiger {
 		automato.addTransicao(new Transicao(q3, q4, ESPACO_EM_BRANCO));
 		automato.addTransicao(new Transicao(q3, q4, SIMBOLOS_SIMPLES));
 		
-		automato.addTransicao(new Transicao(q0, q5, SIMBOLOS_SIMPLES));
+		automato.addTransicao(new Transicao(q0, q5, OPERADORES));
 		automato.addTransicao(new Transicao(q5, q6, LETRA_NUMERO_ESPACO_EM_BRANCO));
 		
 		automato.addTransicao(new Transicao(q0, q7, MENOR));

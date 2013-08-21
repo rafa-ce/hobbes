@@ -1,3 +1,9 @@
 while i and /*8*/ 100 do
-i =j+i
+	i =j+i
+
+/*
+comentario
+*/	
+
 i = 10
+

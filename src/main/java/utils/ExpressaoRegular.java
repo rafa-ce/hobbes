@@ -8,6 +8,8 @@ public class ExpressaoRegular {
 	
 	public static final String SIMBOLOS_SIMPLES = "\\+|-|\\*|=|\\(|\\)|\\[|\\]|\\$";
 	
+	public static final String OPERADORES = "\\+|-|\\*|=|\\(|\\)|\\[|\\]";
+	
 	public static final String LETRA_NUMERO_ESPACO_EM_BRANCO = "[a-zA-Z0-9\\s(]";
 	
 	public static final String MENOR = "<";

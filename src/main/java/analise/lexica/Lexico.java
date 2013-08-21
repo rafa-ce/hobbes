@@ -57,6 +57,7 @@ public class Lexico {
 		    linhaAtual = codigoFonte.readLine() + "$";
 		} else {
 			linhaAtual = "FIM";
+			fimDeArquivo = TRUE;
 		}
 	}
 
@@ -73,16 +74,19 @@ public class Lexico {
     	Estado estadoAtual = automato.getEstadoInicial();
     
 	    while (!automato.isEstadoFinal(estadoAtual)) {
-	            
+	           
 	        Character cada = linhaAtual.charAt(iterador);
 	        
 	        try {
                 estadoAtual = automato.getProximoEstado(estadoAtual, cada.toString());
                 valorDoToken = montaValorDoToken(valorDoToken, estadoAtual, cada.toString());
 
+                if (valorDoToken == null)
+                	return null;
+                
                 if (valorDoToken.length() == 1)
                 	tokenColuna = iterador;
-
+               
 	        } catch (AutomatoException e) {
                 throw new LexicoException();
 	        }
@@ -96,10 +100,10 @@ public class Lexico {
         if (automato.isEstadoFinal(estado))
         	return valorDoToken;
         
-        if (estado.getId().equals(99)) {
-        	getProximaLinha();
-    		iterador = 0;
-        }
+//        if (estado.getId().equals(99)) {
+//        	getProximaLinha();
+//    		iterador = 0;
+//        }
         
         if (automato.isEstadoInicial(estado) || estado.getId().equals(16)) { 
         	if (!isFimDaLinha()) {
@@ -109,6 +113,10 @@ public class Lexico {
         		getProximaLinha();
         		iterador = 0;
         	}
+        	
+        	if(fimDeArquivo)
+        		return null;
+        	
         	return "";
         }
             
