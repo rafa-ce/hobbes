@@ -1,4 +1,4 @@
-// nome
+// comentario
 
 while( i < /* inicio */ 100 )do              
 	i = j + i

@@ -31,6 +31,14 @@ public class SintaticoTest {
 		
 		assertEquals(13, sintatico.montaASA().size());
 	}
+	
+	@Test
+	public void testaFluxoLoucuraComComentario() throws Throwable {
+		
+		Sintatico sintatico = new Sintatico("src/test/resources/arquivoDaLocura.txt");
+		
+		assertEquals(16, sintatico.montaASA().size());
+	}
 
 	@Test(expected = LexicoException.class)
 	public void testaLexicoException() throws Throwable {

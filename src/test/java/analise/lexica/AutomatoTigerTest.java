@@ -54,9 +54,9 @@ public class AutomatoTigerTest {
 		
 		Estado estadoAtual = automato.getEstadoInicial();
 		
-		estadoAtual = percorreAutomato("<>", automato, estadoAtual);
+		estadoAtual = percorreAutomato("<> ", automato, estadoAtual);
 		
-		assertEquals("Estado final deveria ser 8", 8, estadoAtual.getId().intValue());
+		assertEquals("Estado final deveria ser 6", 6, estadoAtual.getId().intValue());
 	}
 	
 	@Test
@@ -67,7 +67,7 @@ public class AutomatoTigerTest {
 		
 		estadoAtual = percorreAutomato("<=", automato, estadoAtual);
 		
-		assertEquals("Estado final deveria ser 9", 9, estadoAtual.getId().intValue());
+		assertEquals("Estado final deveria ser 8", 8, estadoAtual.getId().intValue());
 	}
 	
 	@Test
@@ -78,7 +78,7 @@ public class AutomatoTigerTest {
 		
 		estadoAtual = percorreAutomato("< ", automato, estadoAtual);
 		
-		assertEquals("Estado final deveria ser 10", 10, estadoAtual.getId().intValue());
+		assertEquals("Estado final deveria ser 6", 6, estadoAtual.getId().intValue());
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ public class AutomatoTigerTest {
 		
 		estadoAtual = percorreAutomato(">=", automato, estadoAtual);
 		
-		assertEquals("Estado final deveria ser 12", 12, estadoAtual.getId().intValue());
+		assertEquals("Estado final deveria ser 10", 10, estadoAtual.getId().intValue());
 	}
 	
 	@Test
@@ -100,6 +100,6 @@ public class AutomatoTigerTest {
 		
 		estadoAtual = percorreAutomato("> ", automato, estadoAtual);
 		
-		assertEquals("Estado final deveria ser 13", 13, estadoAtual.getId().intValue());
+		assertEquals("Estado final deveria ser 6", 6, estadoAtual.getId().intValue());
 	}
 }

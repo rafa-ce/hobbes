@@ -100,12 +100,7 @@ public class Lexico {
         if (automato.isEstadoFinal(estado))
         	return valorDoToken;
         
-//        if (estado.getId().equals(99)) {
-//        	getProximaLinha();
-//    		iterador = 0;
-//        }
-        
-        if (automato.isEstadoInicial(estado) || estado.getId().equals(16)) { 
+        if (automato.isEstadoInicial(estado) || estado.getId().equals(12)) { 
         	if (!isFimDaLinha()) {
         		iterador++;
         	}

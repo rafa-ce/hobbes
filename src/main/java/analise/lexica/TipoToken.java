@@ -9,12 +9,12 @@ public class TipoToken {
 	
 	private Map<Integer, String> tiposToken;
 	private List<String> palavrasChave;
-	private List<String> simbolos;
+	private List<String> operadores;
 	
 	public TipoToken() {
 		iniciaTiposToken();
 		iniciaPalavrasChave();
-		iniciaSibolos();
+		iniciaOperadores();
 	}
 
 	public String getTipo(Integer id, String valor) {
@@ -29,8 +29,14 @@ public class TipoToken {
 	}
 	
 	private String identificaPalavra(String valor) {
-		if (simbolos.contains(valor)) return "simbolo";
-		if (palavrasChave.contains(valor)) return "palavraChave";
+		if (operadores.contains(valor)) {
+			return "simbolo";
+		}
+		
+		if (palavrasChave.contains(valor)) {
+			return "palavraChave";
+		}
+		
 		return "identificador";
 	}
 
@@ -38,14 +44,9 @@ public class TipoToken {
 		tiposToken = new HashMap<Integer, String>();
 		tiposToken.put(2, "palavra");
 		tiposToken.put(4, "numero");
-		tiposToken.put(6, "simbolo");
-		tiposToken.put(8, "simbolo");
-		tiposToken.put(9, "simbolo");
-		tiposToken.put(10, "simbolo");
-		tiposToken.put(12, "simbolo");
-		tiposToken.put(13, "simbolo");
-		tiposToken.put(15, "simbolo");
-		tiposToken.put(19, "string");
+		tiposToken.put(6, "operador");
+		tiposToken.put(17, "string");
+		tiposToken.put(19, "simbolo");
 	}     
 
 	private void iniciaPalavrasChave() {
@@ -66,10 +67,10 @@ public class TipoToken {
 		palavrasChave.add("or");
 	}
 	
-	private void iniciaSibolos() {
-		this.simbolos = new ArrayList<String>();
-		simbolos.add("and");
-		simbolos.add("or");
+	private void iniciaOperadores() {
+		this.operadores = new ArrayList<String>();
+		operadores.add("and");
+		operadores.add("or");
 	}
 	
 }
