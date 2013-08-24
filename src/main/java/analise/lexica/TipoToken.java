@@ -65,6 +65,7 @@ public class TipoToken {
 		palavrasChave.add("import");
 		palavrasChave.add("and");
 		palavrasChave.add("or");
+		palavrasChave.add("printf");
 	}
 	
 	private void iniciaOperadores() {

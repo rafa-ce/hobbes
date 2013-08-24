@@ -1,2 +1,0 @@
-while i and 100 do                           
-	i :=j+i
