@@ -7,6 +7,15 @@ import java.util.Map;
 
 public class TipoToken {
 	
+	public static final String STRING = "string";
+	public static final String OPERADOR = "operador";
+	public static final String NUMERO = "numero";
+	public static final String IDENTIFICADOR = "identificador";
+	public static final String PALAVRA_CHAVE = "palavraChave";
+	public static final String SIMBOLO = "simbolo";
+	
+	private static final String PALAVRA = "palavra";
+	
 	private Map<Integer, String> tiposToken;
 	private List<String> palavrasChave;
 	private List<String> operadores;
@@ -21,7 +30,7 @@ public class TipoToken {
 		
 		String tipo = tiposToken.get(id);
 		
-		if (tipo.equals("palavra")) {
+		if (tipo.equals(PALAVRA)) {
 			return identificaPalavra(valor);
 		}
 	
@@ -30,23 +39,23 @@ public class TipoToken {
 	
 	private String identificaPalavra(String valor) {
 		if (operadores.contains(valor)) {
-			return "simbolo";
+			return SIMBOLO;
 		}
 		
 		if (palavrasChave.contains(valor)) {
-			return "palavraChave";
+			return PALAVRA_CHAVE;
 		}
 		
-		return "identificador";
+		return IDENTIFICADOR;
 	}
 
 	private void iniciaTiposToken() {
 		tiposToken = new HashMap<Integer, String>();
-		tiposToken.put(2, "palavra");
-		tiposToken.put(4, "numero");
-		tiposToken.put(6, "operador");
-		tiposToken.put(17, "string");
-		tiposToken.put(19, "simbolo");
+		tiposToken.put(2, PALAVRA);
+		tiposToken.put(4, NUMERO);
+		tiposToken.put(6, OPERADOR);
+		tiposToken.put(17, STRING);
+		tiposToken.put(19, SIMBOLO);
 	}     
 
 	private void iniciaPalavrasChave() {

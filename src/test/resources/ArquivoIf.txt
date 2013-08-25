@@ -1,0 +1,4 @@
+if a = b then
+	a := 1
+else
+	b := 1
