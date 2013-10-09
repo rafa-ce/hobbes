@@ -13,7 +13,9 @@ public class Sintatico {
 	private Lexico lexico;
 	
 	public Sintatico(String entrada) {
+		
 		this.lexico = new Lexico(entrada);
+		
 	}
 	
 	public List<Token> montaASA() throws Throwable {
