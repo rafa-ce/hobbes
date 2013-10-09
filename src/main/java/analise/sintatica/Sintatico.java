@@ -18,26 +18,22 @@ public class Sintatico {
 	
 	public List<Token> montaASA() throws Throwable {
 		
-		Token proximoToken;
-		Token tokenAtual = lexico.getNextToken() ;
-		
+		Token token;
 		List<Token> tokens = new ArrayList<Token>();
 		
 		while (lexico.hasToken()) {
+			token = lexico.getNextToken();
 			
-			proximoToken = lexico.getNextToken();
-			
-			if (proximoToken != null)
-				tokens.add(tokenAtual);
-			
-			tokenAtual = proximoToken;
-			
+			if (token != null)
+				tokens.add(token);			
 		}
-		
-		tokens.add(tokenAtual);
 		
 		return tokens;
 		
+	}
+	
+	private Boolean isTokenEsperado(Token token) {
+		return TRUE;
 	}
 	
 }
