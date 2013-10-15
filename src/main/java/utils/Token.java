@@ -1,5 +1,9 @@
 package utils;
 
+import static analise.lexica.TipoToken.IDENTIFICADOR;
+import static analise.lexica.TipoToken.NUMERO;
+import static analise.lexica.TipoToken.PALAVRA_CHAVE;
+
 public class Token {
 	
 	private String valor;
@@ -22,5 +26,17 @@ public class Token {
 
 	public Posicao getPosicao() {
 		return posicao;
+	}
+	
+	public Boolean isPalavraChave() {
+		return getTipo().equals(PALAVRA_CHAVE);
+	}
+	
+	public Boolean isIdentificador() {
+		return getTipo().equals(IDENTIFICADOR);
+	}
+
+	public Boolean isNumero() {
+		return getTipo().equals(NUMERO);
 	}
 }

@@ -3,8 +3,6 @@ package analise.lexica.automato;
 import java.util.ArrayList;
 import java.util.List;
 
-import analise.lexica.LexicoException;
-
 public class Automato {
 	
 	private Estado estadoInicial;
