@@ -19,21 +19,20 @@ public class Sintatico {
 		iniciaPilha();
 	}
 	
-	public void montaASA() throws Throwable {
+	public void executa() throws Throwable {
 		
 		while (lexico.hasToken()) {
 			
 			Token token = lexico.getNextToken();			
 			
-			while(isNaoTerminal(pilha.firstElement())) {
+			while(isNaoTerminal(pilha.lastElement())) {
 				String topo = pilha.pop();
 				List<String> producaoGerada = geraProducao(topo, token);
 				empilhaProducao(producaoGerada);
 			}
 				
-			validaToken(token);
-						
-		}		
+			validaToken(token);		
+		}
 	}
 	
 	private Boolean validaToken(Token token) {
@@ -46,14 +45,16 @@ public class Sintatico {
 	}
 
 	private void empilhaProducao(List<String> producaoGerada) {
-		for (int i = producaoGerada.size(); i < 0; i--)
+		for (int i = producaoGerada.size() - 1; i >= 0; i--)
 			pilha.push(producaoGerada.get(i));			
 				
 	}
 
 	private void iniciaPilha() {
+		pilha = new Stack<String>();
+		
 		pilha.push("$");
-		pilha.push("<prog>");
+		pilha.push("<Prog>");
 	}
 	
 	public static Boolean isNaoTerminal(String valor) {

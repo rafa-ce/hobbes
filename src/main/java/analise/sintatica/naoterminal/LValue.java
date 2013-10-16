@@ -17,7 +17,7 @@ public class LValue extends NaoTerminal {
 
 	@Override
 	protected void inicializaProducoes() {
-		producoes.put(IDENTIFICADOR, Arrays.asList("id", "<LValuePr>"));
+		producoes.put(IDENTIFICADOR, Arrays.asList(IDENTIFICADOR, "<LValuePr>"));
 	}
 
 }

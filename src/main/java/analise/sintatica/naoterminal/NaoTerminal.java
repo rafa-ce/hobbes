@@ -10,7 +10,7 @@ public abstract class NaoTerminal {
 	
     private static Map<String, NaoTerminal> naoTerminais;
     
-    protected Map<String, List<String>> producoes;
+    protected Map<String, List<String>> producoes = new HashMap<String, List<String>>();
 	
     protected abstract void inicializaProducoes();
 
@@ -61,10 +61,10 @@ public abstract class NaoTerminal {
 	public static List<String> geraProducao(String topo, Token token) {
 		NaoTerminal atual = getTerminalAtual(topo);
 		
-		if (token.isPalavraChave())
-			return atual.getProducao(token.getValor());
+		if (token.isIdentificador() || token.isNumero())
+			return atual.getProducao(token.getTipo());
 		
-		return atual.getProducao(token.getTipo());
+		return atual.getProducao(token.getValor());
 	}
 
 }

@@ -20,7 +20,7 @@ public class LValuePr extends NaoTerminal {
 		producoes.put("(", Arrays.asList("(", "<ArgList>", ")"));		
 		producoes.put("/", Arrays.asList("ε"));
 		producoes.put("*", Arrays.asList("ε"));
-		producoes.put(":=", Arrays.asList(":=", "exp"));
+		producoes.put(":=", Arrays.asList(":=", "<Exp>"));
 		producoes.put("$", Arrays.asList("ε"));
 	}
 
