@@ -33,4 +33,8 @@ public class Lista extends NaoTerminal {
 		producoes.put("function", Arrays.asList("<Item>", "<Lista>"));
 		producoes.put("$", Arrays.asList("ε"));
 	}
+	
+	public static String codigo() {
+		return "<Lista>";
+	}
 }

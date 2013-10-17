@@ -33,4 +33,7 @@ public class IfElse extends NaoTerminal {
 		producoes.put("$", Arrays.asList("ε"));
 	}
 
+	public static String codigo() {
+		return "<IfElse>";
+	}
 }

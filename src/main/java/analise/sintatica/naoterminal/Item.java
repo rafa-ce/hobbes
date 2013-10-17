@@ -33,4 +33,7 @@ private static Item instance;
 		producoes.put("function", Arrays.asList("<Dec>"));
 	}
 
+	public static String codigo() {
+		return "<Item>";
+	}
 }

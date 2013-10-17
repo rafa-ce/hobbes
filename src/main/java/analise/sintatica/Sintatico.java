@@ -2,25 +2,37 @@ package analise.sintatica;
 
 import static analise.sintatica.naoterminal.NaoTerminal.geraProducao;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 import utils.Token;
 import analise.lexica.Lexico;
+import analise.sintatica.arvore.No;
+import analise.sintatica.naoterminal.Prog;
 
 public class Sintatico {
 	
 	private static final Token TOKEN_FIM_DA_PILHA = new Token("$", 0, 0, "Final do Arquivo");
 	private Lexico lexico;
 	private Stack<String> pilha;
+	private No raiz;
+	private No noAtual;
 	
 	public Sintatico(String entrada) {
 		lexico = new Lexico(entrada);
 		iniciaPilha();
+		iniciaASA();
 	}
 	
+	private void iniciaASA() {
+		raiz = No.criaNo(Prog.codigo(), null, new ArrayList<No>());
+	}
+
 	public void executa() throws Throwable {
+		noAtual = raiz;
+		
 		while (lexico.hasToken()) {
 			
 			Token token = lexico.getNextToken();
@@ -29,9 +41,13 @@ public class Sintatico {
 				String topo = pilha.pop();
 				List<String> producaoGerada = geraProducao(topo, token);
 				empilhaProducao(producaoGerada);
+				noAtual.criaFilhos(producaoGerada);
+				noAtual = noAtual.proximo();
 			}
 				
-			validaToken(token);		
+			validaToken(token);
+			noAtual.trocaConteudo(token);
+			noAtual = noAtual.proximo();
 		}
 
 		finalizaPilha();
@@ -113,5 +129,9 @@ public class Sintatico {
 
 	public Stack<String> getPilha() {
 		return pilha;
+	}
+	
+	public void printArvore() {
+		
 	}
 }

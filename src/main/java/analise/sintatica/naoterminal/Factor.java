@@ -32,4 +32,7 @@ public class Factor extends NaoTerminal {
 		producoes.put(NUMERO, Arrays.asList("numero"));	
 	}
 
+	public static String codigo() {
+		return "<Factor>";
+	}
 }

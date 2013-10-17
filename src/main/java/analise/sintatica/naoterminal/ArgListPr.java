@@ -20,4 +20,7 @@ public class ArgListPr extends NaoTerminal {
 		producoes.put(")", Arrays.asList("ε"));
 	}
 
+	public static String codigo() {
+		return "<ArgListPr>";
+	}
 }

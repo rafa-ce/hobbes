@@ -29,5 +29,8 @@ public class ArgList extends NaoTerminal {
 		producoes.put("(", Arrays.asList("<Exp>", "<ArgListPr>"));
 		producoes.put(NUMERO, Arrays.asList("<Exp>", "<ArgListPr>"));
 	}
-
+	
+	public static String codigo() {
+		return "<ArgList>";
+	}
 }

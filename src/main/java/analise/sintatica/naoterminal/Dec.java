@@ -18,4 +18,8 @@ public class Dec extends NaoTerminal {
 	protected void inicializaProducoes() {
 		producoes.put("function", Arrays.asList("function", "id", "(", "<FieldList>", ")","=", "<Exp>"));
 	}
+	
+	public static String codigo() {
+		return "<Dec>";
+	}
 }

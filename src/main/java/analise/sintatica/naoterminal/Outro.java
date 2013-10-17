@@ -21,4 +21,7 @@ public class Outro extends NaoTerminal {
 		producoes.put("*", Arrays.asList("ε"));
 	}
 
+	public static String codigo() {
+		return "<Outro>";
+	}
 }

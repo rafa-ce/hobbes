@@ -31,4 +31,7 @@ public class ExpAnd extends NaoTerminal {
 		producoes.put(NUMERO, Arrays.asList("<ArithExp>", "<RelExp>"));		
 	}
 
+	public static String codigo() {
+		return "<ExpAnd>";
+	}
 }

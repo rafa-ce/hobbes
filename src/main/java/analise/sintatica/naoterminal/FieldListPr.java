@@ -21,4 +21,7 @@ public class FieldListPr extends NaoTerminal {
 		producoes.put(",", Arrays.asList("id", IDENTIFICADOR));
 	}
 
+	public static String codigo() {
+		return "<FieldListPr>";
+	}
 }

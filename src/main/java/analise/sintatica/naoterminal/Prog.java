@@ -33,4 +33,8 @@ public class Prog extends NaoTerminal {
 		producoes.put("function", Arrays.asList("<Lista>"));
 		producoes.put("$", Arrays.asList("ε"));		
 	}
+
+	public static String codigo() {
+		return "<Prog>";
+	}
 }

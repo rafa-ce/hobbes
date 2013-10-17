@@ -22,5 +22,8 @@ public class RelOp extends NaoTerminal {
 		producoes.put(">=", Arrays.asList(">="));
 		producoes.put("<=", Arrays.asList("<="));		
 	}
-
+	
+	public static String codigo() {
+		return "<RelOp>";
+	}
 }

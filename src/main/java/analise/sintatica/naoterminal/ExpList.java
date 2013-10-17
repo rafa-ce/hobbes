@@ -30,4 +30,7 @@ public class ExpList extends NaoTerminal {
 		producoes.put(NUMERO, Arrays.asList("<Exp>", "<ExpPr>"));
 	}
 
+	public static String codigo() {
+		return "<ExpList>";
+	}
 }

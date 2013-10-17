@@ -31,4 +31,7 @@ public class ArithExp extends NaoTerminal {
 		producoes.put(NUMERO, Arrays.asList("<Term>", "<TermPr>"));
 	}
 
+	public static String codigo() {
+		return "<ArithExp>";
+	}
 }

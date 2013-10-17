@@ -19,5 +19,8 @@ public class LValue extends NaoTerminal {
 	protected void inicializaProducoes() {
 		producoes.put(IDENTIFICADOR, Arrays.asList(IDENTIFICADOR, "<LValuePr>"));
 	}
-
+	
+	public static String codigo() {
+		return "<LValue>";
+	}
 }

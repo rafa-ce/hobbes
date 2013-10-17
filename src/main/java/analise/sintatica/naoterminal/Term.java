@@ -31,4 +31,7 @@ public class Term extends NaoTerminal {
 		producoes.put(NUMERO, Arrays.asList("<Factor>", "<FactorPr>"));				
 	}
 
+	public static String codigo() {
+		return "<Term>";
+	}
 }

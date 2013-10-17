@@ -21,4 +21,8 @@ public class ExpAndPr extends NaoTerminal {
 		producoes.put("do", Arrays.asList("ε"));
 		producoes.put("$", Arrays.asList("ε"));
 	}
+	
+	public static String codigo() {
+		return "<ExpAndPr>";
+	}
 }
