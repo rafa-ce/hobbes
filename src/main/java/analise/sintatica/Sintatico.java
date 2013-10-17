@@ -11,6 +11,7 @@ import analise.lexica.Lexico;
 
 public class Sintatico {
 	
+	private static final Token TOKEN_FIM_DA_PILHA = new Token("$", 0, 0, "Final do Arquivo");
 	private Lexico lexico;
 	private Stack<String> pilha;
 	
@@ -20,10 +21,9 @@ public class Sintatico {
 	}
 	
 	public void executa() throws Throwable {
-		
 		while (lexico.hasToken()) {
 			
-			Token token = lexico.getNextToken();			
+			Token token = lexico.getNextToken();
 			
 			while(isNaoTerminal(pilha.lastElement())) {
 				String topo = pilha.pop();
@@ -33,8 +33,27 @@ public class Sintatico {
 				
 			validaToken(token);		
 		}
+
+		finalizaPilha();
+
 	}
 	
+	private void finalizaPilha() {
+		
+		if (pilha.lastElement().equals("$"))
+			return;
+		
+		String topo = pilha.pop();
+
+		if (!isNaoTerminal(topo))
+			return;
+		
+		if (!geraProducao(topo, TOKEN_FIM_DA_PILHA).get(0).equals("ε"))
+			return;
+		
+		finalizaPilha();
+	}
+
 	private Boolean validaToken(Token token) {
 		String topo = pilha.pop();
 		
@@ -45,6 +64,9 @@ public class Sintatico {
 	}
 
 	private void empilhaProducao(List<String> producaoGerada) {
+		if (producaoGerada.get(0).equals("ε"))
+			return;
+		
 		for (int i = producaoGerada.size() - 1; i >= 0; i--)
 			pilha.push(producaoGerada.get(i));			
 				
@@ -87,5 +109,9 @@ public class Sintatico {
 				,"<FieldListPr>");
 		
 		return naoTerminais.contains(valor);
+	}
+
+	public Stack<String> getPilha() {
+		return pilha;
 	}
 }

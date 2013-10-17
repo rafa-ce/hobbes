@@ -1,56 +1,37 @@
 package analise.sintatica;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import analise.lexica.LexicoException;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Test;
 
 public class SintaticoTest {
 	
 	@Test
-	public void testaFluxoTokensHappyDay() throws Throwable {
+	public void testaFluxoSintaticoHappyDay() throws Throwable {
 		
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoLinhaUnica.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoSintaticoHappyDay.txt");
 		
-//		assertEquals(8, sintatico.montaASA().size());
+		sintatico.executa();
+		
+		assertEquals(1, sintatico.getPilha().size());
+		String firstElement = sintatico.getPilha().firstElement();
+		String lastElement = sintatico.getPilha().lastElement();
+		
+		assertTrue(firstElement.equals("$"));
+		assertTrue(firstElement.equals(lastElement));
 	}
 
-	@Test(expected = LexicoException.class)
-	public void testaLexicoException() throws Throwable {
+	@Test
+	public void testaFluxoSintaticoSobrandoElementosNaPilha() throws Throwable {
+		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoSintaticoSobraNaPilha.txt");
 		
-		Sintatico sintatico = new Sintatico("src/test/resources/TokenInvalido.txt");
+		sintatico.executa();
 		
-		sintatico.montaASA();
+		assertEquals("[$, <Lista>, <ExpORPr>, <ExpANDPr>, <RelExp>, <TermPr>, <FactorPr>, <Exp>]", sintatico.getPilha().toString());
 	}
 	
-	@Test
-	public void testaFluxoTokensWhile() throws Throwable {
-		
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoWhile.txt");
-		
-//		assertEquals(10, sintatico.montaASA().size());
-	}
-	
-	@Test
-	public void testaFluxoTokensIf() throws Throwable {
-		
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoIf.txt");
-		
-//		assertEquals(12, sintatico.montaASA().size());
-	}
-	
-	@Test
-	public void testaFluxoTokensComentario() throws Throwable {
-		
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoComentario.txt");
-		
-//		assertEquals(13, sintatico.montaASA().size());
-	}
-	
-	@Test
-	public void testaFluxoTokensArquivoDesorganizado() throws Throwable {
-		
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoDesorganizado.txt");
-		
-//		assertEquals(16, sintatico.montaASA().size());
-	}
 }

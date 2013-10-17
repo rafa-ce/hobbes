@@ -21,7 +21,10 @@ public class RelExp extends NaoTerminal {
 		producoes.put("=", Arrays.asList("<RelOp>", "<ArithExp>"));		
 		producoes.put("<>", Arrays.asList("<RelOp>", "<ArithExp>"));
 		producoes.put(">=", Arrays.asList("<RelOp>", "<ArithExp>"));
-		producoes.put("<=", Arrays.asList("<RelOp>", "<ArithExp>"));	
+		producoes.put("<=", Arrays.asList("<RelOp>", "<ArithExp>"));
+		producoes.put("to", Arrays.asList("ε"));
+		producoes.put("do", Arrays.asList("ε"));
+		producoes.put("$", Arrays.asList("ε"));
 	}
 
 }
