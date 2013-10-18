@@ -22,9 +22,9 @@ public class Factor extends NaoTerminal {
 		producoes.put(IDENTIFICADOR, Arrays.asList("<LValue>"));
 		producoes.put("[", Arrays.asList("[", "<ArgList>", "]"));
 //		producoes.put("print", Arrays.asList("print string [, <Exp>]"));
-		producoes.put("if", Arrays.asList("if", "<Exp>", "then", "<Exp>", "<Else>"));
-		producoes.put("for", Arrays.asList("for", "id", ":=", "<Exp>", "to", "<Exp>", "do", "<Exp>"));
-		producoes.put("while", Arrays.asList("while", "<Exp>", "do", "<Exp>"));
+		producoes.put("if", Arrays.asList("<Away>"));
+		producoes.put("for", Arrays.asList("<Away>"));
+		producoes.put("while", Arrays.asList("<Away>"));
 		producoes.put("break", Arrays.asList("break"));
 		producoes.put("return", Arrays.asList("return"));
 		producoes.put("(", Arrays.asList("(", "<ExpList>", ")"));

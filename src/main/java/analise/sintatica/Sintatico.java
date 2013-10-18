@@ -67,6 +67,11 @@ public class Sintatico {
 		if (!geraProducao(topo, TOKEN_FIM_DA_PILHA).get(0).equals("ε"))
 			return;
 		
+		noAtual.criaFilhos(Arrays.asList("ε"));
+		
+		noAtual = noAtual.proximo();
+		noAtual = noAtual.proximo();
+		
 		finalizaPilha();
 	}
 

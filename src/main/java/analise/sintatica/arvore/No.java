@@ -36,8 +36,8 @@ public class No {
 	public No proximo() {
 		if (filhos.size() == filhoAtual() + 1) {
 			marcador = -1;
-			pai.incrementaMarcador();
-			pai.proximo();
+			//TODO para quando pai == null
+			return pai.proximo();
 		}
 		
 		incrementaMarcador();
@@ -61,6 +61,10 @@ public class No {
 			return ((Token)conteudo).getValor();
 		
 		return conteudo.toString();
+	}
+
+	public No getPai() {
+		return pai;
 	}
 	
 }
