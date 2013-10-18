@@ -36,7 +36,9 @@ public class No {
 	public No proximo() {
 		if (filhos.size() == filhoAtual() + 1) {
 			marcador = -1;
-			//TODO para quando pai == null
+			if (pai == null)
+				return null;
+			
 			return pai.proximo();
 		}
 		

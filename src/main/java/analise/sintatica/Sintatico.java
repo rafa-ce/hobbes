@@ -72,6 +72,9 @@ public class Sintatico {
 		noAtual = noAtual.proximo();
 		noAtual = noAtual.proximo();
 		
+		if (noAtual == null)
+			return;
+		
 		finalizaPilha();
 	}
 
@@ -102,32 +105,34 @@ public class Sintatico {
 	
 	public static Boolean isNaoTerminal(String valor) {
 		List<String> naoTerminais = Arrays.asList(
-				"<Prog>"
-				,"<Lista>"
-				,"<Item>"
-				,"<Exp>"
-				,"<ExpOR>"
-				,"<ExpAND>"
-				,"<ExpORPr>"
-				,"<ExpANDPr>"
-				,"<ArithExp>"
-				,"<RelExp>"
-				,"<Term>"
-				,"<TermPr>"
-				,"<FactorPr>"
-				,"<Factor>"
-				,"<IfElse>"
-				,"<LValue>"
-				,"<LValuePr>"
-				,"<Outro>"
-				,"<ArgList>"
-				,"<ArgListPr>"
-				,"<RelOp>"
-				,"<ExpList>"
-				,"<ExpPr>"
-				,"<Dec>"
-				,"<FieldList>"
-				,"<FieldListPr>");
+				"<Prog>",
+				"<Lista>",
+				"<Item>",
+				"<Exp>",
+				"<ExpOR>",
+				"<ExpAND>",
+				"<ExpORPr>",
+				"<ExpANDPr>",
+				"<ArithExp>",
+				"<RelExp>",
+				"<Term>",
+				"<TermPr>",
+				"<FactorPr>",
+				"<Factor>",
+				"<Away>",
+				"<Laco>",
+				"<IfElse>",
+				"<LValue>",
+				"<LValuePr>",
+				"<Outro>",
+				"<ArgList>",
+				"<ArgListPr>",
+				"<RelOp>",
+				"<ExpList>",
+				"<ExpPr>",
+				"<Dec>",
+				"<FieldList>",
+				"<FieldListPr>");
 		
 		return naoTerminais.contains(valor);
 	}
