@@ -68,5 +68,4 @@ public class No {
 	public No getPai() {
 		return pai;
 	}
-	
 }

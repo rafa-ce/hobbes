@@ -20,6 +20,8 @@ public class SintaticoTest {
 		
 		assertTrue(firstElement.equals("$"));
 		assertTrue(firstElement.equals(lastElement));
+		
+		sintatico.printArvore();
 	}
 
 	@Test

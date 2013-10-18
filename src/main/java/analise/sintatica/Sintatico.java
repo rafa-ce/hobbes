@@ -142,6 +142,12 @@ public class Sintatico {
 	}
 	
 	public void printArvore() {
+		No no = raiz;
 		
+		while (no != null) {
+			System.out.println(no.printConteudo());
+			
+			no = no.proximo();
+		}
 	}
 }
