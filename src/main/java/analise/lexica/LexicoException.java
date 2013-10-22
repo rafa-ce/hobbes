@@ -4,8 +4,10 @@ public class LexicoException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	
-	public LexicoException() {
-		super("Token inv·lido");
+	public LexicoException(String valorDoToken, Integer tokenLinha, Integer tokenColuna) {
+		super("Linha: " + tokenLinha + 
+			" - Coluna: " + tokenColuna + ". Token " + 
+				valorDoToken + " inv√°lido");
 	}
 	
 	@Override

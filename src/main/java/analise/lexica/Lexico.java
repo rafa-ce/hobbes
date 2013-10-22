@@ -88,7 +88,7 @@ public class Lexico {
                 	tokenColuna = iterador;
                
 	        } catch (AutomatoException e) {
-                throw new LexicoException();
+                throw new LexicoException(valorDoToken + cada.toString(), tokenLinha, tokenColuna);
 	        }
 	        
 	    }
