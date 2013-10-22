@@ -11,6 +11,7 @@ public class No {
 	private No pai;
 	private List<No> filhos;
 	private Integer marcador = -1;
+	private Boolean escape;
 	
 	private No(Object conteudo, No pai, List<No> filhos) {
 		this.conteudo = conteudo;
@@ -67,5 +68,21 @@ public class No {
 
 	public No getPai() {
 		return pai;
+	}
+
+	public Boolean getEscape() {
+		return escape;
+	}
+
+	public void setEscape(Boolean escape) {
+		this.escape = escape;
+	}
+	
+	public Boolean isToken() {
+		return conteudo instanceof Token;
+	}
+	
+	public Token getConteudo() {
+		return (Token) conteudo;
 	}
 }

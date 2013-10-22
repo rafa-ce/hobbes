@@ -19,9 +19,7 @@ public class SintaticoTest {
 		String lastElement = sintatico.getPilha().lastElement();
 		
 		assertTrue(firstElement.equals("$"));
-		assertTrue(firstElement.equals(lastElement));
-		
-		sintatico.printArvore();
+		assertTrue(firstElement.equals(lastElement));		
 	}
 
 	@Test

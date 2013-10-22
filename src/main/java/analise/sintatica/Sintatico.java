@@ -30,7 +30,7 @@ public class Sintatico {
 		raiz = No.criaNo(Prog.codigo(), null, new ArrayList<No>());
 	}
 
-	public void executa() throws Throwable {
+	public No executa() throws Throwable {
 		noAtual = raiz;
 		
 		while (lexico.hasToken()) {
@@ -51,7 +51,8 @@ public class Sintatico {
 		}
 
 		finalizaPilha();
-
+		
+		return raiz;
 	}
 	
 	private void finalizaPilha() {
@@ -119,7 +120,7 @@ public class Sintatico {
 				"<TermPr>",
 				"<FactorPr>",
 				"<Factor>",
-				"<Away>",
+				"<Bloco>",
 				"<Laco>",
 				"<IfElse>",
 				"<LValue>",

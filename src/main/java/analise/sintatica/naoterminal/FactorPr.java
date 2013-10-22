@@ -15,12 +15,21 @@ public class FactorPr extends NaoTerminal {
 
 	@Override
 	protected void inicializaProducoes() {
-		producoes.put("+", Arrays.asList("id", "<FieldListPr>"));
+		producoes.put("+", Arrays.asList("ε"));
 		producoes.put("-", Arrays.asList("ε"));
 		producoes.put("/", Arrays.asList("/", "<Factor>", "<FactorPr>"));
 		producoes.put("*", Arrays.asList("*", "<Factor>", "<FactorPr>"));
 		producoes.put("to", Arrays.asList("ε"));
 		producoes.put("do", Arrays.asList("ε"));
+		producoes.put("then", Arrays.asList("ε"));
+		producoes.put("else", Arrays.asList("ε"));
+		producoes.put("return", Arrays.asList("ε"));
+		producoes.put("<", Arrays.asList("ε"));
+		producoes.put(">", Arrays.asList("ε"));
+		producoes.put("<=", Arrays.asList("ε"));
+		producoes.put(">=", Arrays.asList("ε"));
+		producoes.put("=", Arrays.asList("ε"));
+		producoes.put("<>", Arrays.asList("ε"));
 		producoes.put("$", Arrays.asList("ε"));
 	}
 

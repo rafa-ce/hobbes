@@ -71,6 +71,7 @@ public class TipoToken {
 		palavrasChave.add("break");
 		palavrasChave.add("nil");
 		palavrasChave.add("function");
+		palavrasChave.add("return");
 		palavrasChave.add("import");
 		palavrasChave.add("and");
 		palavrasChave.add("or");

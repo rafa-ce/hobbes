@@ -2,13 +2,13 @@ package analise.sintatica.naoterminal;
 
 import java.util.Arrays;
 
-public class Away extends NaoTerminal {
+public class Bloco extends NaoTerminal {
 
-	private static Away instance;
+	private static Bloco instance;
 	
-	public static Away getInstance() {
+	public static Bloco getInstance() {
 		if (instance == null)
-			instance = new Away();
+			instance = new Bloco();
 		
 		return instance;
 	}
@@ -21,6 +21,6 @@ public class Away extends NaoTerminal {
 	}
 
 	public static String codigo() {
-		return "<Away>";
+		return "<Bloco>";
 	}
 }

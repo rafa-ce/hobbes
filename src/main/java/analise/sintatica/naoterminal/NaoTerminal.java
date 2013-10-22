@@ -44,7 +44,7 @@ public abstract class NaoTerminal {
 		naoTerminais.put("<TermPr>", TermPr.getInstance());
 		naoTerminais.put("<FactorPr>", FactorPr.getInstance());
 		naoTerminais.put("<Factor>", Factor.getInstance());
-		naoTerminais.put("<Away>", Away.getInstance());
+		naoTerminais.put("<Bloco>", Bloco.getInstance());
 		naoTerminais.put("<Laco>", Laco.getInstance());
 		naoTerminais.put("<IfElse>", IfElse.getInstance());
 		naoTerminais.put("<LValue>", LValue.getInstance());

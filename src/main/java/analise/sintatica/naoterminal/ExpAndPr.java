@@ -19,6 +19,9 @@ public class ExpAndPr extends NaoTerminal {
 		producoes.put("or", Arrays.asList("ε"));
 		producoes.put("to", Arrays.asList("ε"));
 		producoes.put("do", Arrays.asList("ε"));
+		producoes.put("then", Arrays.asList("ε"));
+		producoes.put("else", Arrays.asList("ε"));
+		producoes.put("return", Arrays.asList("ε"));
 		producoes.put("$", Arrays.asList("ε"));
 	}
 	
