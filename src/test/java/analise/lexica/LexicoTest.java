@@ -28,7 +28,7 @@ public class LexicoTest {
 		assertToken(")", "1 - 15", SIMBOLO, lexico.getNextToken());
 	}
 	
-	@Test()
+	@Test(expected = LexicoException.class)
 	public void identificaToken() throws Throwable {
 		Lexico lexico = new Lexico("src/test/resources/TokenInvalido.txt");
 		
