@@ -37,17 +37,19 @@ public class Sintatico {
 			
 			Token token = lexico.getNextToken();
 			
-			while(isNaoTerminal(pilha.lastElement())) {
-				String topo = pilha.pop();
-				List<String> producaoGerada = geraProducao(topo, token);
-				empilhaProducao(producaoGerada);
-				noAtual.criaFilhos(producaoGerada);
-				noAtual = noAtual.proximo();
-			}
+			if (token != null) {
+				while(isNaoTerminal(pilha.lastElement())) {
+					String topo = pilha.pop();
+					List<String> producaoGerada = geraProducao(topo, token);
+					empilhaProducao(producaoGerada);
+					noAtual.criaFilhos(producaoGerada);
+					noAtual = noAtual.proximo();
+				}
 				
-			validaToken(token);
-			noAtual.trocaConteudo(token);
-			noAtual = noAtual.proximo();
+				validaToken(token);
+				noAtual.trocaConteudo(token);
+				noAtual = noAtual.proximo();				
+			}
 		}
 
 		finalizaPilha();

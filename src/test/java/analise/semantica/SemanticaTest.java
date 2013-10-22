@@ -11,7 +11,7 @@ public class SemanticaTest {
 	@Test
 	public void test() throws Throwable {
 		
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoDeclaraFuncao.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoComentario.txt");
 		
 		No raiz = sintatico.executa();
 		

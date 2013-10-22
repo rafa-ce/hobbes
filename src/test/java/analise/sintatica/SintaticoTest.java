@@ -19,7 +19,43 @@ public class SintaticoTest {
 		String lastElement = sintatico.getPilha().lastElement();
 		
 		assertTrue(firstElement.equals("$"));
-		assertTrue(firstElement.equals(lastElement));		
+		assertTrue(firstElement.equals(lastElement));
+		
+		sintatico.printArvore();
+	}
+	
+	@Test
+	public void testaFluxoSintaticoWhile() throws Throwable {
+		
+		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoWhile.txt");
+		
+		sintatico.executa();
+		
+		assertEquals(1, sintatico.getPilha().size());
+		String firstElement = sintatico.getPilha().firstElement();
+		String lastElement = sintatico.getPilha().lastElement();
+		
+		assertTrue(firstElement.equals("$"));
+		assertTrue(firstElement.equals(lastElement));
+		
+		sintatico.printArvore();
+	}
+	
+	@Test
+	public void testaFluxoSintaticoWhileErro() throws Throwable {
+		
+		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoWhileErro.txt");
+		
+		sintatico.executa();
+		
+		assertEquals(1, sintatico.getPilha().size());
+		String firstElement = sintatico.getPilha().firstElement();
+		String lastElement = sintatico.getPilha().lastElement();
+		
+		assertTrue(firstElement.equals("$"));
+		assertTrue(firstElement.equals(lastElement));
+		
+		sintatico.printArvore();
 	}
 
 	@Test
