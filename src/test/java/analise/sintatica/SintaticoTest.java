@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import analise.sintatica.suporte.Pilha;
+
 public class SintaticoTest {
 	
 	@Test
@@ -14,14 +16,12 @@ public class SintaticoTest {
 		
 		sintatico.executa();
 		
-		assertEquals(1, sintatico.getPilha().size());
-		String firstElement = sintatico.getPilha().firstElement();
-		String lastElement = sintatico.getPilha().lastElement();
+		assertEquals(1, Pilha.getPilha().size());
+		String topo = Pilha.getTopo();
+		String first = (String) Pilha.getPilha().firstElement();
 		
-		assertTrue(firstElement.equals("$"));
-		assertTrue(firstElement.equals(lastElement));
-		
-		sintatico.printArvore();
+		assertTrue(topo.equals("$"));
+		assertTrue(topo.equals(first));
 	}
 	
 	@Test
@@ -31,40 +31,21 @@ public class SintaticoTest {
 		
 		sintatico.executa();
 		
-		assertEquals(1, sintatico.getPilha().size());
-		String firstElement = sintatico.getPilha().firstElement();
-		String lastElement = sintatico.getPilha().lastElement();
+		assertEquals(1, Pilha.getPilha().size());
+		String topo = Pilha.getTopo();
+		String first = (String) Pilha.getPilha().firstElement();
 		
-		assertTrue(firstElement.equals("$"));
-		assertTrue(firstElement.equals(lastElement));
-		
-		sintatico.printArvore();
+		assertTrue(topo.equals("$"));
+		assertTrue(topo.equals(first));
 	}
 	
-	@Test
-	public void testaFluxoSintaticoWhileErro() throws Throwable {
-		
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoWhileErro.txt");
-		
-		sintatico.executa();
-		
-		assertEquals(1, sintatico.getPilha().size());
-		String firstElement = sintatico.getPilha().firstElement();
-		String lastElement = sintatico.getPilha().lastElement();
-		
-		assertTrue(firstElement.equals("$"));
-		assertTrue(firstElement.equals(lastElement));
-		
-		sintatico.printArvore();
-	}
-
 	@Test
 	public void testaFluxoSintaticoSobrandoElementosNaPilha() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoSintaticoSobraNaPilha.txt");
 		
 		sintatico.executa();
 		
-		assertEquals("[$, <Lista>, <ExpORPr>, <ExpANDPr>, <RelExp>, <TermPr>, <FactorPr>, <Exp>]", sintatico.getPilha().toString());
+		assertEquals("[$, <Lista>, <ExpORPr>, <ExpANDPr>, <RelExp>, <TermPr>, <FactorPr>, <Exp>, do]", Pilha.getPilha().toString());
 	}
 	
 }

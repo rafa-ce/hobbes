@@ -1,11 +1,14 @@
-package analise.sintatica.arvore;
+package analise.sintatica.suporte;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import analise.sintatica.naoterminal.Prog;
 import utils.Token;
 
 public class No {
+	
+	private static No raiz;
 	
 	private Object conteudo;
 	private No pai;
@@ -19,6 +22,10 @@ public class No {
 		this.filhos = filhos;
 	}
 	
+	public static void criaRaiz() {
+		raiz = criaNo(Prog.codigo(), null, new ArrayList<No>());
+	}
+
 	public static No criaNo(Object conteudo, No pai, List<No> filhos) {
 		return new No(conteudo, pai, filhos);
 	}
@@ -47,23 +54,12 @@ public class No {
 		return filhos.get(marcador);
 	}
 
-	public List<No> getFilhos() {
-		return filhos;
-	}
-
 	public Integer filhoAtual() {
 		return marcador;
 	}
 	
-	private void incrementaMarcador() {
-		marcador++;
-	}
-	
-	public String printConteudo() {
-		if (conteudo instanceof Token)
-			return ((Token)conteudo).getValor();
-		
-		return conteudo.toString();
+	public List<No> getFilhos() {
+		return filhos;
 	}
 
 	public No getPai() {
@@ -78,11 +74,26 @@ public class No {
 		this.escape = escape;
 	}
 	
+	public String printConteudo() {
+		if (conteudo instanceof Token)
+			return ((Token)conteudo).getValor();
+		
+		return conteudo.toString();
+	}
+
+	public Token getConteudo() {
+		return (Token) conteudo;
+	}
+
 	public Boolean isToken() {
 		return conteudo instanceof Token;
 	}
-	
-	public Token getConteudo() {
-		return (Token) conteudo;
+
+	private void incrementaMarcador() {
+		marcador++;
+	}
+
+	public static No getRaiz() {
+		return raiz;
 	}
 }

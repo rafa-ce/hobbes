@@ -1,24 +1,20 @@
 package analise.sintatica;
 
-import static analise.sintatica.naoterminal.NaoTerminal.geraProducao;
+import static analise.sintatica.suporte.Pilha.finalizaPilha;
+import static analise.sintatica.suporte.Pilha.iniciaPilha;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
 
 import utils.Token;
 import analise.lexica.Lexico;
-import analise.sintatica.arvore.No;
-import analise.sintatica.naoterminal.Prog;
+import analise.sintatica.naoterminal.NaoTerminal;
+import analise.sintatica.suporte.No;
+import analise.sintatica.suporte.Pilha;
+
 
 public class Sintatico {
 	
-	private static final Token TOKEN_FIM_DA_PILHA = new Token("$", 0, 0, "Final do Arquivo");
 	private Lexico lexico;
-	private Stack<String> pilha;
-	private No raiz;
-	private No noAtual;
 	
 	public Sintatico(String entrada) {
 		lexico = new Lexico(entrada);
@@ -27,130 +23,41 @@ public class Sintatico {
 	}
 	
 	private void iniciaASA() {
-		raiz = No.criaNo(Prog.codigo(), null, new ArrayList<No>());
+		No.criaRaiz();
 	}
-
+	
 	public No executa() throws Throwable {
-		noAtual = raiz;
+		
+		No noAtual = No.getRaiz();
 		
 		while (lexico.hasToken()) {
 			
 			Token token = lexico.getNextToken();
 			
-			if (token != null) {
-				while(isNaoTerminal(pilha.lastElement())) {
-					String topo = pilha.pop();
-					List<String> producaoGerada = geraProducao(topo, token);
-					empilhaProducao(producaoGerada);
-					noAtual.criaFilhos(producaoGerada);
-					noAtual = noAtual.proximo();
-				}
-				
-				validaToken(token);
-				noAtual.trocaConteudo(token);
-				noAtual = noAtual.proximo();				
+			while (Pilha.topoIsNaoTerminal()) {
+				List<String> producaoGerada = NaoTerminal.geraProducao(Pilha.getTopo(), token);
+				Pilha.desempilha();
+				Pilha.empilha(producaoGerada);
+				noAtual.criaFilhos(producaoGerada);
+				noAtual = noAtual.proximo();
 			}
+			
+			validaToken(token);
+			noAtual.trocaConteudo(token);
+			noAtual = noAtual.proximo();
 		}
-
+		
 		finalizaPilha();
 		
-		return raiz;
+		return No.getRaiz();
 	}
 	
-	private void finalizaPilha() {
-		
-		if (pilha.lastElement().equals("$"))
-			return;
-		
-		String topo = pilha.pop();
-
-		if (!isNaoTerminal(topo))
-			return;
-		
-		if (!geraProducao(topo, TOKEN_FIM_DA_PILHA).get(0).equals("ε"))
-			return;
-		
-		noAtual.criaFilhos(Arrays.asList("ε"));
-		
-		noAtual = noAtual.proximo();
-		noAtual = noAtual.proximo();
-		
-		if (noAtual == null)
-			return;
-		
-		finalizaPilha();
-	}
-
 	private Boolean validaToken(Token token) {
-		String topo = pilha.pop();
+		String topo = Pilha.desempilha();
 		
 		if (token.isIdentificador() || token.isNumero())
 			return token.getTipo().equals(topo);
 		
 		return token.getValor().equals(topo);
-	}
-
-	private void empilhaProducao(List<String> producaoGerada) {
-		if (producaoGerada.get(0).equals("ε"))
-			return;
-		
-		for (int i = producaoGerada.size() - 1; i >= 0; i--)
-			pilha.push(producaoGerada.get(i));			
-				
-	}
-
-	private void iniciaPilha() {
-		pilha = new Stack<String>();
-		
-		pilha.push("$");
-		pilha.push("<Prog>");
-	}
-	
-	public static Boolean isNaoTerminal(String valor) {
-		List<String> naoTerminais = Arrays.asList(
-				"<Prog>",
-				"<Lista>",
-				"<Item>",
-				"<Exp>",
-				"<ExpOR>",
-				"<ExpAND>",
-				"<ExpORPr>",
-				"<ExpANDPr>",
-				"<ArithExp>",
-				"<RelExp>",
-				"<Term>",
-				"<TermPr>",
-				"<FactorPr>",
-				"<Factor>",
-				"<Bloco>",
-				"<Laco>",
-				"<IfElse>",
-				"<LValue>",
-				"<LValuePr>",
-				"<Outro>",
-				"<ArgList>",
-				"<ArgListPr>",
-				"<RelOp>",
-				"<ExpList>",
-				"<ExpPr>",
-				"<Dec>",
-				"<FieldList>",
-				"<FieldListPr>");
-		
-		return naoTerminais.contains(valor);
-	}
-
-	public Stack<String> getPilha() {
-		return pilha;
-	}
-	
-	public void printArvore() {
-		No no = raiz;
-		
-		while (no != null) {
-			System.out.println(no.printConteudo());
-			
-			no = no.proximo();
-		}
 	}
 }

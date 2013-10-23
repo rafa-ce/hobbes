@@ -32,6 +32,6 @@ public class ExpOr extends NaoTerminal {
 	}
 
 	public static String codigo() {
-		return "<ExpOr>";
+		return "<ExpOR>";
 	}
 }

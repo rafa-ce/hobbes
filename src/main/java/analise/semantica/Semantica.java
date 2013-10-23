@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.Token;
-import analise.sintatica.arvore.No;
+import analise.sintatica.suporte.No;
 
 
 public class Semantica {

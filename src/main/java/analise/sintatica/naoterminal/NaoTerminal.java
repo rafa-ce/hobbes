@@ -1,5 +1,6 @@
 package analise.sintatica.naoterminal;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,6 @@ import utils.Token;
 public abstract class NaoTerminal {
 	
     private static Map<String, NaoTerminal> naoTerminais;
-    
     protected Map<String, List<String>> producoes = new HashMap<String, List<String>>();
 	
     protected abstract void inicializaProducoes();
@@ -27,39 +27,6 @@ public abstract class NaoTerminal {
 		return naoTerminais.get(naoTerminal);
 	}
 
-	private static void inicializa() {
-		naoTerminais = new HashMap<String, NaoTerminal>();
-		
-		naoTerminais.put("<Prog>", Prog.getInstance());
-		naoTerminais.put("<Lista>", Lista.getInstance());
-		naoTerminais.put("<Item>", Item.getInstance());
-		naoTerminais.put("<Exp>", Exp.getInstance());
-		naoTerminais.put("<ExpOR>", ExpOr.getInstance());
-		naoTerminais.put("<ExpAND>", ExpAnd.getInstance());
-		naoTerminais.put("<ExpORPr>", ExpOrPr.getInstance());
-		naoTerminais.put("<ExpANDPr>", ExpAndPr.getInstance());
-		naoTerminais.put("<ArithExp>", ArithExp.getInstance());
-		naoTerminais.put("<RelExp>", RelExp.getInstance());
-		naoTerminais.put("<Term>", Term.getInstance());
-		naoTerminais.put("<TermPr>", TermPr.getInstance());
-		naoTerminais.put("<FactorPr>", FactorPr.getInstance());
-		naoTerminais.put("<Factor>", Factor.getInstance());
-		naoTerminais.put("<Bloco>", Bloco.getInstance());
-		naoTerminais.put("<Laco>", Laco.getInstance());
-		naoTerminais.put("<IfElse>", IfElse.getInstance());
-		naoTerminais.put("<LValue>", LValue.getInstance());
-		naoTerminais.put("<LValuePr>", LValuePr.getInstance());
-		naoTerminais.put("<Outro>", Outro.getInstance());
-		naoTerminais.put("<ArgList>", ArgList.getInstance());
-		naoTerminais.put("<ArgListPr>", ArgListPr.getInstance());
-		naoTerminais.put("<RelOp>", RelOp.getInstance());
-		naoTerminais.put("<ExpList>", ExpList.getInstance());
-		naoTerminais.put("<ExpPr>", ExpPr.getInstance());
-		naoTerminais.put("<Dec>", Dec.getInstance());
-		naoTerminais.put("<FieldList>", FieldList.getInstance());
-		naoTerminais.put("<FieldListPr>", FieldListPr.getInstance());
-	}
-
 	public static List<String> geraProducao(String topo, Token token) {
 		NaoTerminal atual = getTerminalAtual(topo);
 		
@@ -69,4 +36,68 @@ public abstract class NaoTerminal {
 		return atual.getProducao(token.getValor());
 	}
 
+	private static void inicializa() {
+		naoTerminais = new HashMap<String, NaoTerminal>();
+		
+		naoTerminais.put(Prog.codigo(), Prog.getInstance());
+		naoTerminais.put(Lista.codigo(), Lista.getInstance());
+		naoTerminais.put(Item.codigo(), Item.getInstance());
+		naoTerminais.put(Exp.codigo(), Exp.getInstance());
+		naoTerminais.put(ExpOr.codigo(), ExpOr.getInstance());
+		naoTerminais.put(ExpAnd.codigo(), ExpAnd.getInstance());
+		naoTerminais.put(ExpOrPr.codigo(), ExpOrPr.getInstance());
+		naoTerminais.put(ExpAndPr.codigo(), ExpAndPr.getInstance());
+		naoTerminais.put(ArithExp.codigo(), ArithExp.getInstance());
+		naoTerminais.put(RelExp.codigo(), RelExp.getInstance());
+		naoTerminais.put(Term.codigo(), Term.getInstance());
+		naoTerminais.put(TermPr.codigo(), TermPr.getInstance());
+		naoTerminais.put(FactorPr.codigo(), FactorPr.getInstance());
+		naoTerminais.put(Factor.codigo(), Factor.getInstance());
+		naoTerminais.put(Bloco.codigo(), Bloco.getInstance());
+		naoTerminais.put(Laco.codigo(), Laco.getInstance());
+		naoTerminais.put(IfElse.codigo(), IfElse.getInstance());
+		naoTerminais.put(LValue.codigo(), LValue.getInstance());
+		naoTerminais.put(LValuePr.codigo(), LValuePr.getInstance());
+		naoTerminais.put(Outro.codigo(), Outro.getInstance());
+		naoTerminais.put(ArgList.codigo(), ArgList.getInstance());
+		naoTerminais.put(ArgListPr.codigo(), ArgListPr.getInstance());
+		naoTerminais.put(RelOp.codigo(), RelOp.getInstance());
+		naoTerminais.put(ExpList.codigo(), ExpList.getInstance());
+		naoTerminais.put(ExpPr.codigo(), ExpPr.getInstance());
+		naoTerminais.put(Dec.codigo(), Dec.getInstance());
+		naoTerminais.put(FieldList.codigo(), FieldList.getInstance());
+		naoTerminais.put(FieldListPr.codigo(), FieldListPr.getInstance());
+	}
+	
+	public static List<String> naoTerminais() {
+		return Arrays.asList(
+				Prog.codigo(),
+				Lista.codigo(),
+				Item.codigo(),
+				Exp.codigo(),
+				ExpOr.codigo(),
+				ExpAnd.codigo(),
+				ExpOrPr.codigo(),
+				ExpAndPr.codigo(),
+				ArithExp.codigo(),
+				RelExp.codigo(),
+				Term.codigo(),
+				TermPr.codigo(),
+				FactorPr.codigo(),
+				Factor.codigo(),
+				Bloco.codigo(),
+				Laco.codigo(),
+				IfElse.codigo(),
+				LValue.codigo(),
+				LValuePr.codigo(),
+				Outro.codigo(),
+				ArgList.codigo(),
+				ArgListPr.codigo(),
+				RelOp.codigo(),
+				ExpList.codigo(),
+				ExpPr.codigo(),
+				Dec.codigo(),
+				FieldList.codigo(),
+				FieldListPr.codigo());
+	}
 }
