@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import analise.lexica.LexicoException;
 import analise.sintatica.suporte.Pilha;
 
 public class SintaticoTest {
@@ -39,13 +40,13 @@ public class SintaticoTest {
 		assertTrue(topo.equals(first));
 	}
 	
-	@Test
+	@Test(expected = SintaticoException.class)
 	public void testaFluxoSintaticoSobrandoElementosNaPilha() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoSintaticoSobraNaPilha.txt");
 		
 		sintatico.executa();
 		
-		assertEquals("[$, <Lista>, <ExpORPr>, <ExpANDPr>, <RelExp>, <TermPr>, <FactorPr>, <Exp>, do]", Pilha.getPilha().toString());
+		assertEquals("[ <Lista>, <ExpORPr>, <ExpANDPr>, <RelExp>, <TermPr>, <FactorPr>, <Exp>, do]", Pilha.getPilha().toString());
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Stack;
 
 import utils.Token;
+import analise.sintatica.SintaticoException;
 import analise.sintatica.naoterminal.NaoTerminal;
 import analise.sintatica.naoterminal.Prog;
 
@@ -44,15 +45,28 @@ public class Pilha {
 		return pilha;
 	}
 	
-	public static void finalizaPilha() {
-		if (pilha.lastElement().equals("$"))
-			return;
+	public static void finalizaPilha() throws SintaticoException {
+		String topo;
 		
-		desempilha();
-		
-		if (!topoIsNaoTerminal())
-			return;
-		
-		finalizaPilha();
+		while (!isFimDaPilha()) {
+			
+			if (!topoIsNaoTerminal())
+				throw new SintaticoException();
+				
+			topo = getTopo();
+			
+			if (!geraVazio(topo))
+				throw new SintaticoException();
+			
+			desempilha();
+		}
+	}
+
+	private static boolean isFimDaPilha() {
+		return getTopo().equals("$");
+	}
+
+	private static Boolean geraVazio(String topo) {
+		return NaoTerminal.geraProducao(topo, TOKEN_FIM_DA_PILHA).get(0).equals("ε");
 	}
 }

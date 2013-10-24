@@ -44,6 +44,7 @@ public class RelExp extends NaoTerminal {
 		producoes.put("or", Arrays.asList("ε"));
 		producoes.put(NUMERO, Arrays.asList("ε"));
 		producoes.put("function", Arrays.asList("ε"));
+		producoes.put(",", Arrays.asList("ε"));
 		producoes.put("$", Arrays.asList("ε"));
 	}
 

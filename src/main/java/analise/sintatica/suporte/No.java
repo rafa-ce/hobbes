@@ -96,4 +96,20 @@ public class No {
 	public static No getRaiz() {
 		return raiz;
 	}
+	
+	public void printArvore() {
+		No no = raiz;
+		
+		while (no != null) {
+			System.out.println(no.printConteudo());
+			
+			no = no.proximo();
+		}
+	}
+
+	public static void finalizaArvore(No no) {
+		while (no != null)  {
+			no = no.proximo();
+		}
+	}
 }

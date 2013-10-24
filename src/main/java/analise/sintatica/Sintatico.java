@@ -26,7 +26,7 @@ public class Sintatico {
 		No.criaRaiz();
 	}
 	
-	public No executa() throws Throwable {
+	public void executa() throws Throwable {
 		
 		No noAtual = No.getRaiz();
 		
@@ -34,22 +34,23 @@ public class Sintatico {
 			
 			Token token = lexico.getNextToken();
 			
-			while (Pilha.topoIsNaoTerminal()) {
-				List<String> producaoGerada = NaoTerminal.geraProducao(Pilha.getTopo(), token);
-				Pilha.desempilha();
-				Pilha.empilha(producaoGerada);
-				noAtual.criaFilhos(producaoGerada);
-				noAtual = noAtual.proximo();
+			if (token != null) {
+				while (Pilha.topoIsNaoTerminal()) {
+					List<String> producaoGerada = NaoTerminal.geraProducao(Pilha.getTopo(), token);
+					Pilha.desempilha();
+					Pilha.empilha(producaoGerada);
+					noAtual.criaFilhos(producaoGerada);
+					noAtual = noAtual.proximo();
+				}
+				
+				validaToken(token);
+				noAtual.trocaConteudo(token);
+				noAtual = noAtual.proximo();				
 			}
-			
-			validaToken(token);
-			noAtual.trocaConteudo(token);
-			noAtual = noAtual.proximo();
 		}
 		
 		finalizaPilha();
-		
-		return No.getRaiz();
+		No.finalizaArvore(noAtual);
 	}
 	
 	private Boolean validaToken(Token token) {

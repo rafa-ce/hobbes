@@ -35,6 +35,7 @@ public class ExpOrPr extends NaoTerminal {
 		producoes.put("return", Arrays.asList("ε"));
 		producoes.put("(", Arrays.asList("ε"));
 		producoes.put(")", Arrays.asList("ε"));
+		producoes.put(",", Arrays.asList("ε"));
 		producoes.put("or", Arrays.asList("or", "<Exp>"));
 		producoes.put(NUMERO, Arrays.asList("ε"));
 		producoes.put("function", Arrays.asList("ε"));

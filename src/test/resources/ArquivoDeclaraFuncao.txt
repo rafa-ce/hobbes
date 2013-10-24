@@ -1,5 +1,6 @@
-function f(a, b, c) = 
-	a := b + c
-	return a
+function f(b, c) = (
+		a := b + c
+		return a
+	)
 	
-i := f
+i := f(10, 20)
