@@ -3,41 +3,31 @@ package analise.sintatica.suporte;
 import java.util.ArrayList;
 import java.util.List;
 
-import analise.sintatica.naoterminal.Prog;
 import utils.Token;
 
 public class No {
-	
-	private static No raiz;
 	
 	private Object conteudo;
 	private No pai;
 	private List<No> filhos;
 	private Integer marcador = -1;
+	private Integer profundidade;
 	
-	private No(Object conteudo, No pai, List<No> filhos) {
+	private No(Object conteudo, No pai, List<No> filhos, Integer profundidade) {
 		this.conteudo = conteudo;
 		this.pai = pai;
 		this.filhos = filhos;
+		this.profundidade = profundidade; 
 	}
 	
-	public static void criaRaiz() {
-		raiz = criaNo(Prog.codigo(), null, new ArrayList<No>());
-	}
-
-	public static No criaNo(Object conteudo, No pai, List<No> filhos) {
-		return new No(conteudo, pai, filhos);
+	public static No criaNo(Object conteudo, No pai, List<No> filhos, Integer profundidade) {
+		return new No(conteudo, pai, filhos, profundidade);
 	}
 	
 	public void criaFilhos(List<String> filhos) {
 		for (String filho : filhos) {
-			this.filhos.add(criaNo(filho, this, new ArrayList<No>()));
+			this.filhos.add(criaNo(filho, this, new ArrayList<No>(), getProfundidade() + 1));
 		}
-		
-	}
-	
-	public void trocaConteudo(Token token) {
-		conteudo = token;
 	}
 	
 	public No proximo() {
@@ -53,16 +43,8 @@ public class No {
 		return filhos.get(marcador);
 	}
 
-	public Integer filhoAtual() {
-		return marcador;
-	}
-	
-	public List<No> getFilhos() {
-		return filhos;
-	}
-
-	public No getPai() {
-		return pai;
+	public Boolean isToken() {
+		return conteudo instanceof Token;
 	}
 
 	public String printConteudo() {
@@ -72,35 +54,31 @@ public class No {
 		return conteudo.toString();
 	}
 
+	public No getPai() {
+		return pai;
+	}
+
+	public List<No> getFilhos() {
+		return filhos;
+	}
+
+	public Integer filhoAtual() {
+		return marcador;
+	}
+
 	public Token getConteudo() {
 		return (Token) conteudo;
 	}
 
-	public Boolean isToken() {
-		return conteudo instanceof Token;
+	public void trocaConteudo(Token token) {
+		conteudo = token;
+	}
+
+	public Integer getProfundidade() {
+		return profundidade;
 	}
 
 	private void incrementaMarcador() {
 		marcador++;
-	}
-
-	public static No getRaiz() {
-		return raiz;
-	}
-	
-	public void printArvore() {
-		No no = raiz;
-		
-		while (no != null) {
-			System.out.println(no.printConteudo());
-			
-			no = no.proximo();
-		}
-	}
-
-	public static void finalizaArvore(No no) {
-		while (no != null)  {
-			no = no.proximo();
-		}
 	}
 }

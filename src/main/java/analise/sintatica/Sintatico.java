@@ -1,6 +1,5 @@
 package analise.sintatica;
 
-import static analise.sintatica.suporte.Pilha.finalizaPilha;
 import static analise.sintatica.suporte.Pilha.iniciaPilha;
 
 import java.util.List;
@@ -8,6 +7,7 @@ import java.util.List;
 import utils.Token;
 import analise.lexica.Lexico;
 import analise.sintatica.naoterminal.NaoTerminal;
+import analise.sintatica.suporte.Arvore;
 import analise.sintatica.suporte.No;
 import analise.sintatica.suporte.Pilha;
 
@@ -23,12 +23,12 @@ public class Sintatico {
 	}
 	
 	private void iniciaASA() {
-		No.criaRaiz();
+		Arvore.criaRaiz();
 	}
 	
 	public void executa() throws Throwable {
 		
-		No noAtual = No.getRaiz();
+		No noAtual = Arvore.getRaiz();
 		
 		while (lexico.hasToken()) {
 			
@@ -49,8 +49,8 @@ public class Sintatico {
 			}
 		}
 		
-		finalizaPilha();
-		No.finalizaArvore(noAtual);
+		Pilha.finaliza();
+		Arvore.finaliza(noAtual);
 	}
 	
 	private Boolean validaToken(Token token) {

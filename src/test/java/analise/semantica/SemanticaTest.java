@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import analise.sintatica.Sintatico;
-import analise.sintatica.suporte.No;
+import analise.sintatica.suporte.Arvore;
 
 public class SemanticaTest {
 
@@ -15,7 +15,7 @@ public class SemanticaTest {
 		
 		sintatico.executa();
 		
-		Semantica.executa(No.getRaiz());
+		Semantica.executa(Arvore.getRaiz());
 		
 		Assert.assertEquals(13, Semantica.getLista().size());
 	}
@@ -27,7 +27,7 @@ public class SemanticaTest {
 		
 		sintatico.executa();
 		
-		Semantica.executa(No.getRaiz());
+		Semantica.executa(Arvore.getRaiz());
 		
 		Assert.assertEquals(25, Semantica.getLista().size());
 	}

@@ -45,7 +45,7 @@ public class Pilha {
 		return pilha;
 	}
 	
-	public static void finalizaPilha() throws SintaticoException {
+	public static void finaliza() throws SintaticoException {
 		String topo;
 		
 		while (!isFimDaPilha()) {
