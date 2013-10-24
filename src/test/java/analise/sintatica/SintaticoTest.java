@@ -48,4 +48,20 @@ public class SintaticoTest {
 		assertEquals("[ <Lista>, <ExpORPr>, <ExpANDPr>, <RelExp>, <TermPr>, <FactorPr>, <Exp>, do]", Pilha.getPilha().toString());
 	}
 	
+	@Test
+	public void erroLexicoNaSintatica() {
+		
+		Sintatico sintatica = new Sintatico("src/test/resources/TokenInvalido.txt");
+		String erro = null;
+		
+		try {
+			sintatica.executa();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			erro = e.getMessage();
+		}
+		
+		assertEquals("", erro);
+	}
+	
 }
