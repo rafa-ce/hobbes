@@ -16,7 +16,8 @@ public class Dec extends NaoTerminal {
 
 	@Override
 	protected void inicializaProducoes() {
-		producoes.put("function", Arrays.asList("function", "id", "(", "<FieldList>", ")","=", "<Exp>"));
+		producoes.put("function", Arrays.asList(FuncDec.codigo()));
+		producoes.put("import", Arrays.asList("import", "arquivo"));
 	}
 	
 	public static String codigo() {

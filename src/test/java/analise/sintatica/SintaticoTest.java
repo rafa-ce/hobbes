@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import analise.lexica.LexicoException;
 import analise.sintatica.suporte.Pilha;
 
 public class SintaticoTest {
