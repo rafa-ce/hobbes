@@ -5,7 +5,7 @@ public class AutomatoException extends Exception {
 	private static final long serialVersionUID = 1L;
 	
 	public AutomatoException() {
-		super("Caractere Inv·lido");
+		super("Caractere Inv√°lido");
 	}
 	
 	@Override

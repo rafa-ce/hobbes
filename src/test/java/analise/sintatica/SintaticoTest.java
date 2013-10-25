@@ -61,7 +61,7 @@ public class SintaticoTest {
 			erro = e.getMessage();
 		}
 		
-		assertEquals("", erro);
+		assertEquals("Linha: 1 - Coluna: 8. Token 2c inválido", erro);
 	}
 	
 }
