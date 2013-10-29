@@ -1,33 +1,42 @@
 package analise.semantica;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import utils.Token;
+import analise.semantica.suporte.TabelaDeSimbolos;
+import analise.sintatica.naoterminal.Bloco;
+import analise.sintatica.naoterminal.Prog;
+import analise.sintatica.suporte.Arvore;
 import analise.sintatica.suporte.No;
 
 
 public class Semantica {
 
-	private static List<Token> lista; 
+	private TabelaDeSimbolos tabela;
 	
-	public static void executa(No no) {
+	public Semantica() {
+		tabela = new TabelaDeSimbolos();
+	}
+	
+	public void executa() {
 		
-		lista = new ArrayList<Token>();
+		tabela.defineEscopo(null, Arvore.getRaiz());
 		
-		while (no != null) {
+		No noAtual = Arvore.getRaiz().proximoSemantico();
+		No noAnterior = Arvore.getRaiz();
+		
+		while (noAtual != null) {
 			
-			if (no.isToken())
-				lista.add(no.getConteudo());
-				
-			no = no.proximo();
+			if (noAtual.getConteudo().equals(Prog.codigo()))
+				tabela.defineEscopo(noAnterior, noAtual);;
 			
+			if (noAtual.getConteudo().equals(Bloco.codigo()))
+				tabela.defineEscopo(noAnterior, noAtual);;
+			
+			if (noAtual.isToken())
+				tabela.adicionaToken((Token)noAtual.getConteudo());
+			
+			noAnterior = noAtual;
+			noAtual = noAtual.proximoSemantico();
 		}
-		
+		System.out.println("");
 	}
-	
-	public static List<Token> getLista() {
-		return lista;
-	}
-	
 }

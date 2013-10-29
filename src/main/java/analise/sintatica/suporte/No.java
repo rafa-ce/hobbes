@@ -25,6 +25,9 @@ public class No {
 	}
 	
 	public void criaFilhos(List<String> filhos) {
+		if (filhos.get(0).equals("ε"))
+			return;
+		
 		for (String filho : filhos) {
 			this.filhos.add(criaNo(filho, this, new ArrayList<No>(), getProfundidade() + 1));
 		}
@@ -66,8 +69,8 @@ public class No {
 		return marcador;
 	}
 
-	public Token getConteudo() {
-		return (Token) conteudo;
+	public Object getConteudo() {
+		return conteudo;
 	}
 
 	public void trocaConteudo(Token token) {
@@ -80,5 +83,18 @@ public class No {
 
 	private void incrementaMarcador() {
 		marcador++;
+	}
+	
+	public No proximoSemantico() {
+		if (filhos.size() == filhoAtual() + 1) {
+			marcador = -1;
+			if (pai == null)
+				return null;
+			
+			return pai;
+		}
+		
+		incrementaMarcador();
+		return filhos.get(marcador);
 	}
 }
