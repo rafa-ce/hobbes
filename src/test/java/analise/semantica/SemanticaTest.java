@@ -26,5 +26,15 @@ public class SemanticaTest {
 		semantico.executa();
 	}
 
+	@Test
+	public void semanticaHappyDay() throws Throwable {
+		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoSintaticoHappyDay.txt");
+		sintatico.executa();
+		
+		Semantica semantico = new Semantica();
+		semantico.executa();
+		
+//		Assert.assertEquals(13, semantico.getLista().size());
+	}
 
 }

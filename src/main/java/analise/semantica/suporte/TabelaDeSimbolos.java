@@ -1,5 +1,8 @@
 package analise.semantica.suporte;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +46,18 @@ public class TabelaDeSimbolos {
 
 	private void fechaEscopo() {
 		escopos.remove(ultimoEscopo());
+	}
+
+	public Boolean possuiToken(Token token) {
+		for (int i = escopos.size() - 1; i >= 0; i--) {
+			if (escopos.get(i).possui(token))
+				return TRUE;
+		}
+		return FALSE;
+	}
+
+	public Boolean taNoUltimoEscopo(Token token) {
+		return ultimoEscopo().possui(token);
 	}
 
 }

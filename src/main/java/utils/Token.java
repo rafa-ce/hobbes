@@ -59,4 +59,12 @@ public class Token {
 	public void setTipoRetorno(TipoRetorno tipoRetorno) {
 		this.tipoRetorno = tipoRetorno;
 	}
+	
+	public boolean equals(Token token) {
+		if (getValor().equals(token.getValor()))
+			if (getTipo().equals(token.getTipo()))
+				return true;
+		
+		return false;
+	}
 }

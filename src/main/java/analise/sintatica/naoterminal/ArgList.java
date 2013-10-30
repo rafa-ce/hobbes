@@ -28,6 +28,8 @@ public class ArgList extends NaoTerminal {
 		producoes.put("return", Arrays.asList("<Exp>", "<ArgListPr>"));
 		producoes.put("(", Arrays.asList("<Exp>", "<ArgListPr>"));
 		producoes.put(NUMERO, Arrays.asList("<Exp>", "<ArgListPr>"));
+		producoes.put(")", Arrays.asList("ε"));
+		producoes.put("]", Arrays.asList("ε"));
 	}
 	
 	public static String codigo() {

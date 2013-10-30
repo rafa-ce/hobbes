@@ -80,6 +80,10 @@ public class No {
 	public Integer getProfundidade() {
 		return profundidade;
 	}
+	
+	public Integer getMarcador() {
+		return marcador;
+	}
 
 	private void incrementaMarcador() {
 		marcador++;
