@@ -60,8 +60,14 @@ public class SintaticoTest {
 			e.printStackTrace();
 			erro = e.getMessage();
 		}
-		
 		assertEquals("Linha: 1 - Coluna: 8. Token 2c inválido", erro);
 	}
 	
+	@Test(expected = SintaticoException.class)
+	public void erroSintatico() throws Throwable {
+		
+		Sintatico sintatica = new Sintatico("src/test/resources/ArquivoWhileOd.txt");
+		
+		sintatica.executa();
+	}
 }

@@ -43,7 +43,9 @@ public class Sintatico {
 					noAtual = noAtual.proximo();
 				}
 				
-				validaToken(token);
+				if (!validaToken(token))
+					throw new SintaticoException();
+				
 				noAtual.trocaConteudo(token);
 				noAtual = noAtual.proximo();				
 			}
