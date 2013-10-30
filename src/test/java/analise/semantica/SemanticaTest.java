@@ -13,13 +13,20 @@ public class SemanticaTest {
 		
 		Semantica semantico = new Semantica();
 		semantico.executa();
-		
-//		Assert.assertEquals(13, semantico.getLista().size());
 	}
 	
 	@Test
-	public void testaFluxoDeclaraFuncao() throws Throwable {
+	public void testaVariosEscopos() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoVariosEscopos.txt");
+		sintatico.executa();
+		
+		Semantica semantico = new Semantica();
+		semantico.executa();
+	}
+	
+	@Test
+	public void testaSemanticaFunction() throws Throwable {
+		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoDeclaraFuncao.txt");
 		sintatico.executa();
 		
 		Semantica semantico = new Semantica();
@@ -33,8 +40,6 @@ public class SemanticaTest {
 		
 		Semantica semantico = new Semantica();
 		semantico.executa();
-		
-//		Assert.assertEquals(13, semantico.getLista().size());
 	}
 
 }

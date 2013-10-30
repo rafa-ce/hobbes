@@ -1,6 +1,10 @@
 package analise.sintatica.naoterminal;
 
+import static analise.lexica.TipoToken.IDENTIFICADOR;
+
 import java.util.Arrays;
+
+import analise.lexica.TipoToken;
 
 public class FuncDec extends NaoTerminal {
 	
@@ -15,7 +19,7 @@ public class FuncDec extends NaoTerminal {
 
 	@Override
 	protected void inicializaProducoes() {
-		producoes.put("function", Arrays.asList("function", "id", "(", "<FieldList>", ")","=", "<Exp>"));
+		producoes.put("function", Arrays.asList("function", IDENTIFICADOR, "(", "<FieldList>", ")","<FuncCorpo>"));
 	}
 
 	public static String codigo() {

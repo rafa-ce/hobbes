@@ -70,4 +70,19 @@ public class SintaticoTest {
 		
 		sintatica.executa();
 	}
+	
+	@Test
+	public void testaFluxoSintaticoFuncao() throws Throwable {
+		
+		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoDeclaraFuncao.txt");
+		
+		sintatico.executa();
+		
+		assertEquals(1, Pilha.getPilha().size());
+		String topo = Pilha.getTopo();
+		String first = (String) Pilha.getPilha().firstElement();
+		
+		assertTrue(topo.equals("$"));
+		assertTrue(topo.equals(first));
+	}
 }
