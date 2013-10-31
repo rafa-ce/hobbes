@@ -4,8 +4,6 @@ import static analise.lexica.TipoToken.IDENTIFICADOR;
 
 import java.util.Arrays;
 
-import analise.lexica.TipoToken;
-
 public class FuncDec extends NaoTerminal {
 	
 	private static FuncDec instance;
@@ -19,7 +17,7 @@ public class FuncDec extends NaoTerminal {
 
 	@Override
 	protected void inicializaProducoes() {
-		producoes.put("function", Arrays.asList("function", IDENTIFICADOR, "(", "<FieldList>", ")","<FuncCorpo>"));
+		producoes.put("function", Arrays.asList("function", IDENTIFICADOR, FuncCorpo.codigo()));
 	}
 
 	public static String codigo() {

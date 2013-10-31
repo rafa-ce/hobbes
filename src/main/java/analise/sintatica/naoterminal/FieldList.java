@@ -19,6 +19,7 @@ public class FieldList extends NaoTerminal {
 	protected void inicializaProducoes() {
 		producoes.put(IDENTIFICADOR, Arrays.asList(IDENTIFICADOR, "<FieldListPr>"));
 		producoes.put("$", Arrays.asList("ε"));
+		producoes.put(")", Arrays.asList("ε"));
 	}
 
 	public static String codigo() {

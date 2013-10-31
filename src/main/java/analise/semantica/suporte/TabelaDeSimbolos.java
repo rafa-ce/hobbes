@@ -19,6 +19,7 @@ public class TabelaDeSimbolos {
 	
 	public void abreEscopo() {
 		escopos.add(new Escopo());
+		System.out.println("Abre: " + escopos.size());
 	}
 	
 	private Escopo ultimoEscopo() {
@@ -35,9 +36,9 @@ public class TabelaDeSimbolos {
 			return;
 		}
 			
-		if ( anterior.equals(atual.getPai())) {
+		if (anterior.equals(atual.getPai())) {
 			abreEscopo();
-			System.out.println("Abre: " + escopos.size() + " - " + atual.getConteudo().toString());			
+//			System.out.println("Abre: " + escopos.size() + " - " + atual.getConteudo().toString());			
 		} else {
 			fechaEscopo();
 			System.out.println("Fecha: " + escopos.size() + " - " + atual.getConteudo().toString());

@@ -15,7 +15,7 @@ public class FuncCorpo extends NaoTerminal {
 
 	@Override
 	protected void inicializaProducoes() {
-		producoes.put("=", Arrays.asList("=", "<Exp>"));
+		producoes.put("(", Arrays.asList("(", "<FieldList>", ")","=", Exp.codigo()));
 	}
 
 	public static String codigo() {
