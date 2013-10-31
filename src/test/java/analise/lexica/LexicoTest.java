@@ -77,30 +77,6 @@ public class LexicoTest {
 		assertToken("1", "4 - 7", NUMERO, lexico.getNextToken());
 	}
 	
-
-	@Test
-	@Ignore
-	public void arquivoComComentario() throws Throwable {
-		Lexico lexico = new Lexico("src/test/resources/ArquivoComentario.txt");
-
-		assertToken("while", "1 - 1", PALAVRA_CHAVE, lexico.getNextToken());
-		assertToken("i", "1 - 7", IDENTIFICADOR, lexico.getNextToken());
-		assertToken(">", "1 - 9", OPERADOR, lexico.getNextToken());
-		assertToken("100", "1 - 17", NUMERO, lexico.getNextToken());
-		assertToken("do", "1 - 21", PALAVRA_CHAVE, lexico.getNextToken());
-
-		assertToken("i", "2 - 2", IDENTIFICADOR, lexico.getNextToken());
-		assertToken(":=", "2 - 4", OPERADOR, lexico.getNextToken());
-		assertToken("j", "2 - 6", IDENTIFICADOR, lexico.getNextToken());
-		assertToken("+", "2 - 7", OPERADOR, lexico.getNextToken());
-		assertToken("i", "2 - 8", IDENTIFICADOR, lexico.getNextToken());
-
-		assertToken("i", "7 - 1", IDENTIFICADOR, lexico.getNextToken());
-		assertToken(":=", "7 - 3", OPERADOR, lexico.getNextToken());
-		assertToken("10", "7 - 6", NUMERO, lexico.getNextToken());
-		
-	}
-	
 	@Test
 	public void arquivoDesorganizado() throws Throwable {
 		Lexico lexico = new Lexico("src/test/resources/ArquivoDesorganizado.txt");

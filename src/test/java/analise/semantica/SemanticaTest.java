@@ -7,7 +7,7 @@ import analise.sintatica.Sintatico;
 public class SemanticaTest {
 
 	@Test
-	public void testArquivoComComentario1() throws Throwable {
+	public void arquivoComComentario() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoComentario.txt");
 		sintatico.executa();
 		
@@ -15,8 +15,17 @@ public class SemanticaTest {
 		semantico.executa();
 	}
 	
+	@Test(expected = SemanticoException.class)
+	public void arquivoComComentarioErro() throws Throwable {
+		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoComentarioErro.txt");
+		sintatico.executa();
+		
+		Semantica semantico = new Semantica();
+		semantico.executa();
+	}
+	
 	@Test
-	public void testaVariosEscopos() throws Throwable {
+	public void variosEscopos() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoVariosEscopos.txt");
 		sintatico.executa();
 		
@@ -25,7 +34,7 @@ public class SemanticaTest {
 	}
 	
 	@Test
-	public void testaSemanticaFunction() throws Throwable {
+	public void semanticaFunction() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoDeclaraFuncao.txt");
 		sintatico.executa();
 		
