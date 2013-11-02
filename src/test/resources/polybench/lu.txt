@@ -1,0 +1,23 @@
+function init_array (n, A) = (	
+   for i:=0 to n do
+      for j:=0 to n do
+         A[i][j] :=  ((i+1)*(j+1)) / n
+)
+
+A := [][]
+n := 3
+PB_N := 2
+
+init_array (1, 2)
+
+for k:=0 to PB_N do (
+
+   for j := k+1 to PB_N do (
+      A[k][j] := A[k][j] / A[k][k]
+   )
+	
+   for i:= k+1  to PB_N do (
+      for j := k+1 to PB_N do
+         A[i][j] := A[i][j] - (A[i][k] * A[k][j])
+      )
+)

@@ -20,7 +20,6 @@ public class Exp extends NaoTerminal {
 	@Override
 	protected void inicializaProducoes() {
 		producoes.put(IDENTIFICADOR, Arrays.asList("<ExpOR>", "<ExpORPr>"));
-		producoes.put("[", Arrays.asList("<ExpOR>", "<ExpORPr>"));
 		producoes.put("print", Arrays.asList("<ExpOR>", "<ExpORPr>"));
 		producoes.put("if", Arrays.asList("<ExpOR>", "<ExpORPr>"));
 		producoes.put("for", Arrays.asList("<ExpOR>", "<ExpORPr>"));
@@ -28,6 +27,7 @@ public class Exp extends NaoTerminal {
 		producoes.put("break", Arrays.asList("<ExpOR>", "<ExpORPr>"));
 		producoes.put("return", Arrays.asList("<ExpOR>", "<ExpORPr>"));
 		producoes.put("(", Arrays.asList("<ExpOR>", "<ExpORPr>"));
+		producoes.put("[", Arrays.asList("<ExpOR>", "<ExpORPr>"));
 		producoes.put(NUMERO, Arrays.asList("<ExpOR>", "<ExpORPr>"));		
 	}
 	

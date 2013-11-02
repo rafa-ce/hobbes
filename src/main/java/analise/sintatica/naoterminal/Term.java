@@ -5,7 +5,6 @@ import static analise.lexica.TipoToken.NUMERO;
 
 import java.util.Arrays;
 
-
 public class Term extends NaoTerminal {
 	
 	private static Term instance;
@@ -20,7 +19,6 @@ public class Term extends NaoTerminal {
 	@Override
 	protected void inicializaProducoes() {
 		producoes.put(IDENTIFICADOR, Arrays.asList("<Factor>", "<FactorPr>"));
-		producoes.put("[", Arrays.asList("<Factor>", "<FactorPr>"));
 		producoes.put("print", Arrays.asList("<Factor>", "<FactorPr>"));
 		producoes.put("if", Arrays.asList("<Factor>", "<FactorPr>"));
 		producoes.put("for", Arrays.asList("<Factor>", "<FactorPr>"));
@@ -28,6 +26,8 @@ public class Term extends NaoTerminal {
 		producoes.put("break", Arrays.asList("<Factor>", "<FactorPr>"));
 		producoes.put("return", Arrays.asList("<Factor>", "<FactorPr>"));
 		producoes.put("(", Arrays.asList("<Factor>", "<FactorPr>"));
+		producoes.put("[", Arrays.asList("<Factor>", "<FactorPr>"));
+		producoes.put("-", Arrays.asList("<Factor>", "<FactorPr>"));
 		producoes.put(NUMERO, Arrays.asList("<Factor>", "<FactorPr>"));				
 	}
 

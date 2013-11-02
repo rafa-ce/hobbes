@@ -17,8 +17,7 @@ public class FieldList extends NaoTerminal {
 
 	@Override
 	protected void inicializaProducoes() {
-		producoes.put(IDENTIFICADOR, Arrays.asList(IDENTIFICADOR, "<FieldListPr>"));
-		producoes.put("$", Arrays.asList("ε"));
+		producoes.put(IDENTIFICADOR, Arrays.asList(IDENTIFICADOR, FieldListPr.codigo()));
 		producoes.put(")", Arrays.asList("ε"));
 	}
 

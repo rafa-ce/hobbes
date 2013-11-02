@@ -20,7 +20,6 @@ public class ArithExp extends NaoTerminal {
 	@Override
 	protected void inicializaProducoes() {
 		producoes.put(IDENTIFICADOR, Arrays.asList("<Term>", "<TermPr>"));
-		producoes.put("[", Arrays.asList("<Term>", "<TermPr>"));
 		producoes.put("print", Arrays.asList("<Term>", "<TermPr>"));
 		producoes.put("if", Arrays.asList("<Term>", "<TermPr>"));
 		producoes.put("for", Arrays.asList("<Term>", "<TermPr>"));
@@ -28,6 +27,8 @@ public class ArithExp extends NaoTerminal {
 		producoes.put("break", Arrays.asList("<Term>", "<TermPr>"));
 		producoes.put("return", Arrays.asList("<Term>", "<TermPr>"));
 		producoes.put("(", Arrays.asList("<Term>", "<TermPr>"));
+		producoes.put("[", Arrays.asList("<Term>", "<TermPr>"));
+		producoes.put("-", Arrays.asList("<Term>", "<TermPr>"));
 		producoes.put(NUMERO, Arrays.asList("<Term>", "<TermPr>"));
 	}
 

@@ -20,7 +20,6 @@ public class ExpAnd extends NaoTerminal {
 	@Override
 	protected void inicializaProducoes() {
 		producoes.put(IDENTIFICADOR, Arrays.asList("<ArithExp>", "<RelExp>"));
-		producoes.put("[", Arrays.asList("<ArithExp>", "<RelExp>"));
 		producoes.put("print", Arrays.asList("<ArithExp>", "<RelExp>"));
 		producoes.put("if", Arrays.asList("<ArithExp>", "<RelExp>"));
 		producoes.put("for", Arrays.asList("<ArithExp>", "<RelExp>"));
@@ -28,6 +27,8 @@ public class ExpAnd extends NaoTerminal {
 		producoes.put("break", Arrays.asList("<ArithExp>", "<RelExp>"));
 		producoes.put("return", Arrays.asList("<ArithExp>", "<RelExp>"));
 		producoes.put("(", Arrays.asList("<ArithExp>", "<RelExp>"));
+		producoes.put("[", Arrays.asList("<ArithExp>", "<RelExp>"));
+		producoes.put("-", Arrays.asList("<ArithExp>", "<RelExp>"));
 		producoes.put(NUMERO, Arrays.asList("<ArithExp>", "<RelExp>"));		
 	}
 

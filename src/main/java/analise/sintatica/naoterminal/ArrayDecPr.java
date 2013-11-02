@@ -5,23 +5,21 @@ import static analise.lexica.TipoToken.NUMERO;
 
 import java.util.Arrays;
 
-public class Outro extends NaoTerminal {
+public class ArrayDecPr extends NaoTerminal {
+
+	private static ArrayDecPr instance;
 	
-	private static Outro instance;
-	
-	public static Outro getInstance() {
+	public static ArrayDecPr getInstance() {
 		if (instance == null)
-			instance = new Outro();
+			instance = new ArrayDecPr();
 		
 		return instance;
 	}
-
+	
 	@Override
 	protected void inicializaProducoes() {
-		producoes.put("[", Arrays.asList("[", "<Exp>", "]", "<Outro>"));
-		producoes.put(":=", Arrays.asList(":=", Exp.codigo()));
-		producoes.put("/", Arrays.asList("ε"));
-		producoes.put("*", Arrays.asList("ε"));
+		producoes.put("[", Arrays.asList("[", "]", ArrayDecPr.codigo()));
+		producoes.put("]", Arrays.asList("ε"));
 		
 		producoes.put(IDENTIFICADOR, Arrays.asList("ε"));
 		producoes.put("import", Arrays.asList("ε"));
@@ -36,10 +34,10 @@ public class Outro extends NaoTerminal {
 		producoes.put("function", Arrays.asList("ε"));
 		producoes.put("$", Arrays.asList("ε"));
 		producoes.put(")", Arrays.asList("ε"));
-		producoes.put("-", Arrays.asList("ε"));
 	}
 
 	public static String codigo() {
-		return "<Outro>";
+		return "<ArrayDecPr>";
 	}
+
 }

@@ -16,7 +16,7 @@ public class LexicoTest {
 
 	@Test
 	public void lexicoHappyDay() throws Throwable {
-		Lexico lexico = new Lexico("src/test/resources/ArquivoLinhaUnica.txt");
+		Lexico lexico = new Lexico("src/test/resources/outros/ArquivoLinhaUnica.txt");
 		
 		assertToken("a", "1 - 1", IDENTIFICADOR, lexico.getNextToken());
 		assertToken(":=", "1 - 3", OPERADOR, lexico.getNextToken());
@@ -30,7 +30,7 @@ public class LexicoTest {
 	
 	@Test(expected = LexicoException.class)
 	public void identificaToken() throws Throwable {
-		Lexico lexico = new Lexico("src/test/resources/TokenInvalido.txt");
+		Lexico lexico = new Lexico("src/test/resources/outros/TokenInvalido.txt");
 		
 		assertToken("if", "1 - 1", PALAVRA_CHAVE, lexico.getNextToken());
 		assertToken("a", "1 - 4", IDENTIFICADOR, lexico.getNextToken());
@@ -40,7 +40,7 @@ public class LexicoTest {
 	
 	@Test
 	public void identificaWhile() throws Throwable {
-		Lexico lexico = new Lexico("src/test/resources/ArquivoWhile.txt");
+		Lexico lexico = new Lexico("src/test/resources/outros/ArquivoWhile.txt");
 		
 		assertToken("while", "1 - 1", PALAVRA_CHAVE, lexico.getNextToken());
 		assertToken("i", "1 - 7", IDENTIFICADOR, lexico.getNextToken());
@@ -57,7 +57,7 @@ public class LexicoTest {
 	
 	@Test
 	public void idetificaIf() throws Throwable {
-		Lexico lexico = new Lexico("src/test/resources/ArquivoIf.txt");
+		Lexico lexico = new Lexico("src/test/resources/outros/ArquivoIf.txt");
 		
 		assertToken("if", "1 - 1", PALAVRA_CHAVE, lexico.getNextToken());
 		assertToken("a", "1 - 4", IDENTIFICADOR, lexico.getNextToken());
@@ -78,7 +78,7 @@ public class LexicoTest {
 	
 	@Test
 	public void arquivoDesorganizado() throws Throwable {
-		Lexico lexico = new Lexico("src/test/resources/ArquivoDesorganizado.txt");
+		Lexico lexico = new Lexico("src/test/resources/outros/ArquivoDesorganizado.txt");
 		
 		assertToken("while", "3 - 1", PALAVRA_CHAVE, lexico.getNextToken());
 		assertToken("(", "3 - 6", SIMBOLO, lexico.getNextToken());

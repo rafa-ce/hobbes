@@ -8,7 +8,7 @@ public class SemanticaTest {
 
 	@Test
 	public void arquivoComComentario() throws Throwable {
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoComentario.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoComentario.txt");
 		sintatico.executa();
 		
 		Semantica semantico = new Semantica();
@@ -17,7 +17,7 @@ public class SemanticaTest {
 	
 	@Test(expected = SemanticoException.class)
 	public void arquivoComComentarioErro() throws Throwable {
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoComentarioErro.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoComentarioErro.txt");
 		sintatico.executa();
 		
 		Semantica semantico = new Semantica();
@@ -26,7 +26,7 @@ public class SemanticaTest {
 	
 	@Test
 	public void variosEscopos() throws Throwable {
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoVariosEscopos.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoVariosEscopos.txt");
 		sintatico.executa();
 		
 		Semantica semantico = new Semantica();
@@ -35,7 +35,7 @@ public class SemanticaTest {
 	
 	@Test
 	public void semanticaFunction() throws Throwable {
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoDeclaraFuncao.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoDeclaraFuncao.txt");
 		sintatico.executa();
 		
 		Semantica semantico = new Semantica();
@@ -44,7 +44,7 @@ public class SemanticaTest {
 
 	@Test
 	public void semanticaHappyDay() throws Throwable {
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoSintaticoHappyDay.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoSintaticoHappyDay.txt");
 		sintatico.executa();
 		
 		Semantica semantico = new Semantica();

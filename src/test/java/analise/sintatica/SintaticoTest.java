@@ -12,7 +12,7 @@ public class SintaticoTest {
 	@Test
 	public void testaFluxoSintaticoHappyDay() throws Throwable {
 		
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoSintaticoHappyDay.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoSintaticoHappyDay.txt");
 		
 		sintatico.executa();
 		
@@ -27,7 +27,7 @@ public class SintaticoTest {
 	@Test
 	public void testaFluxoSintaticoWhile() throws Throwable {
 		
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoWhile.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoWhile.txt");
 		
 		sintatico.executa();
 		
@@ -41,7 +41,7 @@ public class SintaticoTest {
 	
 	@Test(expected = SintaticoException.class)
 	public void testaFluxoSintaticoSobrandoElementosNaPilha() throws Throwable {
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoSintaticoSobraNaPilha.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoSintaticoSobraNaPilha.txt");
 		
 		sintatico.executa();
 		
@@ -51,7 +51,7 @@ public class SintaticoTest {
 	@Test
 	public void erroLexicoNaSintatica() {
 		
-		Sintatico sintatica = new Sintatico("src/test/resources/TokenInvalido.txt");
+		Sintatico sintatica = new Sintatico("src/test/resources/outros/TokenInvalido.txt");
 		String erro = null;
 		
 		try {
@@ -66,7 +66,7 @@ public class SintaticoTest {
 	@Test(expected = SintaticoException.class)
 	public void erroSintatico() throws Throwable {
 		
-		Sintatico sintatica = new Sintatico("src/test/resources/ArquivoWhileOd.txt");
+		Sintatico sintatica = new Sintatico("src/test/resources/outros/ArquivoWhileOd.txt");
 		
 		sintatica.executa();
 	}
@@ -74,7 +74,7 @@ public class SintaticoTest {
 	@Test
 	public void testaFluxoSintaticoFuncao() throws Throwable {
 		
-		Sintatico sintatico = new Sintatico("src/test/resources/ArquivoDeclaraFuncao.txt");
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoDeclaraFuncao.txt");
 		
 		sintatico.executa();
 		

@@ -21,7 +21,6 @@ public class Lista extends NaoTerminal {
 	protected void inicializaProducoes() {
 		producoes.put(IDENTIFICADOR, Arrays.asList("<Item>", "<Lista>"));
 		producoes.put("import", Arrays.asList("<Item>", "<Lista>"));
-		producoes.put("[", Arrays.asList("<Item>", "<Lista>"));
 		producoes.put("print", Arrays.asList("<Item>", "<Lista>"));
 		producoes.put("if", Arrays.asList("<Item>", "<Lista>"));
 		producoes.put("for", Arrays.asList("<Item>", "<Lista>"));

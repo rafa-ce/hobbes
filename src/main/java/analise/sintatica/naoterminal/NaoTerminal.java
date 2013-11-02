@@ -69,6 +69,8 @@ public abstract class NaoTerminal {
 		naoTerminais.put(FieldListPr.codigo(), FieldListPr.getInstance());
 		naoTerminais.put(FuncDec.codigo(), FuncDec.getInstance());
 		naoTerminais.put(FuncCorpo.codigo(), FuncCorpo.getInstance());
+		naoTerminais.put(ArrayDec.codigo(), ArrayDec.getInstance());
+		naoTerminais.put(ArrayDecPr.codigo(), ArrayDecPr.getInstance());
 	}
 	
 	public static List<String> naoTerminais() {
@@ -102,6 +104,8 @@ public abstract class NaoTerminal {
 				FieldList.codigo(),
 				FieldListPr.codigo(),
 				FuncDec.codigo(),
-				FuncCorpo.codigo());
+				FuncCorpo.codigo(),
+				ArrayDec.codigo(),
+				ArrayDecPr.codigo());
 	}
 }

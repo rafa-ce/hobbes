@@ -21,7 +21,6 @@ private static Item instance;
 	protected void inicializaProducoes() {
 		producoes.put(IDENTIFICADOR, Arrays.asList("<Exp>"));
 		producoes.put("import", Arrays.asList("<Dec>"));
-		producoes.put("[", Arrays.asList("<Exp>"));
 		producoes.put("print", Arrays.asList("<Exp>"));
 		producoes.put("if", Arrays.asList("<Exp>"));
 		producoes.put("for", Arrays.asList("<Exp>"));
