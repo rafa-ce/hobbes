@@ -1,16 +1,12 @@
 package analise.semantica;
 
 import static java.lang.Boolean.FALSE;
-
-import java.util.ArrayList;
-
 import utils.Token;
 import analise.semantica.suporte.TabelaDeSimbolos;
 import analise.sintatica.naoterminal.Bloco;
 import analise.sintatica.naoterminal.FuncDec;
 import analise.sintatica.naoterminal.Prog;
 import analise.sintatica.suporte.Arvore;
-import analise.sintatica.suporte.No;
 
 
 public class Semantica extends RegraSemantica {
@@ -19,7 +15,6 @@ public class Semantica extends RegraSemantica {
 		tabela = new TabelaDeSimbolos();
 		noAtual = Arvore.getRaiz().proximoSemantico();
 		noAnterior = Arvore.getRaiz();
-		arrays = new ArrayList<Token>();
 	}
 	
 	public void executa() throws SemanticoException {
@@ -39,29 +34,48 @@ public class Semantica extends RegraSemantica {
 				lendoFuncao = FALSE;
 			}
 			if (noAtual.isToken() && ((Token)noAtual.getConteudo()).isIdentificador())
-				trataToken((Token)noAtual.getConteudo(), noAnterior);
+				trataToken((Token)noAtual.getConteudo());
 			
 			andaNaArvore();
 		}
-		System.out.println("");
 	}
 
-	private void trataToken(Token token, No pai) throws SemanticoException {
-		if (tabela.taNoUltimoEscopo(token))
-			return;
+	private void trataToken(Token token) throws SemanticoException {
+		Token tokenDeclarado = tabela.taNoUltimoEscopo(token);
 		
-		if (tabela.possuiToken(token))
+		if (tokenDeclarado != null) {
+			verificaParametrosFuncao(tokenDeclarado);
 			return;
+		}
 		
-		if (verificaAtribuicao(pai, token))
+		tokenDeclarado = tabela.possuiToken(token);
+		
+		if (tokenDeclarado != null) {
+			verificaParametrosFuncao(tokenDeclarado);
+			token.marcaVariavellDeEscape();
+			tokenDeclarado.marcaVariavellDeEscape();
+			return;
+		}
+		
+		if (isAtribuicao(token))
 			return;
 		
 		if (noAtual.getPai().getConteudo().equals(FuncDec.codigo())) {
 			tabela.adicionaToken(token);
-			verificaParametrosFuncao();
+			contaParametrosDeclaracaoFuncao();
 			return;
 		}
 		
 		throw new SemanticoException(token);
+	}
+	
+	private void verificaParametrosFuncao(Token tokenDeclarado) throws SemanticoException {
+		if(!tokenDeclarado.isFuncao())
+			return;
+				
+		if (tokenDeclarado.numeroDeParametros() == contaParametrosChamadaFuncao())
+			return;
+		
+		throw new SemanticoException(tokenDeclarado); //numero de param errados
 	}
 }

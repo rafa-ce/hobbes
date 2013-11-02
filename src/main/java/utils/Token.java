@@ -3,7 +3,10 @@ package utils;
 import static analise.lexica.TipoToken.IDENTIFICADOR;
 import static analise.lexica.TipoToken.NUMERO;
 import static analise.lexica.TipoToken.PALAVRA_CHAVE;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Token {
@@ -11,13 +14,15 @@ public class Token {
 	private String valor;
 	private Posicao posicao;
 	private String tipo;
-	private List<String> parametros;
+	private Integer parametros;
 	private TipoRetorno tipoRetorno;
+	private Boolean escape;
 	
 	public Token(String valor, Integer linha, Integer coluna, String tipo) {
 		this.valor = valor;
 		this.tipo = tipo;
 		this.posicao = new Posicao(linha, coluna);
+		this.escape = FALSE;
 	}
 
 	public String getValor() {
@@ -44,14 +49,6 @@ public class Token {
 		return getTipo().equals(NUMERO);
 	}
 
-	public List<String> getParametros() {
-		return parametros;
-	}
-
-	public void setParametros(List<String> parametros) {
-		this.parametros = parametros;
-	}
-
 	public TipoRetorno getTipoRetorno() {
 		return tipoRetorno;
 	}
@@ -61,10 +58,33 @@ public class Token {
 	}
 	
 	public boolean equals(Token token) {
+//		if (getTipoRetorno() == null && token.getTipoRetorno() == null)
+//			return false;
+		
 		if (getValor().equals(token.getValor()))
 			if (getTipo().equals(token.getTipo()))
 				return true;
 		
 		return false;
 	}
+	
+	public void adicionaParametro() {
+		if (parametros == null)
+			parametros = 0;
+		else
+			parametros++;
+	}
+	
+	public Integer numeroDeParametros() {
+		return parametros;
+	}
+	
+	public void marcaVariavellDeEscape() {
+		escape = TRUE;
+	}
+	
+	public Boolean isFuncao() {
+		return parametros != null;
+	}
+	
 }

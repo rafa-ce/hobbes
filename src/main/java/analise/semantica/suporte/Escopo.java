@@ -1,8 +1,5 @@
 package analise.semantica.suporte;
 
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +13,13 @@ public class Escopo {
 		tokens.add(token);
 	}
 
-	public Boolean possui(Token token) {
+	public Token possui(Token token) {
 		for (Token tokenEscopo : tokens) {
 			if (tokenEscopo.equals(token))
-				return TRUE;
+				return tokenEscopo;
 		}
 		
-		return FALSE;
+		return null;
 	}
 
 }

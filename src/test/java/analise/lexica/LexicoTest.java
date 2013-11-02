@@ -8,7 +8,6 @@ import static analise.lexica.TipoToken.SIMBOLO;
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import utils.Token;

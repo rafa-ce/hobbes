@@ -8,9 +8,8 @@ import analise.sintatica.suporte.No;
 
 public abstract class RegraSemantica extends AtributoSemantica {
 	
-	public Boolean verificaAtribuicao(No pai, Token token) {
-		
-		No irmao = pai.getFilhos().get(pai.getMarcador() + 1);
+	protected Boolean isAtribuicao(Token token) {
+		No irmao = noAnterior.getFilhos().get(noAnterior.getMarcador() + 1);
 		if (irmao.getFilhos().isEmpty()) {
 			if (!irmao.getConteudo().equals(LValuePr.codigo())) {		
 				if (((Token)irmao.getConteudo()).getValor().equals(":=")) {
@@ -30,16 +29,18 @@ public abstract class RegraSemantica extends AtributoSemantica {
 		return FALSE;
 	}
 	
-	public void verificaParametrosFuncao() {
+	protected void contaParametrosDeclaracaoFuncao() {
 		tabela.abreEscopo();
 		lendoFuncao = TRUE;
-		
+		Token tokenFuncao = (Token)noAtual.getConteudo();
+		tokenFuncao.adicionaParametro();
 		andaNaArvore();
 		
 		while (true) {
 			if (noAtual.isToken() && ((Token)noAtual.getConteudo()).isIdentificador()) {
-				tabela.adicionaToken(((Token)noAtual.getConteudo()));
-				System.out.println(((Token)noAtual.getConteudo()).getValor());
+				Token token = (Token)noAtual.getConteudo();
+				tabela.adicionaToken(token);
+				tokenFuncao.adicionaParametro();
 			}
 			
 			andaNaArvore();
@@ -49,8 +50,26 @@ public abstract class RegraSemantica extends AtributoSemantica {
 		}		
 	}
 	
-	public void andaNaArvore() {
-		noAnterior = noAtual;
-		noAtual = noAtual.proximoSemantico();
+	protected Integer contaParametrosChamadaFuncao() {
+		Integer parametros = 0;
+		No irmao = noAnterior.getFilhos().get(noAnterior.getMarcador() + 1);
+		
+		No argList = irmao.getFilhos().get(1);
+		
+		if (argList.getFilhos().isEmpty())
+			return parametros;
+		
+		No no = argList.getFilhos().get(1);
+		
+		while(true) {
+			parametros++;
+			
+			if (no.getFilhos().isEmpty())
+				break;
+			
+			no = no.getFilhos().get(2);
+		}
+		
+		return parametros;
 	}
 }
