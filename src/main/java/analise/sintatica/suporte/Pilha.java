@@ -51,7 +51,7 @@ public class Pilha {
 		while (!isFimDaPilha()) {
 			
 			if (!topoIsNaoTerminal())
-				throw new SintaticoException();
+				throw new SintaticoException(Pilha.getTopo());
 				
 			topo = getTopo();
 			

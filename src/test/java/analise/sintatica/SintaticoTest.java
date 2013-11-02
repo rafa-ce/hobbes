@@ -39,13 +39,20 @@ public class SintaticoTest {
 		assertTrue(topo.equals(first));
 	}
 	
-	@Test(expected = SintaticoException.class)
+	@Test
 	public void testaFluxoSintaticoSobrandoElementosNaPilha() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoSintaticoSobraNaPilha.txt");
 		
-		sintatico.executa();
+		String erro = null;
 		
-		assertEquals("[ <Lista>, <ExpORPr>, <ExpANDPr>, <RelExp>, <TermPr>, <FactorPr>, <Exp>, do]", Pilha.getPilha().toString());
+		try {
+			sintatico.executa();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			erro = e.getMessage();
+		}
+		assertEquals("Erro! Token: 'do' não encontrado.", erro);		
+		assertEquals("[$, <Lista>, <ExpORPr>, <ExpANDPr>, <RelExp>, <TermPr>, <FactorPr>, <Exp>, do]", Pilha.getPilha().toString());
 	}
 	
 	@Test
