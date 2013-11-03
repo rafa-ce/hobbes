@@ -1,6 +1,6 @@
 package analise.sintatica;
 
-import utils.Token;
+import utils.token.Token;
 
 public class SintaticoException extends Exception {
 
@@ -13,7 +13,7 @@ public class SintaticoException extends Exception {
 	public SintaticoException(Token token) {
 		super("Linha: " + token.getPosicao().getLinha() +
 			  " - Coluna: " + token.getPosicao().getColuna() +
-			  "Token não esperado: " + token.getValor());
+			  " .Token não esperado: " + token.getValor());
 	}
 
 	public SintaticoException(String topo) {

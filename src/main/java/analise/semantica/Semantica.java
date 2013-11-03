@@ -1,7 +1,7 @@
 package analise.semantica;
 
 import static java.lang.Boolean.FALSE;
-import utils.Token;
+import utils.token.Token;
 import analise.semantica.suporte.TabelaDeSimbolos;
 import analise.sintatica.naoterminal.Bloco;
 import analise.sintatica.naoterminal.FuncDec;
@@ -56,6 +56,9 @@ public class Semantica extends RegraSemantica {
 			tokenDeclarado.marcaVariavellDeEscape();
 			return;
 		}
+		
+		if (isFor(token))
+			return;
 		
 		if (isAtribuicao(token))
 			return;

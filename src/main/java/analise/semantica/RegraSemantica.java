@@ -2,7 +2,7 @@ package analise.semantica;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import utils.Token;
+import utils.token.Token;
 import analise.sintatica.naoterminal.LValuePr;
 import analise.sintatica.suporte.No;
 
@@ -10,21 +10,29 @@ public abstract class RegraSemantica extends AtributoSemantica {
 	
 	protected Boolean isAtribuicao(Token token) {
 		No irmao = noAnterior.getFilhos().get(noAnterior.getMarcador() + 1);
-		if (irmao.getFilhos().isEmpty()) {
-			if (!irmao.getConteudo().equals(LValuePr.codigo())) {		
+		
+		if (irmao.getFilhos().isEmpty())
+			return FALSE;
+		
+		Token conteudo = (Token) irmao.getFilhos().get(0).getConteudo();
+			
+		if (conteudo.getValor().equals(":=")) {
+			tabela.adicionaToken(token);
+			return TRUE;
+		}
+		
+		return FALSE;
+	}
+	
+	protected Boolean isFor(Token token) {
+		No irmao = noAnterior.getFilhos().get(noAnterior.getMarcador() + 1);
+		
+		if (irmao.getFilhos().isEmpty())
+			if (!irmao.getConteudo().equals(LValuePr.codigo()))		
 				if (((Token)irmao.getConteudo()).getValor().equals(":=")) {
 					tabela.adicionaToken(token);
 					return TRUE;
 				}
-			}
-		} else {
-			Token conteudo = (Token) irmao.getFilhos().get(0).getConteudo();
-			
-			if (conteudo.getValor().equals(":=")) {
-				tabela.adicionaToken(token);
-				return TRUE;
-			}
-		}
 		
 		return FALSE;
 	}

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import utils.Token;
+import utils.token.Token;
 
 public abstract class NaoTerminal {
 	

@@ -1,4 +1,4 @@
-package utils;
+package utils.token;
 
 import static analise.lexica.TipoToken.IDENTIFICADOR;
 import static analise.lexica.TipoToken.NUMERO;
@@ -17,6 +17,7 @@ public class Token {
 	private Integer parametros;
 	private TipoRetorno tipoRetorno;
 	private Boolean escape;
+	private List<Integer> dimensoes;
 	
 	public Token(String valor, Integer linha, Integer coluna, String tipo) {
 		this.valor = valor;
@@ -85,6 +86,18 @@ public class Token {
 	
 	public Boolean isFuncao() {
 		return parametros != null;
+	}
+	
+	public Boolean isVetor() {
+		return dimensoes != null;
+	}
+	
+	public void inicializaVetor(Integer quantidade) {
+		dimensoes = new ArrayList<Integer>();
+		
+		for (int i = 1; i < quantidade; i++) {
+			dimensoes.add(0);
+		}
 	}
 	
 }

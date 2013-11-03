@@ -3,7 +3,7 @@ package analise.semantica.suporte;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.Token;
+import utils.token.Token;
 
 public class Escopo {
 	

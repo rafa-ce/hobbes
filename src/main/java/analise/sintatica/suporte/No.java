@@ -3,7 +3,7 @@ package analise.sintatica.suporte;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.Token;
+import utils.token.Token;
 
 public class No {
 	

@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import utils.Token;
+import utils.token.Token;
 import analise.lexica.automato.Automato;
 import analise.lexica.automato.AutomatoException;
 import analise.lexica.automato.Estado;

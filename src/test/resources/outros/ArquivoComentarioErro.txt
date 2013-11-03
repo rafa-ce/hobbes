@@ -10,6 +10,6 @@ comentario
 i := 10
 
 function f() = (
-	i + j)
+	i := i + j)
 	
 f()

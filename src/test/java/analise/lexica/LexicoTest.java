@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import utils.Token;
+import utils.token.Token;
 
 public class LexicoTest {
 
