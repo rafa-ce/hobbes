@@ -3,6 +3,8 @@ package analise.semantica;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import utils.token.Token;
+import analise.sintatica.naoterminal.ArrayDec;
+import analise.sintatica.naoterminal.Factor;
 import analise.sintatica.naoterminal.LValuePr;
 import analise.sintatica.suporte.No;
 
@@ -79,5 +81,63 @@ public abstract class RegraSemantica extends AtributoSemantica {
 		}
 		
 		return parametros;
+	}
+	
+	protected void verificaTipoToken(Token token) {
+		while(true) {
+			if (noAtual.getConteudo().equals(Factor.codigo())) {
+				defineTipo(token);
+				break;
+			}
+			
+			andaNaArvore();
+		}
+	}
+
+	private void defineTipo(Token token) {
+		No proximo = noAtual.getFilhos().get(0);
+		
+		if (proximo.getConteudo().equals(ArrayDec.codigo()))
+			token.inicializaVetor(contaDimensoes(proximo));
+		
+	}
+
+	private Integer contaDimensoes(No no) {
+		Integer dimensoes = 0;
+		
+		while(true) {
+			dimensoes++;
+			
+			if (no.getFilhos().isEmpty())
+				break;
+			
+			no = no.getFilhos().get(2);
+		}
+		
+		return dimensoes;
+	}
+	
+	protected Integer contaDimensoesChamadaVetor() {
+		Integer dimensoes = 1;
+		
+		No irmao = noAnterior.getFilhos().get(noAnterior.getMarcador() + 1);
+		
+		No outro = irmao.getFilhos().get(3);
+		
+		if (outro.getFilhos().isEmpty() || ((Token)outro.getFilhos().get(0).getConteudo()).getValor().equals(":="))
+			return dimensoes;
+		
+		No no = outro.getFilhos().get(3);
+		
+		while(true) {
+			dimensoes++;
+			
+			if (no.getFilhos().isEmpty() || ((Token)no.getFilhos().get(0).getConteudo()).getValor().equals(":="))
+				break;
+			
+			no = no.getFilhos().get(3);
+		}
+		
+		return dimensoes;
 	}
 }

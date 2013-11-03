@@ -45,6 +45,7 @@ public class Semantica extends RegraSemantica {
 		
 		if (tokenDeclarado != null) {
 			verificaParametrosFuncao(tokenDeclarado);
+			verificaDimensoesVetor(tokenDeclarado);
 			return;
 		}
 		
@@ -60,8 +61,10 @@ public class Semantica extends RegraSemantica {
 		if (isFor(token))
 			return;
 		
-		if (isAtribuicao(token))
+		if (isAtribuicao(token)) {
+			verificaTipoToken(token);
 			return;
+		}
 		
 		if (noAtual.getPai().getConteudo().equals(FuncDec.codigo())) {
 			tabela.adicionaToken(token);
@@ -72,6 +75,16 @@ public class Semantica extends RegraSemantica {
 		throw new SemanticoException(token);
 	}
 	
+	private void verificaDimensoesVetor(Token tokenDeclarado) throws SemanticoException {
+		if(!tokenDeclarado.isVetor())
+			return;
+		
+		if (tokenDeclarado.numeroDeDimensoes() == contaDimensoesChamadaVetor())
+			return;
+		
+		throw new SemanticoException(tokenDeclarado);
+	}
+
 	private void verificaParametrosFuncao(Token tokenDeclarado) throws SemanticoException {
 		if(!tokenDeclarado.isFuncao())
 			return;

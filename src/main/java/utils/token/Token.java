@@ -100,4 +100,8 @@ public class Token {
 		}
 	}
 	
+	public Integer numeroDeDimensoes() {
+		return dimensoes.size();
+	}
+	
 }
