@@ -53,6 +53,7 @@ public class Semantica extends RegraSemantica {
 		
 		if (tokenDeclarado != null) {
 			verificaParametrosFuncao(tokenDeclarado);
+			verificaDimensoesVetor(tokenDeclarado);
 			token.marcaVariavellDeEscape();
 			tokenDeclarado.marcaVariavellDeEscape();
 			return;

@@ -118,11 +118,15 @@ public abstract class RegraSemantica extends AtributoSemantica {
 	}
 	
 	protected Integer contaDimensoesChamadaVetor() {
-		Integer dimensoes = 1;
+		Integer dimensoes = 0;
 		
 		No irmao = noAnterior.getFilhos().get(noAnterior.getMarcador() + 1);
 		
+		if (irmao.getFilhos().isEmpty())
+			return dimensoes;
+		
 		No outro = irmao.getFilhos().get(3);
+		dimensoes++;
 		
 		if (outro.getFilhos().isEmpty() || ((Token)outro.getFilhos().get(0).getConteudo()).getValor().equals(":="))
 			return dimensoes;
