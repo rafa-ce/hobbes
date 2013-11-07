@@ -39,7 +39,7 @@ public class Sintatico {
 					List<String> producaoGerada = NaoTerminal.geraProducao(Pilha.getTopo(), token);
 					Pilha.desempilha();
 					Pilha.empilha(producaoGerada);
-					noAtual.criaFilhos(producaoGerada);
+					noAtual.criaFilhos(producaoGerada); //TODO tratar null
 					noAtual = noAtual.proximo();
 				}
 				

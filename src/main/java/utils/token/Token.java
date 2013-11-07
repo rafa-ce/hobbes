@@ -15,7 +15,6 @@ public class Token {
 	private Posicao posicao;
 	private String tipo;
 	private Integer parametros;
-	private TipoRetorno tipoRetorno;
 	private Boolean escape;
 	private List<Integer> dimensoes;
 	
@@ -50,14 +49,6 @@ public class Token {
 		return getTipo().equals(NUMERO);
 	}
 
-	public TipoRetorno getTipoRetorno() {
-		return tipoRetorno;
-	}
-
-	public void setTipoRetorno(TipoRetorno tipoRetorno) {
-		this.tipoRetorno = tipoRetorno;
-	}
-	
 	public boolean equals(Token token) {
 //		if (getTipoRetorno() == null && token.getTipoRetorno() == null)
 //			return false;
