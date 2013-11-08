@@ -3,4 +3,8 @@ function f(b, c) = (
 		return a
 	)
 	
+function g(a) = (
+		return a
+	)
+	
 i := f(10, 20)

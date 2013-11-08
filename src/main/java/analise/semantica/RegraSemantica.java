@@ -3,6 +3,7 @@ package analise.semantica;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import utils.token.Token;
+import analise.semantica.suporte.Variavel;
 import analise.sintatica.naoterminal.ArrayDec;
 import analise.sintatica.naoterminal.Factor;
 import analise.sintatica.naoterminal.LValuePr;
@@ -33,12 +34,24 @@ public abstract class RegraSemantica extends AtributoSemantica {
 			if (!irmao.getConteudo().equals(LValuePr.codigo()))		
 				if (((Token)irmao.getConteudo()).getValor().equals(":=")) {
 					tabela.adicionaToken(token);
+					verificaDeclaracaoVariavel(token);
 					return TRUE;
 				}
 		
 		return FALSE;
 	}
 	
+	protected void verificaDeclaracaoVariavel(Token token) {
+		Variavel variavel = pesquisaVariavel(token.getValor());
+		
+		if (variavel == null) {
+			variavel = adicionaVariavel(token.getValor());
+		} else
+			variavel.incrementaContador();
+		
+		token.setReferencia(variavel.toString());		
+	}
+
 	protected void contaParametrosDeclaracaoFuncao() {
 		tabela.abreEscopo();
 		lendoFuncao = TRUE;
@@ -47,16 +60,17 @@ public abstract class RegraSemantica extends AtributoSemantica {
 		andaNaArvore();
 		
 		while (true) {
-			if (noAtual.isToken() && ((Token)noAtual.getConteudo()).isIdentificador()) {
+			if(noAtual.isToken() && ((Token)noAtual.getConteudo()).getValor().equals(")"))
+				break;
+			
+			if(noAtual.isToken() && ((Token)noAtual.getConteudo()).isIdentificador()) {
 				Token token = (Token)noAtual.getConteudo();
 				tabela.adicionaToken(token);
 				tokenFuncao.adicionaParametro();
+				verificaDeclaracaoVariavel(token);
 			}
-			
+							
 			andaNaArvore();
-			
-			if(noAtual.isToken() && ((Token)noAtual.getConteudo()).getValor().equals(")"))
-				break;
 		}		
 	}
 	

@@ -1,7 +1,11 @@
 package analise.semantica;
 
 import static java.lang.Boolean.FALSE;
+
+import java.util.ArrayList;
+
 import utils.token.Token;
+import analise.semantica.suporte.Variavel;
 import analise.semantica.suporte.TabelaDeSimbolos;
 import analise.sintatica.naoterminal.Bloco;
 import analise.sintatica.naoterminal.FuncDec;
@@ -15,6 +19,7 @@ public class Semantica extends RegraSemantica {
 		tabela = new TabelaDeSimbolos();
 		noAtual = Arvore.getRaiz().proximoSemantico();
 		noAnterior = Arvore.getRaiz();
+		variaveis = new ArrayList<Variavel>();
 	}
 	
 	public void executa() throws SemanticoException {
@@ -46,6 +51,7 @@ public class Semantica extends RegraSemantica {
 		if (tokenDeclarado != null) {
 			verificaParametrosFuncao(tokenDeclarado);
 			verificaDimensoesVetor(tokenDeclarado);
+			token.setReferencia(tokenDeclarado.getReferencia());
 			return;
 		}
 		
@@ -56,6 +62,7 @@ public class Semantica extends RegraSemantica {
 			verificaDimensoesVetor(tokenDeclarado);
 			token.marcaVariavellDeEscape();
 			tokenDeclarado.marcaVariavellDeEscape();
+			token.setReferencia(tokenDeclarado.getReferencia());
 			return;
 		}
 		
@@ -64,6 +71,7 @@ public class Semantica extends RegraSemantica {
 		
 		if (isAtribuicao(token)) {
 			verificaTipoToken(token);
+			verificaDeclaracaoVariavel(token);
 			return;
 		}
 		

@@ -17,7 +17,7 @@ public class Token {
 	private Integer parametros;
 	private Boolean escape;
 	private List<Integer> dimensoes;
-	private String identificador;
+	private String referencia;
 	
 	public Token(String valor, Integer linha, Integer coluna, String tipo) {
 		this.valor = valor;
@@ -100,11 +100,11 @@ public class Token {
 		return dimensoes.size();
 	}
 
-	public String getIdentificador() {
-		return identificador;
+	public String getReferencia() {
+		return referencia;
 	}
 
-	public void setIdentificador(String identificador) {
-		this.identificador = identificador;
+	public void setReferencia(String identificador) {
+		this.referencia = identificador;
 	}
 }

@@ -9,8 +9,8 @@ comentario
 
 i := 10
 
-function f() = (
+function f(i) = (
 	j := 0
 	i + j)
 	
-f()
+f(10)

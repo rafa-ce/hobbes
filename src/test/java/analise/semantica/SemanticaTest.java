@@ -1,7 +1,12 @@
 package analise.semantica;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
 import org.junit.Test;
 
+import analise.semantica.suporte.Variavel;
 import analise.sintatica.Sintatico;
 import analise.sintatica.SintaticoException;
 
@@ -14,6 +19,12 @@ public class SemanticaTest {
 		
 		Semantica semantico = new Semantica();
 		semantico.executa();
+		
+		List<Variavel> variaveis = semantico.getVariaveis();
+		
+		assertEquals("Variavers declaradas", 2, variaveis.size());
+		assertEquals("i2", variaveis.get(0).toString());
+		assertEquals("j2", variaveis.get(1).toString());
 	}
 	
 	@Test(expected = SemanticoException.class)
@@ -50,6 +61,9 @@ public class SemanticaTest {
 		
 		Semantica semantico = new Semantica();
 		semantico.executa();
+		
+		List<Variavel> variaveis = semantico.getVariaveis();
+		assertEquals("a1", variaveis.get(0).toString());
 	}
 	
 	@Test
@@ -77,6 +91,13 @@ public class SemanticaTest {
 		
 		Semantica semantico = new Semantica();
 		semantico.executa();
+		
+		List<Variavel> variaveis = semantico.getVariaveis();
+		
+		assertEquals(3, variaveis.size());
+		assertEquals("a1", variaveis.get(0).toString());
+		assertEquals("i1", variaveis.get(0).toString());
+		assertEquals("j1", variaveis.get(0).toString());
 	}
 	
 	@Test
