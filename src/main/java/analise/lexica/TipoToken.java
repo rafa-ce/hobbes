@@ -17,7 +17,7 @@ public class TipoToken {
 	private static final String PALAVRA = "palavra";
 	
 	private Map<Integer, String> tiposToken;
-	private List<String> palavrasChave;
+	private static List<String> palavrasChave;
 	private List<String> operadores;
 	
 	public TipoToken() {
@@ -59,7 +59,7 @@ public class TipoToken {
 	}     
 
 	private void iniciaPalavrasChave() {
-		this.palavrasChave = new ArrayList<String>();
+		palavrasChave = new ArrayList<String>();
 		palavrasChave.add("array");
 		palavrasChave.add("if");
 		palavrasChave.add("then");
@@ -82,6 +82,10 @@ public class TipoToken {
 		this.operadores = new ArrayList<String>();
 		operadores.add("and");
 		operadores.add("or");
+	}
+	
+	public static List<String> getPalavrasChave() {
+		return palavrasChave;
 	}
 	
 }

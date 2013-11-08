@@ -17,6 +17,7 @@ public class Token {
 	private Integer parametros;
 	private Boolean escape;
 	private List<Integer> dimensoes;
+	private String identificador;
 	
 	public Token(String valor, Integer linha, Integer coluna, String tipo) {
 		this.valor = valor;
@@ -75,6 +76,10 @@ public class Token {
 		escape = TRUE;
 	}
 	
+	public Boolean isVariavelDeEscape() {
+		return escape;
+	}
+	
 	public Boolean isFuncao() {
 		return parametros != null;
 	}
@@ -94,5 +99,12 @@ public class Token {
 	public Integer numeroDeDimensoes() {
 		return dimensoes.size();
 	}
-	
+
+	public String getIdentificador() {
+		return identificador;
+	}
+
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
+	}
 }

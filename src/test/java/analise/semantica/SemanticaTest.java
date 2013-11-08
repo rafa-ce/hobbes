@@ -3,6 +3,7 @@ package analise.semantica;
 import org.junit.Test;
 
 import analise.sintatica.Sintatico;
+import analise.sintatica.SintaticoException;
 
 public class SemanticaTest {
 
@@ -81,6 +82,24 @@ public class SemanticaTest {
 	@Test
 	public void semanticaVetorEmUmaExpressao() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoExpressaoVetor.txt");
+		sintatico.executa();
+		
+		Semantica semantico = new Semantica();
+		semantico.executa();
+	}
+	
+	@Test(expected = SemanticoException.class)
+	public void erroVariavelNaoDeclarada() throws Throwable {
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoWhile.txt");
+		sintatico.executa();
+		
+		Semantica semantico = new Semantica();
+		semantico.executa();
+	}
+	
+	@Test(expected = SintaticoException.class)
+	public void naoUsaPalavraChaveComoIdentificador() throws Throwable {
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoForIdentificador.txt");
 		sintatico.executa();
 		
 		Semantica semantico = new Semantica();
