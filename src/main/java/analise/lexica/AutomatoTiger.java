@@ -1,6 +1,6 @@
 package analise.lexica;
 
-import static utils.ExpressaoRegular.*;
+import static analise.lexica.utils.ExpressaoRegular.*;
 import analise.lexica.automato.Automato;
 import analise.lexica.automato.Estado;
 import analise.lexica.automato.Transicao;

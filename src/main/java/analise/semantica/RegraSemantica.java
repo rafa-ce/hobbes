@@ -2,7 +2,7 @@ package analise.semantica;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import utils.token.Token;
+import analise.lexica.token.Token;
 import analise.semantica.suporte.Variavel;
 import analise.sintatica.naoterminal.ArrayDec;
 import analise.sintatica.naoterminal.Factor;

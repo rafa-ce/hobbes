@@ -3,7 +3,7 @@ package analise.sintatica.suporte;
 import java.util.List;
 import java.util.Stack;
 
-import utils.token.Token;
+import analise.lexica.token.Token;
 import analise.sintatica.SintaticoException;
 import analise.sintatica.naoterminal.NaoTerminal;
 import analise.sintatica.naoterminal.Prog;

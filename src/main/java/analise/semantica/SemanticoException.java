@@ -1,6 +1,6 @@
 package analise.semantica;
 
-import utils.token.Token;
+import analise.lexica.token.Token;
 
 public class SemanticoException extends Exception {
 

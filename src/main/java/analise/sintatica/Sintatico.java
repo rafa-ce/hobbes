@@ -4,8 +4,8 @@ import static analise.sintatica.suporte.Pilha.iniciaPilha;
 
 import java.util.List;
 
-import utils.token.Token;
 import analise.lexica.Lexico;
+import analise.lexica.token.Token;
 import analise.sintatica.naoterminal.NaoTerminal;
 import analise.sintatica.suporte.Arvore;
 import analise.sintatica.suporte.No;

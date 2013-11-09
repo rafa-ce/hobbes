@@ -1,6 +1,6 @@
 package analise.sintatica;
 
-import utils.token.Token;
+import analise.lexica.token.Token;
 
 public class SintaticoException extends Exception {
 

@@ -1,8 +1,8 @@
 package analise.lexica;
 
 import static analise.lexica.Suporte.percorreAutomato;
+import static analise.lexica.utils.ExpressaoRegular.*;
 import static org.junit.Assert.assertEquals;
-import static utils.ExpressaoRegular.*;
 
 import org.junit.Test;
 

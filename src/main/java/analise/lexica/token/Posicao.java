@@ -1,4 +1,4 @@
-package utils.token;
+package analise.lexica.token;
 
 public class Posicao {
 	

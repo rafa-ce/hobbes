@@ -4,7 +4,7 @@ import static java.lang.Boolean.FALSE;
 
 import java.util.ArrayList;
 
-import utils.token.Token;
+import analise.lexica.token.Token;
 import analise.semantica.suporte.Variavel;
 import analise.semantica.suporte.TabelaDeSimbolos;
 import analise.sintatica.naoterminal.Bloco;

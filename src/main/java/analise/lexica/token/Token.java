@@ -1,4 +1,4 @@
-package utils.token;
+package analise.lexica.token;
 
 import static analise.lexica.TipoToken.IDENTIFICADOR;
 import static analise.lexica.TipoToken.NUMERO;

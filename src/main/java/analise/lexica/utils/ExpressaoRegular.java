@@ -1,4 +1,4 @@
-package utils;
+package analise.lexica.utils;
 
 public class ExpressaoRegular {
 	

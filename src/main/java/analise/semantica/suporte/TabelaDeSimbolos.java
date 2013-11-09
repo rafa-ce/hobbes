@@ -3,7 +3,7 @@ package analise.semantica.suporte;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.token.Token;
+import analise.lexica.token.Token;
 import analise.sintatica.suporte.No;
 
 public class TabelaDeSimbolos {
