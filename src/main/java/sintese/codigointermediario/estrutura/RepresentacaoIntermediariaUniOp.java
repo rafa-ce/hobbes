@@ -11,5 +11,10 @@ public class RepresentacaoIntermediariaUniOp extends RepresentacaoIntermediaria 
 		this.operador = operador;
 		this.arg = arg;
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 
 }

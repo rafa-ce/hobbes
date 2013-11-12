@@ -2,12 +2,15 @@ package analise.lexica.token;
 
 import static analise.lexica.TipoToken.IDENTIFICADOR;
 import static analise.lexica.TipoToken.NUMERO;
+import static analise.lexica.TipoToken.OPERADOR;
 import static analise.lexica.TipoToken.PALAVRA_CHAVE;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import analise.lexica.TipoToken;
 
 public class Token {
 	
@@ -44,6 +47,10 @@ public class Token {
 	
 	public Boolean isIdentificador() {
 		return getTipo().equals(IDENTIFICADOR);
+	}
+	
+	public Boolean isOperador() {
+		return getTipo().equals(OPERADOR);
 	}
 
 	public Boolean isNumero() {

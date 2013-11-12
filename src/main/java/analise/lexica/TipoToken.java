@@ -39,7 +39,7 @@ public class TipoToken {
 	
 	private String identificaPalavra(String valor) {
 		if (operadores.contains(valor)) {
-			return SIMBOLO;
+			return OPERADOR;
 		}
 		
 		if (palavrasChave.contains(valor)) {

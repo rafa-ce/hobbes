@@ -18,5 +18,9 @@ public class Label {
 	public void adicionaInstrucao(RepresentacaoIntermediaria instrucao) {
 		instrucoes.add(instrucao);
 	}
+	
+	public List<RepresentacaoIntermediaria> getInstrucoes() {
+		return instrucoes;
+	}
 
 }

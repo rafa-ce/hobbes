@@ -10,4 +10,9 @@ public class RepresentacaoIntermediariaCopy extends RepresentacaoIntermediaria{
 		this.origem = origem;
 	}
 	
+	@Override
+	public String toString() {
+		return destino + "=" + origem;
+	}
+	
 }

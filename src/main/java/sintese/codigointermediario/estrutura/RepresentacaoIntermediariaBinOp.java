@@ -1,6 +1,6 @@
 package sintese.codigointermediario.estrutura;
 
-public class RepresentacaoIntermediariaBinOp extends RepresentacaoIntermediaria{
+public class RepresentacaoIntermediariaBinOp extends RepresentacaoIntermediaria {
 
 	private String result;
 	private String operador;
@@ -12,6 +12,11 @@ public class RepresentacaoIntermediariaBinOp extends RepresentacaoIntermediaria{
 		this.operador = operador;
 		this.arg1 = arg1;
 		this.arg2 = arg2;
+	}
+	
+	@Override
+	public String toString() {
+		return result + "=" + arg1 + operador + arg2;
 	}
 	
 }

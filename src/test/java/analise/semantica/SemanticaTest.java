@@ -24,7 +24,7 @@ public class SemanticaTest {
 		
 		assertEquals("Variavers declaradas", 2, variaveis.size());
 		assertEquals("i2", variaveis.get(0).toString());
-		assertEquals("j2", variaveis.get(1).toString());
+		assertEquals("j3", variaveis.get(1).toString());
 	}
 	
 	@Test(expected = SemanticoException.class)
@@ -36,7 +36,7 @@ public class SemanticaTest {
 		semantico.executa();
 	}
 	
-	@Test
+	@Test(expected = SemanticoException.class)
 	public void variosEscopos() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoVariosEscopos.txt");
 		sintatico.executa();
