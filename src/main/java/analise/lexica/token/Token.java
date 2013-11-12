@@ -10,8 +10,6 @@ import static java.lang.Boolean.TRUE;
 import java.util.ArrayList;
 import java.util.List;
 
-import analise.lexica.TipoToken;
-
 public class Token {
 	
 	private String valor;
@@ -20,7 +18,8 @@ public class Token {
 	private Integer parametros;
 	private Boolean escape;
 	private List<Integer> dimensoes;
-	private String referencia;
+	private Integer referencia;
+	private String temporario;
 	
 	public Token(String valor, Integer linha, Integer coluna, String tipo) {
 		this.valor = valor;
@@ -107,11 +106,19 @@ public class Token {
 		return dimensoes.size();
 	}
 
-	public String getReferencia() {
+	public Integer getReferencia() {
 		return referencia;
 	}
 
-	public void setReferencia(String identificador) {
+	public void setReferencia(Integer identificador) {
 		this.referencia = identificador;
+	}
+
+	public String getTemporario() {
+		return temporario;
+	}
+
+	public void setTemporario(String temporario) {
+		this.temporario = temporario;
 	}
 }

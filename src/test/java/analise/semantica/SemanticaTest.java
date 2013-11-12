@@ -23,8 +23,8 @@ public class SemanticaTest {
 		List<Variavel> variaveis = semantico.getVariaveis();
 		
 		assertEquals("Variavers declaradas", 2, variaveis.size());
-		assertEquals("i2", variaveis.get(0).toString());
-		assertEquals("j3", variaveis.get(1).toString());
+		assertEquals(2, variaveis.get(0).getQuantidade().intValue());
+		assertEquals(3, variaveis.get(1).getQuantidade().intValue());
 	}
 	
 	@Test(expected = SemanticoException.class)
@@ -63,7 +63,7 @@ public class SemanticaTest {
 		semantico.executa();
 		
 		List<Variavel> variaveis = semantico.getVariaveis();
-		assertEquals("a1", variaveis.get(0).toString());
+		assertEquals(1, variaveis.get(0).getQuantidade().intValue());
 	}
 	
 	@Test

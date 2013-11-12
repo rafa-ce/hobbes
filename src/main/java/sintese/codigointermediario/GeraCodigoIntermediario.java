@@ -18,6 +18,7 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 	public GeraCodigoIntermediario() {
 		this.labels = new ArrayList<Label>();
 		this.no = Arvore.getRaiz();
+		this.temporarios = new ArrayList<Token>();
 	}
 
 	public void executa() {
@@ -39,20 +40,53 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 		List<Token> instrucao = new ArrayList<Token>();
 		
 		no = no.proximoSemantico();
+		trataTemporario((Token)no.getConteudo());
 		instrucao.add((Token)no.getConteudo());
 		no = no.proximoSemantico();
 		no = no.proximoSemantico();
 		
 		while (!no.equals(marcador)) {
 			
-			if (no.isToken())
+			if (no.isToken()) { 
+				trataTemporario((Token)no.getConteudo());
 				instrucao.add((Token)no.getConteudo());
+			}
 			
 			no = no.proximoSemantico();	
 		}
 		
 		criaInstrucao(instrucao);
 		
+	}
+
+	private void trataTemporario(Token token) {
+		if (token.isIdentificador())
+			verificaTipo(token);
+	}
+
+	public void verificaTipo(Token token) {
+		Token declarado;
+		declarado = pesquisaNaListaDeTemporarios(token);
+		
+		if (declarado == null) {
+			identificaTipoTemporario(token);
+			temporarios.add(token);
+		} else
+			token.setTemporario(declarado.getTemporario());
+	}
+
+	public void identificaTipoTemporario(Token token) {
+		if (token.isFuncao()) {
+			token.setTemporario("f" + Integer.toString(temporarios.size()));
+			return;
+		}
+		
+		if (token.isVariavelDeEscape()) { 
+			token.setTemporario("e" + Integer.toString(temporarios.size()));
+			return;
+		}
+		
+		token.setTemporario("t" + Integer.toString(temporarios.size()));
 	}
 
 	private void criaInstrucao(List<Token> instrucao) {
@@ -74,14 +108,15 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 	}
 
 	private RepresentacaoIntermediariaCopy criaCopy(List<Token> instrucao) {
-		return new RepresentacaoIntermediariaCopy(instrucao.get(0).getValor(), instrucao.get(2).getValor());
+		return new RepresentacaoIntermediariaCopy(instrucao.get(0).getTemporario(), 
+													instrucao.get(2).getValor());
 	}
 
 	private RepresentacaoIntermediariaBinOp criaBinOp(List<Token> instrucao) {
-		return new RepresentacaoIntermediariaBinOp(instrucao.get(0).getValor(), 
+		return new RepresentacaoIntermediariaBinOp(instrucao.get(0).getTemporario(), 
 													instrucao.get(3).getValor(), 
-													instrucao.get(2).getValor(), 
-													instrucao.get(4).getValor());
+													instrucao.get(2).getTemporario(), 
+													instrucao.get(4).getTemporario());
 	}
 
 }

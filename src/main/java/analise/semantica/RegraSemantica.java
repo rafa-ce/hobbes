@@ -49,7 +49,7 @@ public abstract class RegraSemantica extends AtributoSemantica {
 		} else
 			variavel.incrementaContador();
 		
-		token.setReferencia(variavel.toString());		
+		token.setReferencia(variavel.getQuantidade());		
 	}
 
 	protected void contaParametrosDeclaracaoFuncao() {

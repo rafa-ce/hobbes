@@ -30,10 +30,5 @@ public class Variavel {
 	public void incrementaContador() {
 		quantidade++;		
 	}
-	
-	@Override
-	public String toString() {
-		return getNome() + getQuantidade().toString();
-	}
 
 }
