@@ -5,8 +5,6 @@ import static java.lang.Boolean.FALSE;
 import java.util.ArrayList;
 import java.util.List;
 
-import sintese.codigointermediario.estrutura.RepresentacaoIntermediariaBinOp;
-import sintese.codigointermediario.estrutura.RepresentacaoIntermediariaCopy;
 import sintese.codigointermediario.suporte.Label;
 import analise.lexica.token.Token;
 import analise.sintatica.naoterminal.LValue;

@@ -93,5 +93,26 @@ public class CodigoIntermediarioTest {
 		}
 		
 	}
+	
+	@Test
+	public void geraCodigoExpressaoComParenteses() throws Throwable {
+		
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoCIExpressaoComParenteses.txt");
+		sintatico.executa();
+		
+		Semantica semantico = new Semantica();
+		semantico.executa();
+		
+		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
+		
+		ci.executa();
+		
+		for (Label label : ci.getLabels()) {
+			for (RepresentacaoIntermediaria ri : label.getInstrucoes()) {
+				System.out.println(ri.toString());
+			}
+		}
+		
+	}
 
 }
