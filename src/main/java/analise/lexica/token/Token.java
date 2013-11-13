@@ -21,6 +21,10 @@ public class Token {
 	private Integer referencia;
 	private String temporario;
 	
+	
+	
+	public Token() { }
+
 	public Token(String valor, Integer linha, Integer coluna, String tipo) {
 		this.valor = valor;
 		this.tipo = tipo;
@@ -30,6 +34,11 @@ public class Token {
 
 	public String getValor() {
 		return valor;
+	}
+	
+	public void setAtributosDoTemporario() {
+		tipo = IDENTIFICADOR;
+		valor = getTemporario();
 	}
 
 	public String getTipo() {

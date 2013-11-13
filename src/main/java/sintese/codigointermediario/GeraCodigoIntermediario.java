@@ -100,23 +100,10 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 		}
 		
 		if (binOp)
-			labels.get(0).adicionaInstrucao(criaBinOp(instrucao));
+			GeraCodigoIntermediarioBinOp.trataBinOp(instrucao, temporarios, labels.get(0));
 		else
-			labels.get(0).adicionaInstrucao(criaCopy(instrucao));
+			labels.get(0).adicionaInstrucao(GeraCodigoIntermediarioCopy.criaCopy(instrucao));
 		
 		binOp = FALSE;
 	}
-
-	private RepresentacaoIntermediariaCopy criaCopy(List<Token> instrucao) {
-		return new RepresentacaoIntermediariaCopy(instrucao.get(0).getTemporario(), 
-													instrucao.get(2).getValor());
-	}
-
-	private RepresentacaoIntermediariaBinOp criaBinOp(List<Token> instrucao) {
-		return new RepresentacaoIntermediariaBinOp(instrucao.get(0).getTemporario(), 
-													instrucao.get(3).getValor(), 
-													instrucao.get(2).getTemporario(), 
-													instrucao.get(4).getTemporario());
-	}
-
 }
