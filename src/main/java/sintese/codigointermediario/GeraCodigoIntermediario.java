@@ -31,6 +31,7 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 //			if (no.getConteudo().equals(Bloco.codigo()))
 //				executa();
 			
+			
 			if (no.getConteudo().equals(LValue.codigo()))
 				trataLValue();
 			
