@@ -16,7 +16,7 @@ public class RepresentacaoIntermediariaBinOp extends RepresentacaoIntermediaria 
 	
 	@Override
 	public String toString() {
-		return result + "=" + arg1 + operador + arg2;
+		return "binop(" + operador + ", " + result + ", " + arg1 + ", " + arg2 + ")";
 	}
 	
 }

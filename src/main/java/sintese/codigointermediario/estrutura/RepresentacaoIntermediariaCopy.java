@@ -12,7 +12,7 @@ public class RepresentacaoIntermediariaCopy extends RepresentacaoIntermediaria{
 	
 	@Override
 	public String toString() {
-		return destino + "=" + origem;
+		return "cp(" + destino + ", " + origem + ")";
 	}
 	
 }
