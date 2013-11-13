@@ -42,6 +42,7 @@ public abstract class NaoTerminal {
 		naoTerminais.put(Prog.codigo(), Prog.getInstance());
 		naoTerminais.put(Lista.codigo(), Lista.getInstance());
 		naoTerminais.put(Item.codigo(), Item.getInstance());
+		naoTerminais.put(Else.codigo(), Else.getInstance());
 		naoTerminais.put(Exp.codigo(), Exp.getInstance());
 		naoTerminais.put(ExpOr.codigo(), ExpOr.getInstance());
 		naoTerminais.put(ExpAnd.codigo(), ExpAnd.getInstance());
@@ -55,7 +56,7 @@ public abstract class NaoTerminal {
 		naoTerminais.put(Factor.codigo(), Factor.getInstance());
 		naoTerminais.put(Bloco.codigo(), Bloco.getInstance());
 		naoTerminais.put(Laco.codigo(), Laco.getInstance());
-		naoTerminais.put(IfElse.codigo(), IfElse.getInstance());
+		naoTerminais.put(If.codigo(), If.getInstance());
 		naoTerminais.put(LValue.codigo(), LValue.getInstance());
 		naoTerminais.put(LValuePr.codigo(), LValuePr.getInstance());
 		naoTerminais.put(Outro.codigo(), Outro.getInstance());
@@ -78,6 +79,7 @@ public abstract class NaoTerminal {
 				Prog.codigo(),
 				Lista.codigo(),
 				Item.codigo(),
+				Else.codigo(),
 				Exp.codigo(),
 				ExpOr.codigo(),
 				ExpAnd.codigo(),
@@ -91,7 +93,7 @@ public abstract class NaoTerminal {
 				Factor.codigo(),
 				Bloco.codigo(),
 				Laco.codigo(),
-				IfElse.codigo(),
+				If.codigo(),
 				LValue.codigo(),
 				LValuePr.codigo(),
 				Outro.codigo(),

@@ -5,35 +5,40 @@ import static analise.lexica.TipoToken.NUMERO;
 
 import java.util.Arrays;
 
+public class Else extends NaoTerminal {
 
-public class IfElse extends NaoTerminal {
+	private static Else instance;
 	
-	private static IfElse instance;
-	
-	public static IfElse getInstance() {
+	public static Else getInstance() {
 		if (instance == null)
-			instance = new IfElse();
+			instance = new Else();
 		
 		return instance;
 	}
-
+	
 	@Override
 	protected void inicializaProducoes() {
+		producoes.put("else", Arrays.asList("else", "<Exp>"));
+		
 		producoes.put(IDENTIFICADOR, Arrays.asList("ε"));
-		producoes.put("[", Arrays.asList("ε"));
+		producoes.put("import", Arrays.asList("ε"));
 		producoes.put("print", Arrays.asList("ε"));
 		producoes.put("if", Arrays.asList("ε"));
-		producoes.put("else", Arrays.asList("else", "<Exp>"));
 		producoes.put("for", Arrays.asList("ε"));
+		producoes.put("to", Arrays.asList("ε"));
+		producoes.put("do", Arrays.asList("ε"));
 		producoes.put("while", Arrays.asList("ε"));
 		producoes.put("break", Arrays.asList("ε"));
 		producoes.put("return", Arrays.asList("ε"));
 		producoes.put("(", Arrays.asList("ε"));
+		producoes.put(")", Arrays.asList("ε"));
 		producoes.put(NUMERO, Arrays.asList("ε"));
+		producoes.put("function", Arrays.asList("ε"));
 		producoes.put("$", Arrays.asList("ε"));
 	}
 
 	public static String codigo() {
-		return "<IfElse>";
+		return "<Else>";
 	}
+
 }

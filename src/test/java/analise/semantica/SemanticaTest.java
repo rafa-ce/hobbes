@@ -126,4 +126,13 @@ public class SemanticaTest {
 		Semantica semantico = new Semantica();
 		semantico.executa();
 	}
+	
+	@Test(expected = SemanticoException.class)
+	public void elseNaoVeVariavelDoIf() throws Throwable {
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoIfElseSemantico.txt");
+		sintatico.executa();
+		
+		Semantica semantico = new Semantica();
+		semantico.executa();
+	}
 }

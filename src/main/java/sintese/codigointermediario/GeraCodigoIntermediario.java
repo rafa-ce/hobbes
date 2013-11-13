@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sintese.codigointermediario.suporte.Label;
+import sintese.codigointermediario.tradutor.GeraCodigoIntermediarioBinOp;
+import sintese.codigointermediario.tradutor.GeraCodigoIntermediarioCopy;
 import analise.lexica.token.Token;
+import analise.sintatica.naoterminal.Bloco;
 import analise.sintatica.naoterminal.LValue;
 import analise.sintatica.suporte.Arvore;
 import analise.sintatica.suporte.No;
@@ -24,6 +27,9 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 		adicionaLabel();
 		
 		while (no != null)  {
+			
+//			if (no.getConteudo().equals(Bloco.codigo()))
+//				executa();
 			
 			if (no.getConteudo().equals(LValue.codigo()))
 				trataLValue();

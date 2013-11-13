@@ -15,7 +15,7 @@ public class Bloco extends NaoTerminal {
 	
 	@Override
 	protected void inicializaProducoes() {
-		producoes.put("if", Arrays.asList("if", "<Exp>", "then", "<Exp>", "<Else>"));
+		producoes.put("if", Arrays.asList(If.codigo()));
 		producoes.put("for", Arrays.asList("<Laco>"));
 		producoes.put("while", Arrays.asList("<Laco>"));
 	}

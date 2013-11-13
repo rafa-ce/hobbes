@@ -1,4 +1,4 @@
-package sintese.codigointermediario;
+package sintese.codigointermediario.tradutor;
 
 import java.util.List;
 

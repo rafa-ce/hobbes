@@ -33,13 +33,21 @@ public class Semantica extends RegraSemantica {
 			
 			if (noAtual.getConteudo().equals(Bloco.codigo()))
 				tabela.defineEscopo(noAnterior, noAtual);
-				
+			
+			
+			
 			if (noAtual.getConteudo().equals(FuncDec.codigo()) && lendoFuncao) {
 				tabela.defineEscopo(noAnterior, noAtual);
 				lendoFuncao = FALSE;
 			}
-			if (noAtual.isToken() && ((Token)noAtual.getConteudo()).isIdentificador())
-				trataToken((Token)noAtual.getConteudo());
+			if (noAtual.isToken()) {
+				if (((Token)noAtual.getConteudo()).getValor().equals("else")) {
+					tabela.fechaEscopo();
+					tabela.abreEscopo();
+				}
+				if (((Token)noAtual.getConteudo()).isIdentificador())
+					trataToken((Token)noAtual.getConteudo());
+			}
 			
 			andaNaArvore();
 		}

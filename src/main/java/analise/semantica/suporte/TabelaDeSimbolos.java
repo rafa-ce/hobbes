@@ -38,7 +38,7 @@ public class TabelaDeSimbolos {
 			fechaEscopo();
 	}
 
-	private void fechaEscopo() {
+	public void fechaEscopo() {
 		escopos.remove(ultimoEscopo());
 	}
 

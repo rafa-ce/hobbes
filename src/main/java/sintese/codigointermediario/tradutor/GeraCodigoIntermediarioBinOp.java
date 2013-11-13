@@ -1,6 +1,4 @@
-package sintese.codigointermediario;
-
-import static java.lang.Boolean.FALSE;
+package sintese.codigointermediario.tradutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,7 @@ import analise.lexica.token.Token;
 public class GeraCodigoIntermediarioBinOp {
 	
 	public static void trataBinOp(List<Token> instrucao, List<Token> temporarios, Label label) {
-		instrucao = verificaOperacoesEntreParenteses(instrucao, temporarios, label);
+//		instrucao = verificaOperacoesEntreParenteses(instrucao, temporarios, label);
 		instrucao = realizaDivisaoMultiplicacao(instrucao, temporarios, label);
 		instrucao = realizaSomaSubtracao(instrucao, temporarios, label);
 		label.adicionaInstrucao(criaBinOp(instrucao));
@@ -20,7 +18,6 @@ public class GeraCodigoIntermediarioBinOp {
 	
 	private static List<Token> verificaOperacoesEntreParenteses(List<Token> instrucao, List<Token> temporarios, Label label) {
 		Integer i = 0;
-		Boolean tem = FALSE;
 		List<Token> dentro = new ArrayList<Token>();
 		
 		while (i < instrucao.size()) {
@@ -29,10 +26,8 @@ public class GeraCodigoIntermediarioBinOp {
 			if (token.getValor().equals(")"))
 				break;
 			
-			if (token.getValor().equals("(")) {
-				tem = Boolean.TRUE;
+			if (token.getValor().equals("("))
 				verificaOperacoesEntreParenteses(instrucao.subList(i + 1, instrucao.size()), temporarios, label);				
-			}
 			
 			dentro.add(token);
 			
@@ -41,7 +36,6 @@ public class GeraCodigoIntermediarioBinOp {
 		
 		dentro = realizaDivisaoMultiplicacao(dentro, temporarios, label);
 		dentro = realizaSomaSubtracao(dentro, temporarios, label);
-		
 			
 		return instrucao;
 	}

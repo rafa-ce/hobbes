@@ -3,3 +3,5 @@ b := 2
 
 if a > b then
 	a := 0
+else
+	b := 0
