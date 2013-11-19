@@ -10,34 +10,58 @@ import analise.lexica.token.Token;
 public class GeraCodigoIntermediarioBinOp {
 	
 	public static void trataBinOp(List<Token> instrucao, List<Token> temporarios, Label label) {
-//		instrucao = verificaOperacoesEntreParenteses(instrucao, temporarios, label);
+		instrucao = verificaOperacoesEntreParenteses(instrucao, temporarios, label);
 		instrucao = realizaDivisaoMultiplicacao(instrucao, temporarios, label);
 		instrucao = realizaSomaSubtracao(instrucao, temporarios, label);
-		label.adicionaInstrucao(criaBinOp(instrucao));
+		instrucao = realizaOperacoesLogicas(instrucao, temporarios, label);
+		
+		label.adicionaInstrucao(GeraCodigoIntermediarioCopy.criaCopy(instrucao));
 	}
 	
 	private static List<Token> verificaOperacoesEntreParenteses(List<Token> instrucao, List<Token> temporarios, Label label) {
-		Integer i = 0;
 		List<Token> dentro = new ArrayList<Token>();
+		Boolean par = Boolean.FALSE;
 		
-		while (i < instrucao.size()) {
-			Token token = instrucao.get(i);
+		while (!instrucao.isEmpty()) {
+			Token token = instrucao.get(0);
 			
-			if (token.getValor().equals(")"))
+			if (token.getValor().equals(")")) {
+				instrucao.remove(0);
+				par = Boolean.TRUE;
 				break;
+			}
 			
-			if (token.getValor().equals("("))
-				verificaOperacoesEntreParenteses(instrucao.subList(i + 1, instrucao.size()), temporarios, label);				
+			if (token.getValor().equals("(")) {
+				List<Token> result = verificaOperacoesEntreParenteses(instrucao.subList(1, instrucao.size()), temporarios, label);
+				dentro.add(result.get(0));
+			}
 			
-			dentro.add(token);
+			if (!token.getValor().equals("("))
+				dentro.add(token);
 			
-			i++;
-		}
+			instrucao.remove(0);
+			}
 		
-		dentro = realizaDivisaoMultiplicacao(dentro, temporarios, label);
-		dentro = realizaSomaSubtracao(dentro, temporarios, label);
+		if (par) {
+			dentro.add(0, criaTemporario(temporarios));
+			dentro.add(1, criaTokenAtribuicao());
 			
-		return instrucao;
+			dentro = realizaDivisaoMultiplicacao(dentro, temporarios, label);
+			dentro = realizaSomaSubtracao(dentro, temporarios, label);
+			dentro = realizaOperacoesLogicas(dentro, temporarios, label);
+			
+			label.adicionaInstrucao(GeraCodigoIntermediarioCopy.criaCopy(dentro));
+		}
+				
+		
+		return dentro;
+	}
+
+	public static Token criaTokenAtribuicao() {
+		Token tokenAtribuicao = new Token();
+		tokenAtribuicao.setValor(":=");
+		
+		return tokenAtribuicao;
 	}
 
 	private static List<Token> realizaSomaSubtracao(List<Token> instrucao,	List<Token> temporarios, Label label) {
@@ -47,20 +71,21 @@ public class GeraCodigoIntermediarioBinOp {
 	private static List<Token> realizaDivisaoMultiplicacao(List<Token> instrucao, List<Token> temporarios, Label label) {
 		return percorreInstrucoesDadoOperadores(instrucao, temporarios, label, "/", "*");			
 	}
+	
+	private static List<Token> realizaOperacoesLogicas(List<Token> instrucao, List<Token> temporarios, Label label) {
+		return percorreInstrucoesDadoOperadores(instrucao, temporarios, label, "<", ">");	
+	}
 
 	public static List<Token> percorreInstrucoesDadoOperadores(List<Token> instrucao, List<Token> temporarios, Label label, String op1, String op2) {
 		Integer i = 0;
 		
-		while (instrucao.size() > 5 && i < instrucao.size()) {
+		while (instrucao.size() > 3 && i < instrucao.size()) {
 			Token token = instrucao.get(i);
-			if (token.isOperador() && (token.getValor().equals(op1) || token.getValor().equals(op2))) {
+			if (token.getTipo() != null && token.isOperador() && (token.getValor().equals(op1) || token.getValor().equals(op2))) {
 				List<Token> instrucaoAux = new ArrayList<Token>();
 				
-				Token tokenTemporario = new Token();
-				temporarios.add(tokenTemporario);
+				Token tokenTemporario = criaTemporario(temporarios);
 				
-				tokenTemporario.setTemporario("t" + Integer.toString(temporarios.size()));
-				tokenTemporario.setAtributosDoTemporario();
 				instrucaoAux.add(tokenTemporario);
 				instrucaoAux.add(null);
 				instrucaoAux.add(instrucao.get(i - 1));
@@ -80,6 +105,15 @@ public class GeraCodigoIntermediarioBinOp {
 		}
 				
 		return instrucao;
+	}
+
+	public static Token criaTemporario(List<Token> temporarios) {
+		Token tokenTemporario = new Token();
+		temporarios.add(tokenTemporario);
+		
+		tokenTemporario.setTemporario("t" + Integer.toString(temporarios.size() - 1));
+		tokenTemporario.setAtributosDoTemporario();
+		return tokenTemporario;
 	}
 
 	private static RepresentacaoIntermediariaBinOp criaBinOp(List<Token> instrucao) {

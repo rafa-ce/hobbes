@@ -36,6 +36,10 @@ public class Token {
 		return valor;
 	}
 	
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+	
 	public void setAtributosDoTemporario() {
 		tipo = IDENTIFICADOR;
 		valor = getTemporario();
@@ -71,7 +75,8 @@ public class Token {
 		
 		if (getValor().equals(token.getValor()))
 			if (getTipo().equals(token.getTipo()))
-				return true;
+				if (!getPosicao().getLinha().equals(token.getPosicao().getLinha()))
+					return true;
 		
 		return false;
 	}

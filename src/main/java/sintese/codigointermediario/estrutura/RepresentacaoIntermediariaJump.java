@@ -9,4 +9,9 @@ public class RepresentacaoIntermediariaJump extends RepresentacaoIntermediaria{
 		this.lugar = lugar;
 	}
 	
+	@Override
+	public String toString() {
+		return "goto " + lugar;
+	}
+	
 }

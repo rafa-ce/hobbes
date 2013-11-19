@@ -1,5 +1,7 @@
 package analise.sintatica.suporte;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import analise.sintatica.naoterminal.Prog;
@@ -42,5 +44,20 @@ public class Arvore {
 		while (no != null)  {
 			no = no.proximo();
 		}
+	}
+
+	public static void escreveNoArquivo(FileWriter fw) throws IOException {
+		No no = getRaiz();
+		
+		while (no != null) {
+			for (int i = 0; i < no.getProfundidade(); i++) {
+				fw.write(" - ");
+			}
+			
+			fw.write(no.printConteudo() + "\n");
+			
+			no = no.proximo();
+		}
+		
 	}
 }

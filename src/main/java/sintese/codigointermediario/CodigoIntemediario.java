@@ -9,23 +9,33 @@ import analise.sintatica.suporte.No;
 public abstract class CodigoIntemediario {
 	
 	protected List<Label> labels;
-	protected No no;
-	protected List<Token> temporarios; 
+	protected No noAtual;
+	protected No noAnterior;
+	protected List<Token> temporarios;
+	
+	public void andaNaArvore() {
+		noAnterior = noAtual;
+		noAtual = noAtual.proximoSemantico();
+	}
 	
 	public List<Label> getLabels() {
 		return labels;
 	}
 
 	public No getNo() {
-		return no;
+		return noAtual;
 	}
 	
 	protected boolean temFilhos() {
-		return no.getFilhos() != null;
+		return noAtual.getFilhos() != null;
 	}
 	
 	protected void adicionaLabel() {
 		labels.add(new Label("L" + Integer.toString(labels.size())));
+	}
+	
+	protected Label labelAtual() {
+		return labels.get(labels.size() - 1);
 	}
 	
 	protected Token pesquisaNaListaDeTemporarios(Token token) {
