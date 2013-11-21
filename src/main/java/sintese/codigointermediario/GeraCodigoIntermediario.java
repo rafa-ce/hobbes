@@ -8,6 +8,7 @@ import java.util.List;
 import sintese.codigointermediario.estrutura.RepresentacaoIntermediaria;
 import sintese.codigointermediario.suporte.Label;
 import sintese.codigointermediario.tradutor.GeraCodigoIntermediarioBinOp;
+import sintese.codigointermediario.tradutor.GeraCodigoIntermediarioCJump;
 import sintese.codigointermediario.tradutor.GeraCodigoIntermediarioCopy;
 import sintese.codigointermediario.tradutor.GeraCodigoIntermediarioJump;
 import analise.lexica.token.Token;
@@ -24,8 +25,7 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 		this.temporarios = new ArrayList<Token>();
 	}
 
-	public void executa() {
-		
+	public void executa(Integer contador) {
 		List<RepresentacaoIntermediaria> buffer = new ArrayList<RepresentacaoIntermediaria>();
 		
 		adicionaLabel();
@@ -34,34 +34,58 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 			
 			if (noAtual.getConteudo().equals(Bloco.codigo())) {
 				if (noAnterior.equals(noAtual.getPai()))
-					trataBloco();
+					trataBloco(buffer, contador);
 				else
-					return;				
+					break;				
 			}
 			
-			if (noAtual.getConteudo().equals(LValue.codigo()))
-				trataLValue();
+			if (noAtual != null && noAtual.getConteudo().equals(LValue.codigo()))
+				trataLValue(buffer);
 			
+			if (noAtual != null &&  noAtual.isToken())
+				trata((Token) noAtual.getConteudo(), buffer, contador);
+			
+			if (noAtual != null)
+				andaNaArvore();
+		}
+		
+		gravaNaLabel(buffer, contador);
+	}
+
+	private void trata(Token token, List<RepresentacaoIntermediaria> buffer, Integer contador) {
+		if (token.getValor().equals("then"))
+			GeraCodigoIntermediarioCJump.geraCJump(Integer.toString(labels.size()), buffer);
+		
+		if (token.getValor().equals("else")) {
 			andaNaArvore();
+			executa(contador + 1);
+		}
+		
+	}
+
+	private void gravaNaLabel(List<RepresentacaoIntermediaria> buffer, Integer contador) {
+		for (RepresentacaoIntermediaria instrucao : buffer) {
+			labels.get(contador).adicionaInstrucao(instrucao);
 		}
 	}
 
-	private void trataBloco() {
+	private void trataBloco(List<RepresentacaoIntermediaria> buffer, Integer contador) {
 		No filho = noAtual.getFilhos().get(0);
 		No neto = filho.getFilhos().get(0);
 		
 		if (((Token)neto.getConteudo()).getValor().equals("if"))
-			GeraCodigoIntermediarioJump.geraJump(Integer.toString(labels.size()), labelAtual());
+			GeraCodigoIntermediarioJump.geraJump(Integer.toString(labels.size()), buffer);
 			
 //		if (((Token)neto.getConteudo()).getValor().equals("for"))
 //			
-//		if (((Token)neto.getConteudo()).getValor().equals("while"))
+		if (((Token)neto.getConteudo()).getValor().equals("while"))
+			GeraCodigoIntermediarioJump.geraJump(Integer.toString(labels.size()), buffer);
 		
 		andaNaArvore();
-		executa();
+		executa(contador + 1);
 	}
 
-	private void trataLValue() {
+	private void trataLValue(List<RepresentacaoIntermediaria> buffer) {
 		No marcador = noAtual;
 		
 		List<Token> instrucao = new ArrayList<Token>();
@@ -77,8 +101,7 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 		else
 			instrucao = trataAtribuicao(marcador, instrucao);
 		
-		criaInstrucao(instrucao);
-		
+		criaInstrucao(instrucao, buffer);
 	}
 
 	public List<Token> trataAtribuicao(No marcador, List<Token> instrucao) {
@@ -158,7 +181,7 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 		token.setTemporario("t" + Integer.toString(temporarios.size()));
 	}
 
-	private void criaInstrucao(List<Token> instrucao) {
+	private void criaInstrucao(List<Token> instrucao, List<RepresentacaoIntermediaria> buffer) {
 		Boolean binOp = FALSE;
 		
 		for (Token token : instrucao) {
@@ -169,9 +192,9 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 		}
 		
 		if (binOp)
-			GeraCodigoIntermediarioBinOp.trataBinOp(instrucao, temporarios, labelAtual());
+			GeraCodigoIntermediarioBinOp.trataBinOp(instrucao, temporarios, buffer);
 		else
-			labelAtual().adicionaInstrucao(GeraCodigoIntermediarioCopy.criaCopy(instrucao));
+			buffer.add(GeraCodigoIntermediarioCopy.criaCopy(instrucao));
 		
 		binOp = FALSE;
 	}

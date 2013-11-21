@@ -26,7 +26,7 @@ public class SelecaoDeInstrucaoTest {
 			semantico.executa();
 			
 			GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
-			ci.executa();
+			ci.executa(0);
 			
 			assertEquals(1, ci.getLabels().size());
 			
@@ -49,7 +49,7 @@ public class SelecaoDeInstrucaoTest {
 		semantico.executa();
 		
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
-		ci.executa();
+		ci.executa(0);
 		
 		SelecaoDeInstrucao si = new SelecaoDeInstrucao(ci);
 		si.executa();
@@ -70,7 +70,7 @@ public class SelecaoDeInstrucaoTest {
 		semantico.executa();
 		
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
-		ci.executa();
+		ci.executa(0);
 		
 		SelecaoDeInstrucao si = new SelecaoDeInstrucao(ci);
 		si.executa();

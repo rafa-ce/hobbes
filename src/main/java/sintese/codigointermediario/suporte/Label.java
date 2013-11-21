@@ -22,5 +22,9 @@ public class Label {
 	public List<RepresentacaoIntermediaria> getInstrucoes() {
 		return instrucoes;
 	}
+	
+	public String getNome() {
+		return nome;
+	}
 
 }

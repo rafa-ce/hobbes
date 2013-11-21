@@ -3,22 +3,22 @@ package sintese.codigointermediario.tradutor;
 import java.util.ArrayList;
 import java.util.List;
 
+import sintese.codigointermediario.estrutura.RepresentacaoIntermediaria;
 import sintese.codigointermediario.estrutura.RepresentacaoIntermediariaBinOp;
-import sintese.codigointermediario.suporte.Label;
 import analise.lexica.token.Token;
 
 public class GeraCodigoIntermediarioBinOp {
 	
-	public static void trataBinOp(List<Token> instrucao, List<Token> temporarios, Label label) {
-		instrucao = verificaOperacoesEntreParenteses(instrucao, temporarios, label);
-		instrucao = realizaDivisaoMultiplicacao(instrucao, temporarios, label);
-		instrucao = realizaSomaSubtracao(instrucao, temporarios, label);
-		instrucao = realizaOperacoesLogicas(instrucao, temporarios, label);
+	public static void trataBinOp(List<Token> instrucao, List<Token> temporarios, List<RepresentacaoIntermediaria> buffer) {
+		instrucao = verificaOperacoesEntreParenteses(instrucao, temporarios, buffer);
+		instrucao = realizaDivisaoMultiplicacao(instrucao, temporarios, buffer);
+		instrucao = realizaSomaSubtracao(instrucao, temporarios, buffer);
+		instrucao = realizaOperacoesLogicas(instrucao, temporarios, buffer);
 		
-		label.adicionaInstrucao(GeraCodigoIntermediarioCopy.criaCopy(instrucao));
+		buffer.add(GeraCodigoIntermediarioCopy.criaCopy(instrucao));
 	}
 	
-	private static List<Token> verificaOperacoesEntreParenteses(List<Token> instrucao, List<Token> temporarios, Label label) {
+	private static List<Token> verificaOperacoesEntreParenteses(List<Token> instrucao, List<Token> temporarios, List<RepresentacaoIntermediaria> buffer) {
 		List<Token> dentro = new ArrayList<Token>();
 		Boolean par = Boolean.FALSE;
 		
@@ -32,7 +32,7 @@ public class GeraCodigoIntermediarioBinOp {
 			}
 			
 			if (token.getValor().equals("(")) {
-				List<Token> result = verificaOperacoesEntreParenteses(instrucao.subList(1, instrucao.size()), temporarios, label);
+				List<Token> result = verificaOperacoesEntreParenteses(instrucao.subList(1, instrucao.size()), temporarios, buffer);
 				dentro.add(result.get(0));
 			}
 			
@@ -46,11 +46,11 @@ public class GeraCodigoIntermediarioBinOp {
 			dentro.add(0, criaTemporario(temporarios));
 			dentro.add(1, criaTokenAtribuicao());
 			
-			dentro = realizaDivisaoMultiplicacao(dentro, temporarios, label);
-			dentro = realizaSomaSubtracao(dentro, temporarios, label);
-			dentro = realizaOperacoesLogicas(dentro, temporarios, label);
+			dentro = realizaDivisaoMultiplicacao(dentro, temporarios, buffer);
+			dentro = realizaSomaSubtracao(dentro, temporarios, buffer);
+			dentro = realizaOperacoesLogicas(dentro, temporarios, buffer);
 			
-			label.adicionaInstrucao(GeraCodigoIntermediarioCopy.criaCopy(dentro));
+			buffer.add(GeraCodigoIntermediarioCopy.criaCopy(dentro));
 		}
 				
 		
@@ -64,19 +64,19 @@ public class GeraCodigoIntermediarioBinOp {
 		return tokenAtribuicao;
 	}
 
-	private static List<Token> realizaSomaSubtracao(List<Token> instrucao,	List<Token> temporarios, Label label) {
-		return percorreInstrucoesDadoOperadores(instrucao, temporarios, label, "+", "-");	
+	private static List<Token> realizaSomaSubtracao(List<Token> instrucao,	List<Token> temporarios, List<RepresentacaoIntermediaria> buffer) {
+		return percorreInstrucoesDadoOperadores(instrucao, temporarios, buffer, "+", "-");	
 	}
 
-	private static List<Token> realizaDivisaoMultiplicacao(List<Token> instrucao, List<Token> temporarios, Label label) {
-		return percorreInstrucoesDadoOperadores(instrucao, temporarios, label, "/", "*");			
+	private static List<Token> realizaDivisaoMultiplicacao(List<Token> instrucao, List<Token> temporarios, List<RepresentacaoIntermediaria> buffer) {
+		return percorreInstrucoesDadoOperadores(instrucao, temporarios, buffer, "/", "*");			
 	}
 	
-	private static List<Token> realizaOperacoesLogicas(List<Token> instrucao, List<Token> temporarios, Label label) {
-		return percorreInstrucoesDadoOperadores(instrucao, temporarios, label, "<", ">");	
+	private static List<Token> realizaOperacoesLogicas(List<Token> instrucao, List<Token> temporarios, List<RepresentacaoIntermediaria> buffer) {
+		return percorreInstrucoesDadoOperadores(instrucao, temporarios, buffer, "<", ">");	
 	}
 
-	public static List<Token> percorreInstrucoesDadoOperadores(List<Token> instrucao, List<Token> temporarios, Label label, String op1, String op2) {
+	public static List<Token> percorreInstrucoesDadoOperadores(List<Token> instrucao, List<Token> temporarios, List<RepresentacaoIntermediaria> buffer, String op1, String op2) {
 		Integer i = 0;
 		
 		while (instrucao.size() > 3 && i < instrucao.size()) {
@@ -92,7 +92,7 @@ public class GeraCodigoIntermediarioBinOp {
 				instrucaoAux.add(instrucao.get(i));
 				instrucaoAux.add(instrucao.get(i + 1));
 				
-				label.adicionaInstrucao(criaBinOp(instrucaoAux));
+				buffer.add(criaBinOp(instrucaoAux));
 				
 				instrucao.set(i, tokenTemporario);
 				instrucao.remove(i + 1);

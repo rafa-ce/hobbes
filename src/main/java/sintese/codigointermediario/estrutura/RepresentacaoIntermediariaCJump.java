@@ -11,4 +11,9 @@ public class RepresentacaoIntermediariaCJump extends RepresentacaoIntermediaria{
 		this.lugar = lugar;
 	}
 	
+	@Override
+	public String toString() {
+		return "if " + condicao + " goto " + lugar;
+	}
+	
 }

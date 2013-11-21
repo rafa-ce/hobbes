@@ -13,7 +13,7 @@ public class Sintese {
 
 	public static void executa() throws IOException {
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
-		ci.executa();
+		ci.executa(0);
 		
 		escreveArquivoCodigoIntermediario(ci);
 		

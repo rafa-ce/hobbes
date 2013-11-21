@@ -1,16 +1,13 @@
 package sintese.codigointermediario.tradutor;
 
+import java.util.List;
+
+import sintese.codigointermediario.estrutura.RepresentacaoIntermediaria;
 import sintese.codigointermediario.estrutura.RepresentacaoIntermediariaJump;
-import sintese.codigointermediario.suporte.Label;
-
-
 
 public class GeraCodigoIntermediarioJump {
 
-	public static void geraJump(String lugar, Label label) {
-		label.adicionaInstrucao(new RepresentacaoIntermediariaJump("L" + lugar));
+	public static void geraJump(String lugar, List<RepresentacaoIntermediaria> buffer) {
+		buffer.add(new RepresentacaoIntermediariaJump("L" + lugar));
 	}
-	
-	
-
 }

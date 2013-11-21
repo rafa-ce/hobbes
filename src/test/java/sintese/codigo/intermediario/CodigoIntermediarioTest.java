@@ -28,7 +28,7 @@ public class CodigoIntermediarioTest {
 		
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
 		
-		ci.executa();
+		ci.executa(0);
 		
 		assertEquals(1, ci.getLabels().size());
 		
@@ -48,7 +48,7 @@ public class CodigoIntermediarioTest {
 		
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
 		
-		ci.executa();
+		ci.executa(0);
 		
 		List<String> esperado = Arrays.asList("cp(t0, 0)", "cp(t1, 1)", "cp(t2, 2)",
 					"binop(+, t4, t0, t1)", "binop(-, t5, t4, t2)",
@@ -67,7 +67,7 @@ public class CodigoIntermediarioTest {
 		
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
 		
-		ci.executa();
+		ci.executa(0);
 		
 		List<String> esperado = Arrays.asList("cp(t0, 1)", "cp(t1, 2)", "cp(t2, 3)",	"binop(*, t4, t0, t1)",
 				"binop(/, t5, t2, 10)", "binop(+, t6, t4, 5)",
@@ -87,7 +87,7 @@ public class CodigoIntermediarioTest {
 		
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
 		
-		ci.executa();
+		ci.executa(0);
 		
 		for (Label label : ci.getLabels()) {
 			for (RepresentacaoIntermediaria ri : label.getInstrucoes()) {
@@ -108,7 +108,7 @@ public class CodigoIntermediarioTest {
 		
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
 		
-		ci.executa();
+		ci.executa(0);
 		
 		List<String> esperado = Arrays.asList("cp(t0, 0)","cp(t1, 1)","cp(t2, 2)",
 				"binop(-, t5, t1, t2)","cp(t4, t5)",
@@ -121,7 +121,6 @@ public class CodigoIntermediarioTest {
 	}
 	
 	@Test
-	@Ignore
 	public void geraCodigoIntermediarioWhile() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoWhileCi.txt");
 		sintatico.executa();
@@ -131,7 +130,7 @@ public class CodigoIntermediarioTest {
 		
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
 		
-		ci.executa();
+		ci.executa(0);
 		
 		for (Label label : ci.getLabels()) {
 			for (RepresentacaoIntermediaria ri : label.getInstrucoes()) {
@@ -139,11 +138,9 @@ public class CodigoIntermediarioTest {
 			}
 		}
 		
-		Assert.fail();
 	}
 	
 	@Test
-	@Ignore
 	public void geraCodigoIntermediarioIf() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoIf.txt");
 		sintatico.executa();
@@ -153,15 +150,16 @@ public class CodigoIntermediarioTest {
 		
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
 		
-		ci.executa();
+		ci.executa(0);
 		
 		for (Label label : ci.getLabels()) {
+			System.out.println(label.getNome());
 			for (RepresentacaoIntermediaria ri : label.getInstrucoes()) {
 				System.out.println(ri.toString());
 			}
 		}
 		
-		Assert.fail();
+		Assert.assertEquals(3, ci.getLabels().size());;
 	}
 	
 	@Test
@@ -175,7 +173,7 @@ public class CodigoIntermediarioTest {
 		
 		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
 		
-		ci.executa();
+		ci.executa(0);
 		
 		for (Label label : ci.getLabels()) {
 			for (RepresentacaoIntermediaria ri : label.getInstrucoes()) {
