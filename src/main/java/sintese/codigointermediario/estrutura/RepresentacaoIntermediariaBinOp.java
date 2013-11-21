@@ -14,9 +14,24 @@ public class RepresentacaoIntermediariaBinOp extends RepresentacaoIntermediaria 
 		this.arg2 = arg2;
 	}
 	
+	public String getOperador() {
+		return operador;
+	}
+	
+	public String getResult() {
+		return result;
+	} 
+	
+	public String getArq1() {
+		return arg1;
+	}
+	
+	public String getArg2() {
+		return arg2;
+	}
+	
 	@Override
 	public String toString() {
 		return "binop(" + operador + ", " + result + ", " + arg1 + ", " + arg2 + ")";
 	}
-	
 }

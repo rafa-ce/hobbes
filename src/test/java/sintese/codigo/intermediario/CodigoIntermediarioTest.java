@@ -1,4 +1,4 @@
-package codigo.intermediario;
+package sintese.codigo.intermediario;
 
 import static org.junit.Assert.assertEquals;
 
