@@ -12,6 +12,7 @@ public abstract class CodigoIntemediario {
 	protected No noAtual;
 	protected No noAnterior;
 	protected List<Token> temporarios;
+	protected Boolean criaLabel = Boolean.TRUE;
 	
 	public void andaNaArvore() {
 		noAnterior = noAtual;
@@ -31,7 +32,10 @@ public abstract class CodigoIntemediario {
 	}
 	
 	protected void adicionaLabel() {
-		labels.add(new Label("L" + Integer.toString(labels.size())));
+		if (criaLabel)
+			labels.add(new Label("L" + Integer.toString(labels.size())));
+		
+		criaLabel = Boolean.TRUE;
 	}
 	
 	protected Label labelAtual() {

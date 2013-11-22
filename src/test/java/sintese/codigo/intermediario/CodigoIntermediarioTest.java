@@ -132,7 +132,15 @@ public class CodigoIntermediarioTest {
 		
 		ci.executa(0);
 		
+		List<String> esperado = Arrays.asList("cp(e0, 1)", "goto L1", "binop(<, t2, e0, 10)",
+				"cp(t1, t2)", "if t1 goto L2", "binop(+, t3, t0, 1)", "cp(t0, t3)", "goto L1");
+		
+//		Assert.assertEquals(3, ci.getLabels().size());
+		
+//		assertCodigoIntemediario(ci, esperado);
+		
 		for (Label label : ci.getLabels()) {
+			System.out.println(label.getNome());
 			for (RepresentacaoIntermediaria ri : label.getInstrucoes()) {
 				System.out.println(ri.toString());
 			}
@@ -152,18 +160,35 @@ public class CodigoIntermediarioTest {
 		
 		ci.executa(0);
 		
+		Assert.assertEquals(4, ci.getLabels().size());
+		
+		List<String> esperado = Arrays.asList("cp(e0, 0)", "cp(e1, 1)", "goto L1",
+				"binop(>, t3, e0, e1)", "cp(t2, t3)", "if t2 goto L2", "cp(e0, 2)",
+				"goto L3", "cp(e1, 2)");
+		
+		assertCodigoIntemediario(ci, esperado);
+	}
+	
+	@Test
+	public void geraCodigoIntermediarioFor() throws Throwable {
+		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoFor.txt");
+		sintatico.executa();
+		
+		Semantica semantico = new Semantica();
+		semantico.executa();
+		
+		GeraCodigoIntermediario ci = new GeraCodigoIntermediario();
+		
+		ci.executa(0);
+		
 		for (Label label : ci.getLabels()) {
-			System.out.println(label.getNome());
 			for (RepresentacaoIntermediaria ri : label.getInstrucoes()) {
 				System.out.println(ri.toString());
 			}
 		}
-		
-		Assert.assertEquals(3, ci.getLabels().size());;
 	}
 	
 	@Test
-	@Ignore
 	public void geraCodigoIntermediarioIfElse() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoIfElse.txt");
 		sintatico.executa();
@@ -181,7 +206,7 @@ public class CodigoIntermediarioTest {
 			}
 		}
 		
-		Assert.fail();
+		Assert.assertEquals(4, ci.getLabels().size());
 	}
 	
 	public void assertCodigoIntemediario(GeraCodigoIntermediario ci,

@@ -27,7 +27,7 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 
 	public void executa(Integer contador) {
 		List<RepresentacaoIntermediaria> buffer = new ArrayList<RepresentacaoIntermediaria>();
-		
+		 
 		adicionaLabel();
 		
 		while (noAtual != null)  {
@@ -57,6 +57,15 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 			GeraCodigoIntermediarioCJump.geraCJump(Integer.toString(labels.size()), buffer);
 		
 		if (token.getValor().equals("else")) {
+			adicionaLabel();
+			GeraCodigoIntermediarioJump.geraJump(Integer.toString(labels.size()), buffer);
+			andaNaArvore();
+			executa(contador + 1);
+		}
+		
+		if (token.getValor().equals("do")) {
+//			adicionaLabel();
+			GeraCodigoIntermediarioCJump.geraCJump(Integer.toString(labels.size()), buffer);
 			andaNaArvore();
 			executa(contador + 1);
 		}
@@ -76,8 +85,9 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 		if (((Token)neto.getConteudo()).getValor().equals("if"))
 			GeraCodigoIntermediarioJump.geraJump(Integer.toString(labels.size()), buffer);
 			
-//		if (((Token)neto.getConteudo()).getValor().equals("for"))
-//			
+		if (((Token)neto.getConteudo()).getValor().equals("for"))
+			GeraCodigoIntermediarioJump.geraJump(Integer.toString(labels.size()), buffer);
+			
 		if (((Token)neto.getConteudo()).getValor().equals("while"))
 			GeraCodigoIntermediarioJump.geraJump(Integer.toString(labels.size()), buffer);
 		
@@ -138,6 +148,9 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 		while (true) {
 			
 			if (noAtual.isToken() && ((Token)noAtual.getConteudo()).getValor().equals("then"))
+				break;
+			
+			if (noAtual.isToken() && ((Token)noAtual.getConteudo()).getValor().equals("do"))
 				break;
 				
 			if (noAtual.isToken()) { 
