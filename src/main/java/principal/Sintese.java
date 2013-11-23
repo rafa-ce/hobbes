@@ -31,10 +31,13 @@ public class Sintese {
 		
 		FileWriter fw = new FileWriter(arquivoCI);
 		
-		for (Label label : ci.getLabels())
+		for (Label label : ci.getLabels()) {
+			fw.write(label.getNome() + "\n");
 			for (RepresentacaoIntermediaria ri : label.getInstrucoes())
 				fw.write(ri.toString() + "\n");
-		
+			
+			fw.write("\n");
+		}
 		fw.close();
 	}
 	
@@ -46,10 +49,12 @@ public class Sintese {
 		
 		FileWriter fw = new FileWriter(arquivoCI);
 		
-		for (Label label : si.getLabels())
+		for (Label label : si.getLabels()) {
+			fw.write(label.getNome() + "\n");
 			for (RepresentacaoIntermediaria ri : label.getInstrucoes())
 				fw.write(ri.toString() + "\n");
-		
+			fw.write("\n");
+		}
 		fw.close();
 	}
 }

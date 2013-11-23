@@ -21,8 +21,6 @@ public class Token {
 	private Integer referencia;
 	private String temporario;
 	
-	
-	
 	public Token() { }
 
 	public Token(String valor, Integer linha, Integer coluna, String tipo) {
@@ -70,9 +68,6 @@ public class Token {
 	}
 
 	public boolean equals(Token token) {
-//		if (getTipoRetorno() == null && token.getTipoRetorno() == null)
-//			return false;
-		
 		if (getValor().equals(token.getValor()))
 			if (getTipo().equals(token.getTipo()))
 				if (!getPosicao().getLinha().equals(token.getPosicao().getLinha()))

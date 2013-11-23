@@ -1,7 +1,9 @@
 package sintese.selecaodeinstrucao.estrutura;
 
 import java.util.HashMap;
+import java.util.List;
 
+import analise.lexica.token.Token;
 import sintese.codigointermediario.estrutura.RepresentacaoIntermediaria;
 import sintese.codigointermediario.estrutura.RepresentacaoIntermediariaBinOp;
 import sintese.codigointermediario.suporte.Label;
@@ -18,11 +20,30 @@ public class GeraCodigoDeMaquinaBinop extends RepresentacaoIntermediaria {
 		this.arg2 = arg2;
 	}
 
-	public static void traduz(RepresentacaoIntermediariaBinOp ri, Label label) {
+	public static void traduz(RepresentacaoIntermediariaBinOp ri, Label label, List<Token> temporarios) {
 		String instrucao = getInstrucaoDeMaquina(ri.getOperador());
 		
-		label.adicionaInstrucao(new GeraCodigoDeMaquinaBinop(instrucao, ri.getArq1(), ri.getArg2()));
-		label.adicionaInstrucao(new GeraCodigoDeMaquinaCopy(ri.getArg2(), ri.getResult()));
+		String retorno = uadsiuasduiadsiu(ri, label, instrucao, temporarios);
+		label.adicionaInstrucao(new GeraCodigoDeMaquinaCopy(retorno, ri.getResult()));
+	}
+
+	public static String uadsiuasduiadsiu(RepresentacaoIntermediariaBinOp ri, Label label, String instrucao, List<Token> temporarios) {
+		String retorno = ri.getArg2();
+		
+		if (isNumero(retorno)) {
+			Token tokenTemporario = new Token();
+			temporarios.add(tokenTemporario);
+			
+			tokenTemporario.setTemporario("t" + Integer.toString(temporarios.size() - 1));
+			tokenTemporario.setAtributosDoTemporario();
+			
+			retorno = tokenTemporario.getValor();
+			label.adicionaInstrucao(new GeraCodigoDeMaquinaCopy(ri.getArg2(), retorno));
+		}
+			
+		label.adicionaInstrucao(new GeraCodigoDeMaquinaBinop(instrucao, ri.getArq1(), retorno));
+		
+		return retorno;
 	}
 	
 	private static String getInstrucaoDeMaquina(String operador) {
@@ -32,13 +53,20 @@ public class GeraCodigoDeMaquinaBinop extends RepresentacaoIntermediaria {
 		instrucoes.put("-", "SUB");
 		instrucoes.put("*", "MUL");
 		instrucoes.put("/", "DIV");
+		instrucoes.put(">", "CMP");
+		instrucoes.put("<", "CMP");
+		instrucoes.put("=", "CMP");
+		instrucoes.put("<>", "CMP");
 		
 		return instrucoes.get(operador);
 	}
 	
 	@Override
 	public String toString() {
-		return instrucao + " " + arg1 + " " + arg2;
+		return instrucao + " " + arg1 + ", " + arg2;
 	}
-
+	
+	public static Boolean isNumero(String valor) {  
+	    return valor.matches("[0-9]*");  
+	}
 }

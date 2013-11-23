@@ -170,6 +170,7 @@ public class CodigoIntermediarioTest {
 	}
 	
 	@Test
+	@Ignore
 	public void geraCodigoIntermediarioFor() throws Throwable {
 		Sintatico sintatico = new Sintatico("src/test/resources/outros/ArquivoFor.txt");
 		sintatico.executa();

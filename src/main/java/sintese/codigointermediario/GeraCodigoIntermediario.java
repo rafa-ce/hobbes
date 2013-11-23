@@ -36,7 +36,12 @@ public class GeraCodigoIntermediario extends CodigoIntemediario {
 				if (noAnterior.equals(noAtual.getPai()))
 					trataBloco(buffer, contador);
 				else
-					break;				
+					break;
+//				else {
+//					andaNaArvore();
+//					executa(contador);
+//				}
+				
 			}
 			
 			if (noAtual != null && noAtual.getConteudo().equals(LValue.codigo()))

@@ -20,6 +20,6 @@ public class GeraCodigoDeMaquinaCopy extends RepresentacaoIntermediaria {
 	
 	@Override
 	public String toString() {
-		return "MOV" + " " + origem + " " + destino;
+		return "MOV" + " " + origem + ", " + destino;
 	}
 }

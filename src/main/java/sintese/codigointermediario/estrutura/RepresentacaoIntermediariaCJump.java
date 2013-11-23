@@ -16,4 +16,8 @@ public class RepresentacaoIntermediariaCJump extends RepresentacaoIntermediaria{
 		return "if " + condicao + " goto " + lugar;
 	}
 	
+	public String getLugar() {
+		return lugar;
+	}
+	
 }

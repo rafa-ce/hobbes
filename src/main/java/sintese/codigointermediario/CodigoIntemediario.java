@@ -42,6 +42,10 @@ public abstract class CodigoIntemediario {
 		return labels.get(labels.size() - 1);
 	}
 	
+	public List<Token> getTemporarios() {
+		return temporarios;
+	}
+	
 	protected Token pesquisaNaListaDeTemporarios(Token token) {
 		for (Token tokenDeclarado : temporarios) {
 			if (tokenDeclarado.getValor().equals(token.getValor()) &&
