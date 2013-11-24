@@ -22,13 +22,13 @@ public class Sintese {
 		}
 		
 		SelecaoDeInstrucao si = null;
-		if (Opcoes.geraSI()) {
+		if (Opcoes.geraCI() && Opcoes.geraSI()) {
 			si = new SelecaoDeInstrucao(ci);
 			si.executa();
 			escreveArquivoCodigoSI(si);
 		}
 
-		if (Opcoes.geraAssembly()) {
+		if (Opcoes.geraCI() && Opcoes.geraSI() && Opcoes.geraAssembly()) {
 			GeraAssembly assembly = new GeraAssembly(si);
 			assembly.executa();
 			escreveArquivoAssembly(assembly);			

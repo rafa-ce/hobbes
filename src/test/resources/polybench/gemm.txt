@@ -1,0 +1,19 @@
+PB_NI := 5
+PB_NJ := 5
+PB_NK := 5
+	
+alpha := 5
+beta := 5
+	
+C := [][]
+A := [][]
+B := [][]
+
+for i := 0 to PB_NI do (
+	for j := 0 to PB_NJ do (
+		C[i][j] := C[i][j] * beta
+			for k:= 0 to PB_NK do ( 			
+				C[i][j] := C[i][j] + alpha * A[i][k] * B[k][j] 
+      		)
+		)
+	)

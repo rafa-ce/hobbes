@@ -22,6 +22,7 @@ public class Outro extends NaoTerminal {
 		producoes.put(":=", Arrays.asList(":=", Exp.codigo()));
 		producoes.put("/", Arrays.asList("ε"));
 		producoes.put("*", Arrays.asList("ε"));
+		producoes.put("+", Arrays.asList("ε"));
 		
 		producoes.put(IDENTIFICADOR, Arrays.asList("ε"));
 		producoes.put("import", Arrays.asList("ε"));

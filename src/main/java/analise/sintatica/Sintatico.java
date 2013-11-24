@@ -38,7 +38,8 @@ public class Sintatico {
 				while (Pilha.topoIsNaoTerminal()) {
 					List<String> producaoGerada = NaoTerminal.geraProducao(Pilha.getTopo(), token);
 					if (producaoGerada == null)
-						throw new SintaticoException("Erro sintático: produção gerada null");
+						throw new SintaticoException(token.getValor() + "'. " + token.getPosicao().toString() + 
+								". Topo: " + Pilha.getTopo() + " .Erro sintático: produção gerada null");
 					Pilha.desempilha();
 					Pilha.empilha(producaoGerada);
 					noAtual.criaFilhos(producaoGerada);

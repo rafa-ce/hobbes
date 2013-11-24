@@ -1,0 +1,18 @@
+ PB_NR := 2
+ PB_NQ := 2
+ PB_NP := 2
+
+ sum := [][][]
+ A := [][][]
+ C4 := [][]
+
+ for r := 0 to PB_NR do
+    for q := 0 to PB_NQ do (
+        for p := 0 to PB_NP do (
+            sum[r][q][p] := 0
+            for s := 0 to PB_NP do
+                sum[r][q][p] := sum[r][q][p] + A[r][q][s] * C4[s][p]
+          )
+          for p := 0 to PB_NR do
+              A[r][q][p] := sum[r][q][p]
+      )

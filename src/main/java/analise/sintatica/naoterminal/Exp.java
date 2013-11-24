@@ -28,6 +28,7 @@ public class Exp extends NaoTerminal {
 		producoes.put("return", Arrays.asList("<ExpOR>", "<ExpORPr>"));
 		producoes.put("(", Arrays.asList("<ExpOR>", "<ExpORPr>"));
 		producoes.put("[", Arrays.asList("<ExpOR>", "<ExpORPr>"));
+		producoes.put("-", Arrays.asList("<ExpOR>", "<ExpORPr>"));
 		producoes.put(NUMERO, Arrays.asList("<ExpOR>", "<ExpORPr>"));		
 	}
 	
