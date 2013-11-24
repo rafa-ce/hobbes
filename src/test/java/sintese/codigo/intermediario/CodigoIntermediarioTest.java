@@ -33,7 +33,7 @@ public class CodigoIntermediarioTest {
 		assertEquals(1, ci.getLabels().size());
 		
 		List<String> esperado = Arrays.asList("cp(t0, 1)", "cp(t1, 3)",
-											"binop(+, t3, t0, t1)", "cp(t2, t3)");
+											"binop(+, tmp3, t0, t1)", "cp(t2, tmp3)");
 		
 		assertCodigoIntemediario(ci, esperado);
 	}
@@ -51,8 +51,8 @@ public class CodigoIntermediarioTest {
 		ci.executa(0);
 		
 		List<String> esperado = Arrays.asList("cp(t0, 0)", "cp(t1, 1)", "cp(t2, 2)",
-					"binop(+, t4, t0, t1)", "binop(-, t5, t4, t2)",
-					"cp(t3, t5)");
+					"binop(+, tmp4, t0, t1)", "binop(-, tmp5, tmp4, t2)",
+					"cp(t3, tmp5)");
 		
 		assertCodigoIntemediario(ci, esperado);
 	}
@@ -69,9 +69,9 @@ public class CodigoIntermediarioTest {
 		
 		ci.executa(0);
 		
-		List<String> esperado = Arrays.asList("cp(t0, 1)", "cp(t1, 2)", "cp(t2, 3)",	"binop(*, t4, t0, t1)",
-				"binop(/, t5, t2, 10)", "binop(+, t6, t4, 5)",
-				"binop(-, t7, t6, t5)", "cp(t3, t7)");
+		List<String> esperado = Arrays.asList("cp(t0, 1)", "cp(t1, 2)", "cp(t2, 3)", "binop(*, tmp4, t0, t1)",
+				"binop(/, tmp5, t2, 10)", "binop(+, tmp6, tmp4, 5)",
+				"binop(-, tmp7, tmp6, tmp5)", "cp(t3, tmp7)");
 		
 		assertCodigoIntemediario(ci, esperado);
 	}
@@ -111,10 +111,10 @@ public class CodigoIntermediarioTest {
 		ci.executa(0);
 		
 		List<String> esperado = Arrays.asList("cp(t0, 0)","cp(t1, 1)","cp(t2, 2)",
-				"binop(-, t5, t1, t2)","cp(t4, t5)",
-				"binop(*, t7, t4, 10)","cp(t6, t7)",
-				"binop(/, t8, t6, 2)", "binop(+, t9, t0, t8)",
-				"cp(t3, t9)");
+				"binop(-, tmp5, t1, t2)","cp(tmp4, tmp5)",
+				"binop(*, tmp7, tmp4, 10)","cp(tmp6, tmp7)",
+				"binop(/, tmp8, tmp6, 2)", "binop(+, tmp9, t0, tmp8)",
+				"cp(t3, tmp9)");
 		
 		assertCodigoIntemediario(ci, esperado);
 		
@@ -163,7 +163,7 @@ public class CodigoIntermediarioTest {
 		Assert.assertEquals(4, ci.getLabels().size());
 		
 		List<String> esperado = Arrays.asList("cp(e0, 0)", "cp(e1, 1)", "goto L1",
-				"binop(>, t3, e0, e1)", "cp(t2, t3)", "if t2 goto L2", "cp(e0, 2)",
+				"binop(>, tmp3, e0, e1)", "cp(tmp2, tmp3)", "if tmp2 goto L2", "cp(e0, 2)",
 				"goto L3", "cp(e1, 2)");
 		
 		assertCodigoIntemediario(ci, esperado);

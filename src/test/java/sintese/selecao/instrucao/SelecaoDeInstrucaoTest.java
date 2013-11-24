@@ -37,7 +37,7 @@ public class SelecaoDeInstrucaoTest {
 			Assert.assertEquals(1, si.getLabels().size());
 			
 			List<String> esperado = Arrays.asList("MOV 1, t0",
-					"MOV 3, t1", "ADD t0, t1", "MOV t1, t3", "MOV t3, t2");
+					"MOV 3, t1", "ADD t0, t1", "MOV t1, tmp3", "MOV tmp3, t2");
 			
 			assertCodigoIntemediario(si, esperado);
 			
@@ -58,7 +58,7 @@ public class SelecaoDeInstrucaoTest {
 		si.executa();
 		
 		List<String> esperado = Arrays.asList("MOV 0, t0", "MOV 1, t1", "MOV 2, t2",
-				"ADD t0, t1", "MOV t1, t4", "SUB t4, t2", "MOV t2, t5", "MOV t5, t3");
+				"ADD t0, t1", "MOV t1, tmp4", "SUB tmp4, t2", "MOV t2, tmp5", "MOV tmp5, t3");
 		
 		assertCodigoIntemediario(si, esperado);
 	}
@@ -78,8 +78,8 @@ public class SelecaoDeInstrucaoTest {
 		si.executa();
 		
 		List<String> esperado = Arrays.asList("MOV 1, t0", "MOV 2, t1", "MOV 3, t2",
-				"MUL t0, t1", "MOV t1, t4", "MOV 10, t8", "DIV t2, t8", "MOV t8, t5",
-				"MOV 5, t9", "ADD t4, t9", "MOV t9, t6", "SUB t6, t5", "MOV t5, t7", "MOV t7, t3");
+				"MUL t0, t1", "MOV t1, tmp4", "MOV 10, tmp8", "DIV t2, tmp8", "MOV tmp8, tmp5",
+				"MOV 5, tmp9", "ADD tmp4, tmp9", "MOV tmp9, tmp6", "SUB tmp6, tmp5", "MOV tmp5, tmp7", "MOV tmp7, t3");
 		
 		assertCodigoIntemediario(si, esperado);
 	}

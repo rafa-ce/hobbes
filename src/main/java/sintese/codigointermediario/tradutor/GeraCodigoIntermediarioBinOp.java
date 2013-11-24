@@ -111,7 +111,7 @@ public class GeraCodigoIntermediarioBinOp {
 		Token tokenTemporario = new Token();
 		temporarios.add(tokenTemporario);
 		
-		tokenTemporario.setTemporario("t" + Integer.toString(temporarios.size() - 1));
+		tokenTemporario.setTemporario("tmp" + Integer.toString(temporarios.size() - 1));
 		tokenTemporario.setAtributosDoTemporario();
 		return tokenTemporario;
 	}

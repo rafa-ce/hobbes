@@ -54,4 +54,9 @@ public class SelecaoDeInstrucao {
 	public List<Label> getLabels() {
 		return labels;
 	}
+	
+	public List<Token> getTemporarios() {
+		return temporarios;
+	}
+	
 }
