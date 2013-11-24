@@ -24,7 +24,7 @@ public class GeraCodigoDeMaquinaBinop extends RepresentacaoIntermediaria {
 		String instrucao = getInstrucaoDeMaquina(ri.getOperador());
 		
 		String retorno = trataBinOp(ri, label, instrucao, temporarios);
-		label.adicionaInstrucao(new GeraCodigoDeMaquinaCopy(retorno, ri.getResult()));
+		label.adicionaInstrucao(new GeraCodigoDeMaquinaMov(retorno, ri.getResult()));
 	}
 
 	public static String trataBinOp(RepresentacaoIntermediariaBinOp ri, Label label, String instrucao, List<Token> temporarios) {
@@ -38,7 +38,7 @@ public class GeraCodigoDeMaquinaBinop extends RepresentacaoIntermediaria {
 			tokenTemporario.setAtributosDoTemporario();
 			
 			retorno = tokenTemporario.getValor();
-			label.adicionaInstrucao(new GeraCodigoDeMaquinaCopy(ri.getArg2(), retorno));
+			label.adicionaInstrucao(new GeraCodigoDeMaquinaMov(ri.getArg2(), retorno));
 		}
 			
 		label.adicionaInstrucao(new GeraCodigoDeMaquinaBinop(instrucao, ri.getArq1(), retorno));
@@ -68,5 +68,17 @@ public class GeraCodigoDeMaquinaBinop extends RepresentacaoIntermediaria {
 	
 	public static Boolean isNumero(String valor) {  
 	    return valor.matches("[0-9]*");  
+	}
+	
+	public String getInstrucao() {
+		return instrucao;
+	}
+	
+	public String arg1() {
+		return arg1;
+	}
+	
+	public String arg2() {
+		return arg2;
 	}
 }

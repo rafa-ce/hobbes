@@ -4,22 +4,30 @@ import sintese.codigointermediario.estrutura.RepresentacaoIntermediaria;
 import sintese.codigointermediario.estrutura.RepresentacaoIntermediariaCopy;
 import sintese.codigointermediario.suporte.Label;
 
-public class GeraCodigoDeMaquinaCopy extends RepresentacaoIntermediaria {
+public class GeraCodigoDeMaquinaMov extends RepresentacaoIntermediaria {
 	
 	private String destino;
 	private String origem;
 	
-	public GeraCodigoDeMaquinaCopy(String origem, String destino) {
+	public GeraCodigoDeMaquinaMov(String origem, String destino) {
 		this.origem = origem;
 		this.destino = destino;
 	}
 
 	public static void traduz(RepresentacaoIntermediariaCopy ri, Label label) {
-		label.adicionaInstrucao(new GeraCodigoDeMaquinaCopy(ri.getOrigem(), ri.getDestino()));
+		label.adicionaInstrucao(new GeraCodigoDeMaquinaMov(ri.getOrigem(), ri.getDestino()));
 	}
 	
 	@Override
 	public String toString() {
 		return "MOV" + " " + origem + ", " + destino;
+	}
+	
+	public String destino() {
+		return destino;
+	}
+	
+	public String origem() {
+		return origem;
 	}
 }
