@@ -44,15 +44,12 @@ public class GeraAssembly {
 		
 		for (Label label : si.getLabels()) {
 			trataLabel(label);
+			labelAtual().adicionaInstrucao(new Inicio());
 			for (RepresentacaoIntermediaria ri : label.getInstrucoes()) {
 				if (ri instanceof GeraCodigoDeMaquinaBinop)
 					GeraOperacao.gera((GeraCodigoDeMaquinaBinop)ri, labelAtual());
-					
 				if (ri instanceof GeraCodigoDeMaquinaMov) {
-//					if (getGera())
-						GeraMov.gera((GeraCodigoDeMaquinaMov)ri, labelAtual());
-//					else
-//						setGera(Boolean.TRUE);
+					GeraMov.gera((GeraCodigoDeMaquinaMov)ri, labelAtual());
 				}
 			}	
 		}

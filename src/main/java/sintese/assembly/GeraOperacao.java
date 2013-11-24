@@ -24,7 +24,11 @@ public class GeraOperacao extends RepresentacaoIntermediaria {
 		String registrador1 = GeraAssembly.getRegistrador(ri.arg1());
 		String registrador2 = GeraAssembly.getRegistrador(ri.arg2());
 		
-		labelAtual.adicionaInstrucao(new GeraOperacao(instrucao, registrador1, registrador2));
+		if (registrador1 != null)
+			labelAtual.adicionaInstrucao(new GeraOperacao(instrucao, registrador1, registrador2));
+		else
+			labelAtual.adicionaInstrucao(new GeraOperacao(instrucao, "$" + ri.arg1(), registrador2));
+			
 		
 		GeraAssembly.setGera(Boolean.FALSE);
 	}
@@ -34,9 +38,7 @@ public class GeraOperacao extends RepresentacaoIntermediaria {
 		
 		instrucoes.put("ADD", "addl");
 		instrucoes.put("SUB", "subl");
-//		instrucoes.put("MUL");
-//		instrucoes.put("DIV");
-		
+				
 		return instrucoes.get(operador);
 	}
 	

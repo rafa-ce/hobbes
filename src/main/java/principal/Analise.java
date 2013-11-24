@@ -10,7 +10,7 @@ import analise.sintatica.suporte.Arvore;
 
 public class Analise {
 
-	public static void executa(String entrada) throws IOException {
+	public static String executa(String entrada) throws IOException {
 		String resultado = "Ok";
 		
 		try {
@@ -27,6 +27,8 @@ public class Analise {
 		
 		if (resultado.equals("Ok"))
 			escreveArvoreNoArquivo();
+		
+		return resultado;
 	}
 
 	private static void escreveArvoreNoArquivo() throws IOException {

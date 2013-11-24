@@ -110,6 +110,6 @@ public class Semantica extends RegraSemantica {
 		if (tokenDeclarado.numeroDeParametros() == contaParametrosChamadaFuncao())
 			return;
 		
-		throw new SemanticoException("Erro número de parâmetros"); //numero de param errados
+		throw new SemanticoException("Erro número de parâmetros");
 	}
 }

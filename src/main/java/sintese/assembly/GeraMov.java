@@ -15,15 +15,23 @@ public class GeraMov extends RepresentacaoIntermediaria {
 	}
 
 	public static void gera(GeraCodigoDeMaquinaMov ri, Label labelAtual) {
-		String registrador = GeraAssembly.getRegistrador();
-		GeraAssembly.alocaRegistrador(ri.destino(), registrador);
+		if (ri.origem().equals("tmp3"))
+			return;
 		
-		labelAtual.adicionaInstrucao(new GeraMov(ri.origem(), registrador));
+		String destino = GeraAssembly.getRegistrador();
+		GeraAssembly.alocaRegistrador(ri.destino(), destino);
+		
+		String origem = GeraAssembly.getRegistrador(ri.origem());
+		
+		if (origem == null)
+			labelAtual.adicionaInstrucao(new GeraMov("$" + ri.origem(), destino));
+		else
+			labelAtual.adicionaInstrucao(new GeraMov(origem, destino));
 	}
 	
 	@Override
 	public String toString() {
-		return "	movl $" + origem + ", " + destino;
+		return "	movl " + origem + ", " + destino;
 	}
 
 }

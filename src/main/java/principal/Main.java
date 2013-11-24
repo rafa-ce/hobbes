@@ -3,11 +3,12 @@ package principal;
 public class Main {
 	
 	public static void main(String[] args) throws Throwable {
-//		configuracoes
+		Opcoes.verifica(args);
 					
-		Analise.executa(args[0]);
+		String analise = Analise.executa(args[0]);
 		
-		Sintese.executa();
+		if (analise.equals("Ok"))
+			Sintese.executa();
 	}
 
 }
