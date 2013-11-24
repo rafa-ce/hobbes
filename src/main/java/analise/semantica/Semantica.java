@@ -89,7 +89,8 @@ public class Semantica extends RegraSemantica {
 			return;
 		}
 		
-		throw new SemanticoException(token);
+		throw new SemanticoException("Variável não inicializada: " + 
+				token.getValor() + "("+ token.getPosicao().toString() + ")");
 	}
 	
 	private void verificaDimensoesVetor(Token tokenDeclarado) throws SemanticoException {
@@ -99,7 +100,7 @@ public class Semantica extends RegraSemantica {
 		if (tokenDeclarado.numeroDeDimensoes() == contaDimensoesChamadaVetor())
 			return;
 		
-		throw new SemanticoException(tokenDeclarado);
+		throw new SemanticoException("Erro na dimensão do vetor");
 	}
 
 	private void verificaParametrosFuncao(Token tokenDeclarado) throws SemanticoException {
@@ -109,6 +110,6 @@ public class Semantica extends RegraSemantica {
 		if (tokenDeclarado.numeroDeParametros() == contaParametrosChamadaFuncao())
 			return;
 		
-		throw new SemanticoException(tokenDeclarado); //numero de param errados
+		throw new SemanticoException("Erro número de parâmetros"); //numero de param errados
 	}
 }
